@@ -1,17 +1,15 @@
 using System.Collections.Generic;
-using System.Threading;
-using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TestLobby : MonoBehaviour
 {
     private Lobby hostLobby;
     private float heartbeatTimer = 15;
+    private string playerName;
 
     private async void Start()
     {
@@ -23,12 +21,14 @@ public class TestLobby : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        playerName = "DongHo" + UnityEngine.Random.Range(10, 99);
+        Debug.Log(playerName);
     }
 
     private void Update()
     {
         HandleLobbyHeartbeat();
-        if(Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             CreateLobby();
         }
@@ -39,10 +39,10 @@ public class TestLobby : MonoBehaviour
     }
     private async void HandleLobbyHeartbeat()
     {
-        if(hostLobby != null)
+        if (hostLobby != null)
         {
             heartbeatTimer -= Time.deltaTime;
-            if(heartbeatTimer < 0)
+            if (heartbeatTimer < 0)
             {
                 float heartbeatTimerMax = 15;
                 heartbeatTimer = heartbeatTimerMax;
@@ -59,12 +59,18 @@ public class TestLobby : MonoBehaviour
             string lobbyName = "MyLobby";
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
-                IsPrivate = true,
+                IsPrivate = false,
+                Player = GetPlayer(),
+                Data = new Dictionary<string, DataObject>
+                {
+                    {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, "Mode1") }
+                }
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, createLobbyOptions);
 
             hostLobby = lobby;
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
+            PrintPlayer(hostLobby);
         }
         catch (LobbyServiceException e)
         {
@@ -93,7 +99,7 @@ public class TestLobby : MonoBehaviour
 
             foreach (Lobby lobby in queryResponse.Results)
             {
-                Debug.Log($"{lobby.Name}");
+                Debug.Log($"{lobby.Name}" + " " + lobby.Data["GameMode"].Value);
             }
         }
         catch (LobbyServiceException e)
@@ -105,17 +111,22 @@ public class TestLobby : MonoBehaviour
     {
         try
         {
+            JoinLobbyByCodeOptions lobbyByCodeOptions = new JoinLobbyByCodeOptions
+            {
+                Player = GetPlayer()
+            };
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
 
-            await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode);
+            Lobby joinedLobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, lobbyByCodeOptions);
 
             Debug.Log($"joined lobby with code {lobbyCode}");
+            PrintPlayer(joinedLobby);
         }
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
         }
-       
+
     }
 
     private async void QuickJoinLobby()
@@ -128,6 +139,42 @@ public class TestLobby : MonoBehaviour
         {
             Debug.Log(e);
         }
-        
+
+    }
+    private Player GetPlayer()
+    {
+        return new Player
+        {
+            Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                    }
+        };
+    }
+    private void PrintPlayer(Lobby lobby)
+    {
+        Debug.Log("Player in lobby " + lobby.Name + " " + lobby.Data["GameMode"].Value);
+        foreach (Player player in lobby.Players)
+        {
+            Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
+        }
+    }
+    private void UpdateLobbyGameMode(string gameMode)
+    {
+        try
+        {
+            Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject>
+            {
+                {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode) }
+            }
+            });
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+
     }
 }
