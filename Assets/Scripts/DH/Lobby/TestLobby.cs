@@ -216,7 +216,6 @@ public class TestLobby : MonoBehaviour
         {
             Debug.Log(e);
         }
-        
     }
     private async void LeaveLobby()
     {
