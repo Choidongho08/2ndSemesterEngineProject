@@ -5,10 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EditPlayerName : MonoBehaviour {
+public class EditPlayerName2 : MonoBehaviour {
 
 
-    public static EditPlayerName Instance { get; private set; }
+    public static EditPlayerName2 Instance { get; private set; }
 
 
     public event EventHandler OnNameChanged;
