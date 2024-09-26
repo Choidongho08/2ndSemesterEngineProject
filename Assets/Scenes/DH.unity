@@ -123,52 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &263087222
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 263087223}
-  - component: {fileID: 263087224}
-  m_Layer: 0
-  m_Name: CreateLobby
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &263087223
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263087222}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -400, y: -225, z: 0}
-  m_LocalScale: {x: 0.41666666, y: 0.41666666, z: 0.41666666}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 930647713}
-  m_Father: {fileID: 269005920}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &263087224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263087222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd9f09f4f6a0c2418a61615420f52b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  createLobbyBtn: {fileID: 930647714}
 --- !u!1 &269005916
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +222,7 @@ RectTransform:
   - {fileID: 1485456949}
   - {fileID: 1847487121}
   - {fileID: 1869284630}
-  - {fileID: 263087223}
+  - {fileID: 930647713}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -791,15 +745,15 @@ RectTransform:
   m_GameObject: {fileID: 930647712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1650590578}
-  m_Father: {fileID: 263087223}
+  m_Father: {fileID: 269005920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 960.00006, y: 372.00006}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930647714
@@ -1021,7 +975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &979573278
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1054,7 +1008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861d0a4f017b1054fbc0724ef6b59d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  authenticateButton: {fileID: 973565043}
 --- !u!1 &1405166892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,30 +1696,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1845071525}
-  - component: {fileID: 1845071524}
+  - component: {fileID: 1845071526}
   m_Layer: 0
-  m_Name: MainLobbyManager
+  m_Name: MainLobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1845071524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845071523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f08331dd54ff4b244b47f2faf2f0add3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartbeatTimer: 15
-  lobbyUpdateTimer: 0
-  playerName: 
-  gameMode: 
 --- !u!4 &1845071525
 Transform:
   m_ObjectHideFlags: 0
@@ -1782,6 +1719,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1845071526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845071523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234ccb04b02f6ce41b8764667ce58295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  authenticateBtn: {fileID: 979573278}
+  _inputField: {fileID: 1782769963}
+  lobbyDelete: {fileID: 0}
+  updateLobbyGameMode: {fileID: 0}
+  createLobbyBtn: {fileID: 1847487122}
 --- !u!1 &1847487120
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using Unity.Services.Lobbies.Models;
 using Unity.Services.Lobbies;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainLobby : MonoBehaviour
 {
@@ -14,17 +15,43 @@ public class MainLobby : MonoBehaviour
     private float heartbeatTimer = 15;
     private float lobbyUpdateTimer;
     private string playerName;
+    private string gameMode;
 
     [SerializeField] private Transform authenticateBtn;
-
+    [SerializeField] private TMP_InputField _inputField;
+    [SerializeField] private Button lobbyDelete;
+    [SerializeField] private Button updateLobbyGameMode; 
+    [SerializeField] private Button createLobbyBtn;
+    [SerializeField] private Button quickJoinLobby; 
 
     private void Awake()
     {
-        authenticateBtn.GetComponent<Button>().onClick.AddListener(() =>
+        authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
         {
             AuthenticateAsync();
             Hide(authenticateBtn);
         });
+    }
+    private void Start()
+    {
+        createLobbyBtn.onClick.AddListener(CreateLobby);
+        _inputField.onValueChanged.AddListener(UpdatePlayerName);
+        lobbyDelete.onClick.AddListener(DeleteLobby);
+        updateLobbyGameMode.onClick.AddListener(() =>
+        {
+            UpdateLobbyGameMode(GetGameMode());
+        });
+        quickJoinLobby.onClick.AddListener(QuickJoinLobby);
+    }
+    private void Update()
+    {
+        HandleLobbyHeartbeat();
+        HandleLobbyPullForUpdates();
+    }
+
+    private string GetGameMode()
+    {
+        return gameMode;
     }
     private void Hide(Transform gameObject)
     {
@@ -40,26 +67,11 @@ public class MainLobby : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-    private async void Start()
-    {
-        await UnityServices.InitializeAsync();
 
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
-        };
-
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
         playerName = "DongHo" + UnityEngine.Random.Range(10, 99);
         Debug.Log(playerName);
     }
-
-    private void Update()
-    {
-        HandleLobbyHeartbeat();
-        HandleLobbyPullForUpdates();
-    }
+    
     private async void HandleLobbyHeartbeat()
     {
         if (hostLobby != null)
@@ -89,7 +101,6 @@ public class MainLobby : MonoBehaviour
             }
         }
     }
-
     private async void CreateLobby()
     {
         try
@@ -118,6 +129,7 @@ public class MainLobby : MonoBehaviour
             Debug.Log(e);
         }
     }
+    
     private async void ListLobbies()
     {
         try
@@ -232,6 +244,7 @@ public class MainLobby : MonoBehaviour
         try
         {
             playerName = newPlayerName;
+            Debug.Log(playerName);
             await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions
             {
                 Data = new Dictionary<string, PlayerDataObject>
