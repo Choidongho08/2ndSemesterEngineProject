@@ -24,14 +24,6 @@ public class MainLobby : MonoBehaviour
     [SerializeField] private Button createLobbyBtn;
     [SerializeField] private Button quickJoinLobby; 
 
-    private void Awake()
-    {
-        authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
-        {
-            AuthenticateAsync();
-            Hide(authenticateBtn);
-        });
-    }
     private void Start()
     {
         createLobbyBtn.onClick.AddListener(CreateLobby);
@@ -52,24 +44,6 @@ public class MainLobby : MonoBehaviour
     private string GetGameMode()
     {
         return gameMode;
-    }
-    private void Hide(Transform gameObject)
-    {
-        gameObject.gameObject.SetActive(false);
-    }
-    private async void AuthenticateAsync()
-    {
-        await UnityServices.InitializeAsync();
-
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
-        };
-
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-        playerName = "DongHo" + UnityEngine.Random.Range(10, 99);
-        Debug.Log(playerName);
     }
     
     private async void HandleLobbyHeartbeat()

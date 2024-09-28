@@ -1736,6 +1736,7 @@ MonoBehaviour:
   lobbyDelete: {fileID: 0}
   updateLobbyGameMode: {fileID: 0}
   createLobbyBtn: {fileID: 1847487122}
+  quickJoinLobby: {fileID: 0}
 --- !u!1 &1847487120
 GameObject:
   m_ObjectHideFlags: 0
