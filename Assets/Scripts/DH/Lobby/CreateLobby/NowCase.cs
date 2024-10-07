@@ -6,9 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class NowCase : MonoBehaviour
+public class NowCase : MonoSingleton<NowCase>
 {
     private TextMeshProUGUI _nowCaseTxt;
-    [SerializeField] private CaseBook _caseBook;
 
+    private void Awake()
+    {
+        _nowCaseTxt = GetComponentInChildren<TextMeshProUGUI>();
+    }
+
+    public void SetCaseNumber(string txt)
+    {
+        _nowCaseTxt.text = $"now case : {txt}";
+    }
 }

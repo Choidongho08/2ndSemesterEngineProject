@@ -478,6 +478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _caseTemplate: {fileID: 1381225425}
   _caseBookListSo: {fileID: 11400000, guid: 29d69698759bf294192fb331af4c8574, type: 2}
+  _caseImange: {fileID: 1424016114}
 --- !u!1 &269005916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3649,7 +3650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbf5d4cff66ce44da3ea0f0120d17df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _caseBook: {fileID: 178379513}
 --- !u!1 &1854790969
 GameObject:
   m_ObjectHideFlags: 0

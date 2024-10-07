@@ -17,14 +17,14 @@ public class CaseBook : MonoBehaviour
             Transform caseTemplate = Instantiate(_caseTemplate, transform);
             caseTemplate.GetChild(0).GetComponent<Image>().sprite = item.sprite;
             MouseEnterExitEvents mouseEvent = caseTemplate.GetComponent<MouseEnterExitEvents>();
-            mouseEvent.OnEnterMouse += () =>
+
+            mouseEvent.OnEnterMouse += () => { caseTemplate.GetComponentInChildren<Image>().color = Color.gray; };
+            mouseEvent.OnExitMouse += () => { caseTemplate.GetComponentInChildren<Image>().color = Color.white; };
+
+            caseTemplate.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
-                GetComponentInChildren<Image>().color = Color.gray;
-            };
-            mouseEvent.OnExitMouse += () =>
-            {
-                GetComponentInChildren<Image>().color = Color.white;
-            };
+                NowCase.instance.SetCaseNumber(item.caseNumber.ToString());
+            });
 
             caseTemplate.gameObject.SetActive(true);
         }
