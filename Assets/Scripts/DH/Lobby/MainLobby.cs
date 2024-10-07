@@ -20,20 +20,21 @@ public class MainLobby : MonoBehaviour
     [SerializeField] private Transform authenticateBtn;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private Button lobbyDelete;
-    [SerializeField] private Button updateLobbyGameMode; 
+    [SerializeField] private Button updateLobbyGameMode;
     [SerializeField] private Button createLobbyBtn;
-    [SerializeField] private Button quickJoinLobby; 
+    [SerializeField] private Button quickJoinLobby;
+    [SerializeField] private CreateLobby _setLobbyOption;
 
     private void Start()
     {
         createLobbyBtn.onClick.AddListener(CreateLobby);
         _inputField.onValueChanged.AddListener(UpdatePlayerName);
-        lobbyDelete.onClick.AddListener(DeleteLobby);
-        updateLobbyGameMode.onClick.AddListener(() =>
-        {
-            UpdateLobbyGameMode(GetGameMode());
-        });
-        quickJoinLobby.onClick.AddListener(QuickJoinLobby);
+        //lobbyDelete.onClick.AddListener(DeleteLobby);
+        //updateLobbyGameMode.onClick.AddListener(() =>
+        //{
+        //    UpdateLobbyGameMode(GetGameMode());
+        //});
+        //quickJoinLobby.onClick.AddListener(QuickJoinLobby);
     }
     private void Update()
     {
@@ -45,7 +46,7 @@ public class MainLobby : MonoBehaviour
     {
         return gameMode;
     }
-    
+
     private async void HandleLobbyHeartbeat()
     {
         if (hostLobby != null)
@@ -82,7 +83,7 @@ public class MainLobby : MonoBehaviour
             string lobbyName = "MyLobby";
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
-                IsPrivate = false,
+                IsPrivate = _setLobbyOption.IsPrivate,
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
@@ -95,7 +96,8 @@ public class MainLobby : MonoBehaviour
             hostLobby = lobby;
             joinedLobby = lobby;
 
-            Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
+            if (createLobbyOptions.IsPrivate == true)
+                Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
             PrintPlayers(hostLobby);
         }
         catch (LobbyServiceException e)
@@ -103,7 +105,7 @@ public class MainLobby : MonoBehaviour
             Debug.Log(e);
         }
     }
-    
+
     private async void ListLobbies()
     {
         try

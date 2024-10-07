@@ -12,6 +12,8 @@ public class CreateLobby : MonoBehaviour
 
     private Button _lobbyAccessModifyBtn;
 
+    public bool IsPrivate;
+
     private void Awake()
     {
         _lobbyAccessModifyBtn = _setLobbyOptionUI.GetComponentInChildren<Button>();
@@ -23,10 +25,11 @@ public class CreateLobby : MonoBehaviour
             _createLobbyBtn.gameObject.SetActive(false);
             _setLobbyOptionUI.gameObject.SetActive(true);
         });
-        _lobbyAccessModifyBtn.onClick.AddListener(() => 
+        _lobbyAccessModifyBtn.onClick.AddListener(() =>
         {
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text =
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? "Private" : "Public";
+            IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? false : true;
         });
     }
 }
