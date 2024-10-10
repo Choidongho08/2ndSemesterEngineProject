@@ -9,27 +9,17 @@ public class CreateLobby : MonoBehaviour
 {
     [SerializeField] private Button _createLobbyBtn;
     [SerializeField] private Transform _setLobbyOptionUI;
-
-    private Button _lobbyAccessModifyBtn;
+    [SerializeField] private MainMenu _mainMenu;
 
     public bool IsPrivate;
 
     private void Awake()
     {
-        _lobbyAccessModifyBtn = _setLobbyOptionUI.GetComponentInChildren<Button>();
-    }
-    private void Start()
-    {
+        _mainMenu.OnCreateLobby += () => _setLobbyOptionUI.gameObject.SetActive(true);
         _createLobbyBtn.onClick.AddListener(() =>
         {
-            _createLobbyBtn.gameObject.SetActive(false);
             _setLobbyOptionUI.gameObject.SetActive(true);
-        });
-        _lobbyAccessModifyBtn.onClick.AddListener(() =>
-        {
-            _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text =
-            _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? "Private" : "Public";
-            IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? false : true;
+            _createLobbyBtn.gameObject.SetActive(false);
         });
     }
 }

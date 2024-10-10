@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Authentication;
@@ -8,13 +9,16 @@ using UnityEngine.UI;
 public class Authenticate : MonoBehaviour
 {
     [SerializeField] private Button authenticateBtn;
+    public event Action OnAfterAuthenticate;
 
-    private async void Start()
+    private void Start()
     {
+        authenticateBtn.gameObject.SetActive(true);
         authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
         {
             AuthenticateAsync();
-            Hide();
+            OnAfterAuthenticate?.Invoke();
+            authenticateBtn.gameObject.SetActive(false);
         });
     }
 
@@ -28,9 +32,5 @@ public class Authenticate : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-    private void Hide()
-    {
-        gameObject.SetActive(false);
     }
 }
