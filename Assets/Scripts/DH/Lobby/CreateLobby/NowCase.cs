@@ -19,4 +19,25 @@ public class NowCase : MonoSingleton<NowCase>
     {
         _nowCaseTxt.text = $"now case : {txt}";
     }
+    public string GetCase(CaseType caseType) => caseType switch 
+    {
+        CaseType.case1 => "case1",
+        CaseType.case2 => "case2",
+        CaseType.case3 => "case3",
+        CaseType.case4 => "case4",
+        CaseType.case5 => "case5",
+        CaseType.case6 => "case6",
+        _ => throw new Exception("Case not Defined ")
+    };
+
+}
+
+public enum CaseType
+{
+    case1,
+    case2,
+    case3,
+    case4,
+    case5,
+    case6
 }

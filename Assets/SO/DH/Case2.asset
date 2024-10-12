@@ -15,3 +15,4 @@ MonoBehaviour:
   caseNumber: 2
   prefab: {fileID: 844810714061235548, guid: 3768595fa351bd9499c46059a3f3e15b, type: 3}
   sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  caseType: 1

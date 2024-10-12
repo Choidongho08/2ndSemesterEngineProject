@@ -8,4 +8,5 @@ public class CaseBookSO : ScriptableObject
     public int caseNumber;
     public Transform prefab;
     public Sprite sprite;
+    public CaseType caseType;
 }

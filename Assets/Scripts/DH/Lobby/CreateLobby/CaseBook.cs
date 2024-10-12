@@ -9,6 +9,8 @@ public class CaseBook : MonoBehaviour
     [SerializeField] private Transform _caseTemplate;
     [SerializeField] private CaseBookListSO _caseBookListSo;
 
+    public string _caseType;
+
     private void Awake()
     {
         _caseTemplate.gameObject.SetActive(false);
@@ -24,6 +26,7 @@ public class CaseBook : MonoBehaviour
             caseTemplate.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
                 NowCase.instance.SetCaseNumber(item.caseNumber.ToString());
+                _caseType = NowCase.instance.GetCase(item.caseType);
             });
 
             caseTemplate.gameObject.SetActive(true);

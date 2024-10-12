@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Services.Authentication;
-using Unity.Services.Core;
-using Unity.Services.Lobbies.Models;
 using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class MainLobby : MonoBehaviour
 {
@@ -20,15 +18,17 @@ public class MainLobby : MonoBehaviour
 
     [SerializeField] private TMP_InputField _inputPlayerName;
     [SerializeField] private TMP_InputField _inputLobbyName;
-    [SerializeField] private Button lobbyDelete;
-    [SerializeField] private Button updateLobbyGameMode;
-    [SerializeField] private Button createLobbyBtn;
-    [SerializeField] private Button quickJoinLobby;
+    [SerializeField] private Button _lobbyDelete;
+    [SerializeField] private Button _updateLobbyGameMode;
+    [SerializeField] private Button _createLobbyBtn;
+    [SerializeField] private Button _quickJoinLobby;
     [SerializeField] private SetLobbyOption _setLobbyOption;
+    [SerializeField] private CaseBook _caseBook;
+
 
     private void Start()
     {
-        createLobbyBtn.onClick.AddListener(CreateLobby);
+        _createLobbyBtn.onClick.AddListener(CreateLobby);
         _inputPlayerName.onValueChanged.AddListener(UpdatePlayerName);
         _inputLobbyName.onValueChanged.AddListener(ChangeLobbyName);
         //lobbyDelete.onClick.AddListener(DeleteLobby);
@@ -94,8 +94,7 @@ public class MainLobby : MonoBehaviour
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, "Case1") },
-                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, "Case2") },
+                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, _caseBook._caseType) },
                 }
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, createLobbyOptions);
@@ -135,7 +134,7 @@ public class MainLobby : MonoBehaviour
 
             foreach (Lobby lobby in queryResponse.Results)
             {
-                Debug.Log($"{lobby.Name}" + " " + lobby.Data["GameMode"].Value);
+                Debug.Log($"{lobby.Name}" + " " + lobby.Data["CaseBook"].Value);
             }
         }
         catch (LobbyServiceException e)
@@ -195,7 +194,7 @@ public class MainLobby : MonoBehaviour
     }
     private void PrintPlayers(Lobby lobby)
     {
-        Debug.Log("Player in lobby " + lobby.Name + " " + lobby.Data["GameMode"].Value + " " + lobby.Data["Map"].Value);
+        Debug.Log("Player in lobby " + lobby.Name + " " + lobby.Data["CaseBook"].Value);
         foreach (Player player in lobby.Players)
         {
             Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
@@ -208,9 +207,9 @@ public class MainLobby : MonoBehaviour
             hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
             {
                 Data = new Dictionary<string, DataObject>
-            {
-                {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode) }
-            }
+                {
+                    {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode) }
+                }
             });
 
             joinedLobby = hostLobby;
