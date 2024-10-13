@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,7 +10,7 @@ public class CaseBook : MonoBehaviour
     [SerializeField] private Transform _caseTemplate;
     [SerializeField] private CaseBookListSO _caseBookListSo;
 
-    public string _caseType;
+    public string caseType;
 
     private void Awake()
     {
@@ -26,7 +27,29 @@ public class CaseBook : MonoBehaviour
             caseTemplate.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
                 NowCase.instance.SetCaseNumber(item.caseNumber.ToString());
-                _caseType = NowCase.instance.GetCase(item.caseType);
+                switch (NowCase.instance.GetCase(item.caseType))
+                {
+                    case 1:
+                        caseType = "case1";
+                        break;
+                    case 2:
+                        caseType = "case2";
+                        break;
+                    case 3:
+                        caseType = "case3";
+                        break;
+                    case 4:
+                        caseType = "case4";
+                        break;
+                    case 5:
+                        caseType = "case5";
+                        break;
+                    case 6:
+                        caseType = "case6";
+                        break;
+                    default:
+                        throw new Exception("No case");
+                };
             });
 
             caseTemplate.gameObject.SetActive(true);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Services.Authentication;
@@ -13,7 +14,6 @@ public class MainLobby : MonoBehaviour
     private float heartbeatTimer = 15;
     private float lobbyUpdateTimer;
     private string playerName;
-    private string gameMode;
     private string lobbyName;
 
     [SerializeField] private TMP_InputField _inputPlayerName;
@@ -28,7 +28,11 @@ public class MainLobby : MonoBehaviour
 
     private void Start()
     {
-        _createLobbyBtn.onClick.AddListener(CreateLobby);
+        _createLobbyBtn.onClick.AddListener(() => 
+        {
+            if(lobbyName != null)
+                CreateLobby();
+        });
         _inputPlayerName.onValueChanged.AddListener(UpdatePlayerName);
         _inputLobbyName.onValueChanged.AddListener(ChangeLobbyName);
         //lobbyDelete.onClick.AddListener(DeleteLobby);
@@ -44,9 +48,9 @@ public class MainLobby : MonoBehaviour
         HandleLobbyPullForUpdates();
     }
 
-    private string GetGameMode()
+    private string GetCaseType()
     {
-        return gameMode;
+        return _caseBook.caseType;
     }
 
     private async void HandleLobbyHeartbeat()
@@ -94,7 +98,7 @@ public class MainLobby : MonoBehaviour
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, _caseBook._caseType) },
+                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, _caseBook.caseType) },
                 }
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, createLobbyOptions);
@@ -102,11 +106,15 @@ public class MainLobby : MonoBehaviour
             hostLobby = lobby;
             joinedLobby = lobby;
 
-            if (createLobbyOptions.IsPrivate == true)
-                Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
+            Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
             PrintPlayers(hostLobby);
+            _setLobbyOption.gameObject.SetActive(false);
         }
         catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+        catch(Exception e) 
         {
             Debug.Log(e);
         }
@@ -183,7 +191,8 @@ public class MainLobby : MonoBehaviour
         {
             Data = new Dictionary<string, PlayerDataObject>
                     {
-                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) },
+                        {"World", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
                     }
         };
     }
@@ -208,7 +217,7 @@ public class MainLobby : MonoBehaviour
             {
                 Data = new Dictionary<string, DataObject>
                 {
-                    {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode) }
+                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, _caseBook.caseType) },
                 }
             });
 
@@ -230,7 +239,8 @@ public class MainLobby : MonoBehaviour
             {
                 Data = new Dictionary<string, PlayerDataObject>
                 {
-                    {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                    {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) },
+                    {"World", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
                 }
             });
         }

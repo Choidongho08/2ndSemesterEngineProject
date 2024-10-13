@@ -11,6 +11,7 @@ public class SetLobbyOption : MonoBehaviour
     public bool IsPrivate;
     private void Start()
     {
+        IsPrivate = true;
         _lobbyAccessModifyBtn.onClick.AddListener(() =>
         {
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text =
