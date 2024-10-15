@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Evidence")]
 public class EvidenceSO : ScriptableObject
 {
-    public List<GameObject> asdf;
+    public List<ItemSO> asdf;
 }
