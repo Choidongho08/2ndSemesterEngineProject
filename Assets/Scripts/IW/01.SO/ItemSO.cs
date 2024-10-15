@@ -6,8 +6,8 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     [Header("아이템 정보")]
-    public string ItemName;
+    public string ItemName; // 아이템의 고유 ID
 
-    [Header("아이템 세부 정보")]
-    public bool OnItem = false;
+    [Header("플레이어 상호작용")]
+    public string[] PlayerID;
 }
