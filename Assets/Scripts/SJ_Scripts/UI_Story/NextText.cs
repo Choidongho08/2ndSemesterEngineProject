@@ -6,9 +6,9 @@ using TMPro;
 public class NextText : interTNPC
 {
     [SerializeField] private QnACut _storyLine;
+    [SerializeField] private StorySO _npcRoll;
     [SerializeField] private StoryTxtSO _story;
 
-    [SerializeField] private TextMeshProUGUI _charText;
 
     private void Awake()
     {
@@ -20,13 +20,11 @@ public class NextText : interTNPC
         _storyLine._storyLine++;
         if(_storyLine._storyLine != _story.ChaTxts.Count)
         {
-            _charText.text = _story.ChaTxts[_storyLine._storyLine];
+            _storyLine._charTxt.text = _story.ChaTxts[_storyLine._storyLine];
         }
         else
         {
-            _storyLine._storyLine = 0;
-            _charText.text = _story.ChaTxts[_storyLine._storyLine];
-            storyPan.SetActive(false);
+            _storyLine.QnA();
         }
     }
 }
