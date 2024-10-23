@@ -7,11 +7,6 @@ using UnityEngine.UI;
 
 public class QnACut : interTNPC
 {
-    // 선택지는 내일까지 일단 일반적인건 해놨으니
-    // 한 화면당 한 캐릭이면 저렇게 안해도 됨...
-    // 그냥 저기에 그 캐릭 할당해놓으면 원래 했던대로 하면 됨...
-    // 나이스 한 화면 한 NPC ㅅㅅㅅㅅㅅㅅㅅ
-
     [Header("설정")]
     public StoryTxtSO _Text;
     [SerializeField] private StorySO _story;
@@ -23,7 +18,7 @@ public class QnACut : interTNPC
 
     public int _storyLine;
 
-    private void Start()
+    private void Awake()
     {
         _charTxt.text = _Text.ChaTxts[0];
         _charName.text = npc.CharName;
