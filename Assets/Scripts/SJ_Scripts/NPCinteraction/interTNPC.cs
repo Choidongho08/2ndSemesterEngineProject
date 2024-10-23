@@ -29,7 +29,7 @@ public class interTNPC : MonoBehaviour
                 return;
         }
     }
-    private void StoryOnOff()
+    private void StoryOn()
     {
         storyPan.SetActive(true);
     }
@@ -37,6 +37,6 @@ public class interTNPC : MonoBehaviour
     public void InteractiveNPC()
     {
         WhatIsNPC(gameObject.tag);
-        StoryOnOff();
+        StoryOn();
     }
 }
