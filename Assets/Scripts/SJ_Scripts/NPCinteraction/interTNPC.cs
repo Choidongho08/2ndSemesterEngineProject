@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Authentication.ExtendedProtection;
 using UnityEngine;
 
 public class interTNPC : MonoBehaviour
 {
     [SerializeField] protected GameObject storyPan;
+    [SerializeField] protected GameObject choosingPan;
+    protected bool _QnA = false;
+    protected bool _important = false;
+    protected int whatNpc;
 
     private void WhatIsNPC(string tag)
     {
