@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Authenticate : MonoBehaviour
@@ -17,18 +18,19 @@ public class Authenticate : MonoBehaviour
         authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
         {
             AuthenticateAsync();
-            OnAfterAuthenticate?.Invoke();
             authenticateBtn.gameObject.SetActive(false);
         });
     }
 
     private async void AuthenticateAsync()
     {
+        Loading.instance.Show();
         await UnityServices.InitializeAsync();
 
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed In " + AuthenticationService.Instance.PlayerId);
+            OnAfterAuthenticate?.Invoke();
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();

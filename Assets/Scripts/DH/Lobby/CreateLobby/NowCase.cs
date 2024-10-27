@@ -22,7 +22,7 @@ public class NowCase : MonoSingleton<NowCase>
     public int GetCase(CaseType caseType) => caseType switch 
     {
         CaseType.case1 => 1,
-        CaseType.case2 => 1,
+        CaseType.case2 => 2,
         CaseType.case3 => 3,
         CaseType.case4 => 4,
         CaseType.case5 => 5,

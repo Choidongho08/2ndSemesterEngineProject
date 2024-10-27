@@ -13,28 +13,28 @@ public class MainLobby : MonoBehaviour
     private Lobby joinedLobby;
     private float heartbeatTimer = 15;
     private float lobbyUpdateTimer;
-    private string playerName;
-    private string lobbyName;
+    private string _playerName;
+    private string _playerReady;
+    private string _lobbyName;
 
-    [SerializeField] private TMP_InputField _inputPlayerName;
-    [SerializeField] private TMP_InputField _inputLobbyName;
     [SerializeField] private Button _lobbyDelete;
     [SerializeField] private Button _updateLobbyGameMode;
     [SerializeField] private Button _createLobbyBtn;
     [SerializeField] private Button _quickJoinLobby;
-    [SerializeField] private SetLobbyOption _setLobbyOption;
     [SerializeField] private CaseBook _caseBook;
+    [SerializeField] private CreateLobby _createLobby;
 
+    public event Action<string, string, string> OnLobbyCreate;
+    public event Action OnGameStart;
 
+    private void Awake()
+    {
+        ChangeNameUI.OnChangePlayerNamed += ((playerName) => _playerName = playerName);
+        _createLobby.OnLobbyNameChange += ChangeLobbyName;
+        _createLobby.createLobbyButton.onClick.AddListener(() => CreateLobby());
+    }
     private void Start()
     {
-        _createLobbyBtn.onClick.AddListener(() => 
-        {
-            if(lobbyName != null)
-                CreateLobby();
-        });
-        _inputPlayerName.onValueChanged.AddListener(UpdatePlayerName);
-        _inputLobbyName.onValueChanged.AddListener(ChangeLobbyName);
         //lobbyDelete.onClick.AddListener(DeleteLobby);
         //updateLobbyGameMode.onClick.AddListener(() =>
         //{
@@ -84,31 +84,32 @@ public class MainLobby : MonoBehaviour
     }
     private void ChangeLobbyName(string newLobbyName)
     {
-        lobbyName = newLobbyName;
-        Debug.Log(lobbyName);
+        _lobbyName = newLobbyName;
+        Debug.Log(_lobbyName);
     }
     private async void CreateLobby()
     {
         try
         {
-            string lobbyNam = lobbyName;
+            string lobbyName = _lobbyName;
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
-                IsPrivate = _setLobbyOption.IsPrivate,
+                IsPrivate = _createLobby.IsPrivate,
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, _caseBook.caseType) },
+                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, GetCaseType()) },
                 }
             };
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 2, createLobbyOptions);
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(_lobbyName, 2, createLobbyOptions);
 
             hostLobby = lobby;
             joinedLobby = lobby;
 
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
+            OnLobbyCreate?.Invoke(lobby.LobbyCode, lobbyName, GetCaseType());
             PrintPlayers(hostLobby);
-            _setLobbyOption.gameObject.SetActive(false);
+            _createLobby.gameObject.SetActive(false);
         }
         catch (LobbyServiceException e)
         {
@@ -191,8 +192,8 @@ public class MainLobby : MonoBehaviour
         {
             Data = new Dictionary<string, PlayerDataObject>
                     {
-                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) },
-                        {"World", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerName) },
+                        {"Ready", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerReady) }
                     }
         };
     }
@@ -217,7 +218,7 @@ public class MainLobby : MonoBehaviour
             {
                 Data = new Dictionary<string, DataObject>
                 {
-                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, _caseBook.caseType) },
+                    {"CaseBook", new DataObject(DataObject.VisibilityOptions.Public, GetCaseType()) },
                 }
             });
 
@@ -229,18 +230,18 @@ public class MainLobby : MonoBehaviour
             Debug.Log(e);
         }
     }
-    private async void UpdatePlayerName(string newPlayerName)
+    private async void UpdatePlayerReady(string newPlayerReady)
     {
         try
         {
-            playerName = newPlayerName;
-            Debug.Log(playerName);
+            _playerReady = newPlayerReady;
+            Debug.Log(_playerReady);
             await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions
             {
                 Data = new Dictionary<string, PlayerDataObject>
                 {
-                    {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) },
-                    {"World", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                    {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerName) },
+                    {"Ready", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, _playerReady) }
                 }
             });
         }
@@ -253,13 +254,29 @@ public class MainLobby : MonoBehaviour
     {
         try
         {
-            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+            
+            if(Leave())
+            {
+                MigrateLobbyHost();
+                await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+            }
+            else
+            {
+                DeleteLobby();
+            }
 
         }
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
         }
+    }
+    private bool Leave()
+    {
+        if (joinedLobby.Players.Count >= 2)
+            return true;
+        else 
+            return false;
     }
     private async void KickPlayer()
     {
@@ -290,7 +307,6 @@ public class MainLobby : MonoBehaviour
             Debug.Log(e);
         }
     }
-
     private async void DeleteLobby()
     {
         try
@@ -301,5 +317,17 @@ public class MainLobby : MonoBehaviour
         {
             Debug.Log(e);
         }
+    }
+    private void GameStart()
+    {
+        int readyCount = 0;
+        foreach (Player player in joinedLobby.Players)
+        {
+            if(player.Data["Ready"].Value == "Ready")
+                readyCount++;
+        }
+        if (readyCount >= 2)
+            OnGameStart?.Invoke();
+        readyCount = 0;
     }
 }

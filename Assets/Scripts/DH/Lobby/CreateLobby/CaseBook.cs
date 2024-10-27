@@ -30,22 +30,22 @@ public class CaseBook : MonoBehaviour
                 switch (NowCase.instance.GetCase(item.caseType))
                 {
                     case 1:
-                        caseType = "case1";
+                        caseType = "Case1";
                         break;
                     case 2:
-                        caseType = "case2";
+                        caseType = "Case2";
                         break;
                     case 3:
-                        caseType = "case3";
+                        caseType = "Case3";
                         break;
                     case 4:
-                        caseType = "case4";
+                        caseType = "Case4";
                         break;
                     case 5:
-                        caseType = "case5";
-                        break;
-                    case 6:
-                        caseType = "case6";
+                        caseType = "Case5";
+                        break;      
+                    case 6:         
+                        caseType = "Case6";
                         break;
                     default:
                         throw new Exception("No case");
