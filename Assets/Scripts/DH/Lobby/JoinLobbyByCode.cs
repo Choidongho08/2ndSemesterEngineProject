@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +18,7 @@ public class JoinLobbyByCode : MonoBehaviour
         _joinButton.onClick.AddListener(() =>
         {
             _lobbyCode = _inputLobbyCode.text;
-            UpdatePlayerName();
+            CodeJoinLobby();
             Hide();
         });
         _cancelButton.onClick.AddListener(() => { Hide(); });
@@ -30,7 +28,7 @@ public class JoinLobbyByCode : MonoBehaviour
     {
         _child.SetActive(false);
     }
-    private void UpdatePlayerName()
+    private void CodeJoinLobby()
     {
         MainLobby.instance.JoinLobbyByCode(_lobbyCode);
     }

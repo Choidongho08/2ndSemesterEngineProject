@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _joinLobbyByCodeButton;
     [SerializeField] private Button _createLobbyButton;
     [SerializeField] private Button _changePlayerNameButton;
-    [SerializeField] private Authenticate authenticate;
     [SerializeField] private GameObject _childGameObject;
     [SerializeField] private TextMeshProUGUI _playerName;
 
@@ -26,7 +25,7 @@ public class MainMenu : MonoBehaviour
         _quickJoinLobbyButton.onClick.AddListener(() => { MainLobby.instance.QuickJoinLobby(); _childGameObject.SetActive(false); });
         _joinLobbyByCodeButton.onClick.AddListener(() => { OnJoinLobbyByCode?.Invoke(); });
         _createLobbyButton.onClick.AddListener(() => { OnCreateLobby?.Invoke(); _childGameObject.SetActive(false); });
-        authenticate.OnAfterAuthenticate += () =>
+        MainLobby.instance.OnAfterAuthenticate += () =>
         {
             Loading.instance.Hide();
             _childGameObject.SetActive(true);

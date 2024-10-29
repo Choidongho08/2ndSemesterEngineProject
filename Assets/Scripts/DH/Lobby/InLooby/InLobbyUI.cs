@@ -53,12 +53,12 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     {
         UpdateLobby(MainLobby.instance.GetJoinedLobby());
     }
+
     private void UpdateLobby(Lobby lobby)
     {
         ClearLobby();
 
-        foreach (Player player in lobby.Players)
-        {
+        foreach(Player player in lobby.Players) {
             Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
             playerSingleTransform.gameObject.SetActive(true);
             PlayerManager lobbyPlayerSingleUI = playerSingleTransform.GetComponent<PlayerManager>();

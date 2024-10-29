@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangeNameUI : MonoBehaviour
+public class ChangeNameUI : MonoSingleton<ChangeNameUI>
 {
     [SerializeField] private TMP_InputField _inputPlayerName;
     [SerializeField] private Button _changeButton;
@@ -61,5 +61,9 @@ public class ChangeNameUI : MonoBehaviour
         if (File.Exists(path + fileName))
             File.Delete(path + fileName);
         File.WriteAllText(path + fileName, _playerName);
+    }
+    public string GetPlayerName()
+    {
+        return _playerName;
     }
 }
