@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Authentication.ExtendedProtection;
 using UnityEngine;
 
 public class interTNPC : MonoBehaviour
 {
     [SerializeField] protected GameObject storyPan;
+    [SerializeField] protected GameObject choosingPan;
+    protected bool _QnA = false;
+    protected bool _important = false;
+    protected int whatNpc;
 
     private void WhatIsNPC(string tag)
     {
@@ -24,7 +29,7 @@ public class interTNPC : MonoBehaviour
                 return;
         }
     }
-    private void StoryOnOff()
+    private void StoryOn()
     {
         storyPan.SetActive(true);
     }
@@ -32,6 +37,6 @@ public class interTNPC : MonoBehaviour
     public void InteractiveNPC()
     {
         WhatIsNPC(gameObject.tag);
-        StoryOnOff();
+        StoryOn();
     }
 }
