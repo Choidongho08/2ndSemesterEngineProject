@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: UnknownMedicine
   m_EditorClassIdentifier: 
   ItemName: UnknownMedicine
-  OnItem: 0
+  ItemInfo: "\uBAB0\uB77C"
+  ItemIcon: {fileID: 0}
+  PlayerID: []
