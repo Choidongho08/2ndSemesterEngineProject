@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: ThinRope
   m_EditorClassIdentifier: 
   ItemName: ThinRope
-  OnItem: 0
+  ItemInfo: "\uC878\uB824"
+  ItemIcon: {fileID: 0}
+  PlayerID: []

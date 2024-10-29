@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Testament
   m_EditorClassIdentifier: 
   ItemName: Testament
-  OnItem: 0
+  ItemInfo: "\uC774\uC775"
+  ItemIcon: {fileID: 0}
+  PlayerID: []
