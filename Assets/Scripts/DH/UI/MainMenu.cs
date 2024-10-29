@@ -14,17 +14,17 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _changePlayerNameButton;
     [SerializeField] private Authenticate authenticate;
     [SerializeField] private GameObject _childGameObject;
+    [SerializeField] private TextMeshProUGUI _playerName;
 
-    public static event Action OnChangeName;
-    public event Action OnQuickJoinLobby;
+    public event Action OnChangeName;
     public event Action OnJoinLobbyByCode;
     public event Action OnCreateLobby;
 
     private void Awake()
     {
         _changePlayerNameButton.onClick.AddListener(() => OnChangeName?.Invoke());
-        _quickJoinLobbyButton.onClick.AddListener(() => { OnQuickJoinLobby?.Invoke(); _childGameObject.SetActive(false); });
-        _joinLobbyByCodeButton.onClick.AddListener(() => { OnJoinLobbyByCode?.Invoke(); _childGameObject.SetActive(false); });
+        _quickJoinLobbyButton.onClick.AddListener(() => { MainLobby.instance.QuickJoinLobby(); _childGameObject.SetActive(false); });
+        _joinLobbyByCodeButton.onClick.AddListener(() => { OnJoinLobbyByCode?.Invoke(); });
         _createLobbyButton.onClick.AddListener(() => { OnCreateLobby?.Invoke(); _childGameObject.SetActive(false); });
         authenticate.OnAfterAuthenticate += () =>
         {
@@ -32,6 +32,11 @@ public class MainMenu : MonoBehaviour
             _childGameObject.SetActive(true);
         };
 
+    }
+
+    public void GetPlayerName(string playerName)
+    {
+        _playerName.text = playerName;
     }
 
 }

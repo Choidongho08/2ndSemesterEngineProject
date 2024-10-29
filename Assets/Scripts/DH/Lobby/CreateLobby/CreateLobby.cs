@@ -16,8 +16,10 @@ public class CreateLobby : MonoBehaviour
     [SerializeField] private TMP_InputField _lobbyNameInput;
 
     private string _lobbyName;
+    private CaseType _caseType;
 
     public Button createLobbyButton;
+    public event Action<CaseType> OnCreateLobby;
     public event Action<string> OnLobbyNameChange;
     public bool IsPrivate;
 
@@ -38,6 +40,7 @@ public class CreateLobby : MonoBehaviour
             {
                 OnLobbyNameChange?.Invoke(_lobbyName);
                 _setLobbyOptionUI.gameObject.SetActive(false);
+                OnCreateLobby?.Invoke(_caseType);
             }
         });
     }
