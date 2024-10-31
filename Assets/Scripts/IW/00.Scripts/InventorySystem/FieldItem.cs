@@ -23,12 +23,19 @@ public class FieldItem : MonoBehaviour, IPointerClickHandler
         _inventory.SetActive(false);
     }
 
+    private void Update()
+    {
+         if (Input.GetKeyDown(KeyCode.E))
+            _inventory.SetActive(true);
+         else if (Input.GetKeyDown(KeyCode.F))
+            _inventory.SetActive(false);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             _inventory.SetActive(true);
-            Debug.Log("´­¸²");
             onItemGet?.Invoke();
         }
     }
