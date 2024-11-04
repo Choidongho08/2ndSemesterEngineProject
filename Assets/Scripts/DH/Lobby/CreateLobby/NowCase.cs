@@ -21,12 +21,12 @@ public class NowCase : MonoSingleton<NowCase>
     }
     public int GetCase(CaseType caseType) => caseType switch 
     {
-        CaseType.case1 => 1,
-        CaseType.case2 => 1,
-        CaseType.case3 => 3,
-        CaseType.case4 => 4,
-        CaseType.case5 => 5,
-        CaseType.case6 => 6,
+        CaseType.Case1 => 1,
+        CaseType.Case2 => 2,
+        CaseType.Case3 => 3,
+        CaseType.Case4 => 4,
+        CaseType.Case5 => 5,
+        CaseType.Case6 => 6,
         _ => throw new Exception("Case not Defined ")
     };
 
@@ -34,10 +34,10 @@ public class NowCase : MonoSingleton<NowCase>
 
 public enum CaseType
 {
-    case1,
-    case2,
-    case3,
-    case4,
-    case5,
-    case6
+    Case1,
+    Case2,
+    Case3,
+    Case4,
+    Case5,
+    Case6
 }

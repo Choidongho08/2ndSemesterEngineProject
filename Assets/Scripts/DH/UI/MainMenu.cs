@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,48 +8,40 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _quickJoinLobbyButton;
     [SerializeField] private Button _joinLobbyByCodeButton;
     [SerializeField] private Button _createLobbyButton;
-    [SerializeField] private Image _inputPlayerName;
-    [SerializeField] private Authenticate authenticate;
+    [SerializeField] private Button _changePlayerNameButton;
+    [SerializeField] private GameObject _childGameObject;
+    [SerializeField] private TextMeshProUGUI _playerName;
+    [SerializeField] private CreateLobby _createLobby;
 
-    private List<GameObject> menuUI = new List<GameObject>();
-
-    public event Action OnQuickJoinLobby;
+    public event Action OnChangeName;
     public event Action OnJoinLobbyByCode;
     public event Action OnCreateLobby;
 
     private void Awake()
     {
-        menuUI.Add(_inputPlayerName.gameObject);
-        menuUI.Add(_createLobbyButton.gameObject);
-        menuUI.Add(_joinLobbyByCodeButton.gameObject);
-        menuUI.Add(_quickJoinLobbyButton.gameObject);
-
-        _quickJoinLobbyButton.onClick.AddListener(() => OnQuickJoinLobby?.Invoke());
-        _joinLobbyByCodeButton.onClick.AddListener(() => OnJoinLobbyByCode?.Invoke());
-        _createLobbyButton.onClick.AddListener(() => OnCreateLobby?.Invoke());
-
-        authenticate.OnAfterAuthenticate += () =>
+        _changePlayerNameButton.onClick.AddListener(() => OnChangeName?.Invoke());
+        _quickJoinLobbyButton.onClick.AddListener(() => 
         {
-            foreach (var item in menuUI)
-            {
-                item.gameObject.SetActive(true);
-            }
+            MainLobby.instance.QuickJoinLobby();
+            _childGameObject.SetActive(false);
+            Util.instance.LoadingShow(); 
+        });
+        _joinLobbyByCodeButton.onClick.AddListener(() =>  OnJoinLobbyByCode?.Invoke());
+        _createLobbyButton.onClick.AddListener(() => 
+        {
+            OnCreateLobby?.Invoke();
+            _childGameObject.SetActive(false);
+            _createLobby.gameObject.SetActive(true);
+            _createLobby.ClearCreateLobbyOption(); 
+        });
+        MainLobby.instance.OnAfterAuthenticate += () =>
+        {
+            Util.instance.LoadingHide();
+            _childGameObject.SetActive(true);
         };
-        foreach(var item in menuUI)
-        {
-            item.gameObject.SetActive(false);
-            if(item.GetComponent<Button>() != null)
-            {
-                item.GetComponent<Button>().onClick.AddListener(Hide);
-            }
-        }
     }
-    private void Hide()
+    public void GetPlayerName(string playerName)
     {
-        foreach (var item in menuUI)
-        {
-            item.gameObject.SetActive(false);
-        }
+        _playerName.text = playerName;
     }
-
 }
