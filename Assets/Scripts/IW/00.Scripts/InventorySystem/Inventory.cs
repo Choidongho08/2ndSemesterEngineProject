@@ -45,8 +45,9 @@ public class Inventory : MonoBehaviour
             {
                 Instantiate(_itemPrefabs, _inventorySlots[i].transform).Initialize(itemSO, _inventorySlots[i]);
                 Debug.Log("아이테무 생성");
-                //_icon = item.ItemIcon;
+                _icon.sprite = item.ItemIcon;
                 _Info.text = item.ItemInfo;
+                return;
             }
         }
     }
