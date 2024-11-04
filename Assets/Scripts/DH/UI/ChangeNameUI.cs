@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     [SerializeField] private GameObject _child;
 
     private string _playerName;
-    
+
 
     private void Start()
     {
@@ -28,16 +29,39 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
         _mainMenu.OnChangeName += () => _child.SetActive(true);
         _changeButton.onClick.AddListener(() =>
         {
-            _playerName = _inputPlayerName.text;
-            WritePlayerName(path, fileName);
-            UpdatePlayerName();
-            _mainMenu.GetPlayerName(_playerName);
-            Hide();
-            _inputPlayerName.text = string.Empty;
+            if (ChangePlayerName())
+            {
+                WritePlayerName(path, fileName);
+                UpdatePlayerName();
+                _mainMenu.GetPlayerName(_playerName);
+                Hide();
+                _inputPlayerName.text = string.Empty;
+            }
+            else
+            {
+                Hide();
+            }
+            
         });
         _cancelButton.onClick.AddListener(() => { Hide(); });
     }
 
+    private bool ChangePlayerName()
+    {
+        _playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
+        if (!_inputPlayerName.text.Equals(_playerName) || _playerName == "")
+        {
+            Util.instance.LoadingHide();
+            Debug.Log("Æ¯¼ö¹®ÀÚ ¾ÈµÅ! ÀÌ ¸ÓÀú¸®¾ß");
+            _inputPlayerName.text = string.Empty;
+            return false;
+        }
+        else
+        {
+            Debug.Log("¼º°ø!");
+            return true;
+        }
+    }
     private void Hide()
     {
         _child.SetActive(false);
@@ -49,7 +73,17 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     private void ReadPlayerName(string path, string fileName)
     {
         if (File.Exists(path + fileName))
-            _playerName = File.ReadAllText(path + fileName);
+        {
+            if (File.ReadAllText(path + fileName) != null)
+            {
+                _playerName = File.ReadAllText(path + fileName);
+            }
+            else
+            {
+                _playerName = "Player" + UnityEngine.Random.Range(1, 9090);
+                File.WriteAllText(path + fileName, _playerName);
+            }
+        }
         else
         {
             _playerName = "Player" + UnityEngine.Random.Range(1, 9090);

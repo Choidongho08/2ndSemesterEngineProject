@@ -4,6 +4,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +33,6 @@ public class MainLobby : MonoSingleton<MainLobby>
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
     public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
-    public event Action OnAfterAuthenticate;
     public class OnLobbyListChangedEventArgs : EventArgs
     {
         public List<Lobby> lobbyList;
@@ -40,7 +40,9 @@ public class MainLobby : MonoSingleton<MainLobby>
     public string KeyPlayerName = "PlayerName";
     public string KeyPlayerReady = "PlayerReady";
     public string KeyCaseBook = "CaseBook";
-    public event Action<string, string, string> OnLobbyCreate;
+    public event Action OnAfterAuthenticate;
+    public event Action<string, string, string, Sprite> OnLobbyCreate;
+    public event Action<string, string, string, Sprite> OnLobbyJoined;
     public event Action OnGameStart;
     public string PlayerReady
     {
@@ -64,7 +66,7 @@ public class MainLobby : MonoSingleton<MainLobby>
     private void Awake()
     {
         _createLobby.OnLobbyNameChange += ChangeLobbyName;
-        _createLobby.OnCreateLobby += (CaseType caseType) => CreateLobby(caseType);
+        _createLobby.OnCreateLobby += (string caseType) => CreateLobby(caseType);
 
     }
     private void Update()
@@ -76,10 +78,11 @@ public class MainLobby : MonoSingleton<MainLobby>
     public async void Authenticate(string playerName)
     {
         _playerName = playerName;
+        string profile = "Player" + UnityEngine.Random.Range(0, 9999);
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
             InitializationOptions initializationOptions = new InitializationOptions();
-            initializationOptions.SetProfile(playerName);
+            initializationOptions.SetProfile(profile);
 
             await UnityServices.InitializeAsync(initializationOptions);
         }
@@ -144,20 +147,19 @@ public class MainLobby : MonoSingleton<MainLobby>
         _lobbyName = newLobbyName;
         Debug.Log(_lobbyName);
     }
-    private async void CreateLobby(CaseType caseType)
+    private async void CreateLobby(string caseType)
     {
         Debug.Log(_createLobby.IsPrivate);
         Player player = GetPlayer();
         try
         {
-            string lobbyName = _lobbyName;
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
                 Player = player,
                 IsPrivate = _createLobby.IsPrivate,
                 Data = new Dictionary<string, DataObject>
                 {
-                    {KeyCaseBook, new DataObject(DataObject.VisibilityOptions.Public, caseType.ToString(), DataObject.IndexOptions.S1) },
+                    {KeyCaseBook, new DataObject(DataObject.VisibilityOptions.Public, caseType, DataObject.IndexOptions.S1) },
                 },
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(_lobbyName, 2, createLobbyOptions);
@@ -166,10 +168,9 @@ public class MainLobby : MonoSingleton<MainLobby>
             hostLobby = lobby;
 
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
-            OnLobbyCreate?.Invoke(lobby.LobbyCode, lobbyName, caseType.ToString());
+            OnLobbyCreate?.Invoke(lobby.LobbyCode, _lobbyName, caseType, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
             _createLobby.gameObject.SetActive(false);
-
         }
         catch (LobbyServiceException e)
         {
@@ -213,6 +214,12 @@ public class MainLobby : MonoSingleton<MainLobby>
     }
     public async void JoinLobbyByCode(string lobbyCode)
     {
+        if(lobbyCode == string.Empty)
+        {
+            Util.instance.LoadingHide();
+            Util.instance.MainMenuShow();
+            return;
+        }
         try
         {
             Player player = GetPlayer();
@@ -224,10 +231,12 @@ public class MainLobby : MonoSingleton<MainLobby>
             joinedLobby = lobby;
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
         }
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+            Util.instance.LoadingHide();
         }
     }
     public async void QuickJoinLobby()
@@ -235,21 +244,27 @@ public class MainLobby : MonoSingleton<MainLobby>
         RefreshLobbyList();
         try
         {
-            QuickJoinLobbyOptions options = new QuickJoinLobbyOptions();
+            Player player = GetPlayer();
 
-            options.Filter = new List<QueryFilter>()
+            Lobby lobby = await LobbyService.Instance.QuickJoinLobbyAsync(new QuickJoinLobbyOptions
             {
-                new QueryFilter(QueryFilter.FieldOptions.MaxPlayers, "1", QueryFilter.OpOptions.GE)
-            };
+                Player = player,
+                Filter = new List<QueryFilter>()
+                {
+                    new QueryFilter(QueryFilter.FieldOptions.MaxPlayers, "1", QueryFilter.OpOptions.GE)
+                }
+            });
 
-            Lobby lobby = await LobbyService.Instance.QuickJoinLobbyAsync();
             joinedLobby = lobby;
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
         }
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+            Util.instance.MainMenuShow();
+            Util.instance.LoadingHide();
         }
     }
     private Player GetPlayer()
@@ -286,11 +301,11 @@ public class MainLobby : MonoSingleton<MainLobby>
             switch (caseType)
             {
                 default:
-                case CaseType.case1:
-                    caseType = CaseType.case1;
+                case CaseType.Case1:
+                    caseType = CaseType.Case1;
                     break;
-                case CaseType.case2:
-                    caseType = CaseType.case2;
+                case CaseType.Case2:
+                    caseType = CaseType.Case2;
                     break;
             }
 
@@ -384,6 +399,8 @@ public class MainLobby : MonoSingleton<MainLobby>
                 joinedLobby = null;
 
                 OnLeftLobby?.Invoke(this, EventArgs.Empty);
+                Util.instance.MainMenuShow();
+                Util.instance.LoadingHide();
             }
             catch (LobbyServiceException e)
             {
@@ -422,16 +439,19 @@ public class MainLobby : MonoSingleton<MainLobby>
             Debug.Log(e);
         }
     }
-    private void GameStart()
+    public void GameStart()
     {
         int readyCount = 0;
         foreach (Player player in joinedLobby.Players)
         {
-            if (player.Data[KeyPlayerReady].Value == "true")
+            if (player.Data[KeyPlayerReady].Value == "True")
                 readyCount++;
         }
-        if (readyCount >= 2)
+        if (readyCount == 2)
+        {
+            Debug.Log("GameStart");
             OnGameStart?.Invoke();
+        }
         readyCount = 0;
     }
     public bool IsLobbyHost()

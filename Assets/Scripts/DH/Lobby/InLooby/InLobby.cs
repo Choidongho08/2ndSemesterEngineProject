@@ -14,13 +14,16 @@ public class InLobby : MonoBehaviour
 
     private void Awake()
     {
-        MainLobby.instance.OnLobbyCreate += (lobbyCode, lobbyName,lobbyCase) => 
-        {
-            _lobbyCode.text = lobbyCode;
-            _lobbyName.text = lobbyName;
-            _lobbyCase.text = lobbyCase;
-            _lobby.SetActive(true);
-            Loading.instance.Hide();
-        };
+        MainLobby.instance.OnLobbyCreate += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode, lobbyName, lobbyCase, sprite);
+        MainLobby.instance.OnLobbyJoined += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode,lobbyName, lobbyCase, sprite);
+    }
+    private void Lobby(string lobbyCode, string lobbyName, string lobbyCase, Sprite sprite)
+    {
+        _lobbyCode.text = lobbyCode;
+        _lobbyName.text = lobbyName;
+        _lobbyCase.text = lobbyCase;
+        _lobby.SetActive(true);
+        Util.instance.LoadingHide();
+        InLobbyUI.instance.CaseImageChange(sprite);
     }
 }

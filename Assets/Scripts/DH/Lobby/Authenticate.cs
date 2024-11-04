@@ -10,7 +10,7 @@ public class Authenticate : MonoBehaviour
         authenticateBtn.gameObject.SetActive(true);
         authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
         {
-            Loading.instance.Show();
+            Util.instance.LoadingShow();
             MainLobby.instance.Authenticate(ChangeNameUI.instance.GetPlayerName());
             authenticateBtn.gameObject.SetActive(false);
         });

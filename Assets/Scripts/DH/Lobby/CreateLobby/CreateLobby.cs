@@ -14,12 +14,15 @@ public class CreateLobby : MonoBehaviour
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private Button _lobbyAccessModifyBtn;
     [SerializeField] private TMP_InputField _lobbyNameInput;
+    [SerializeField] private CaseBook _caseBook;
 
     private string _lobbyName;
-    private CaseType _caseType;
+    private string _caseType;
 
     public Button createLobbyButton;
-    public event Action<CaseType> OnCreateLobby;
+    public Button cancelCreateButton;
+    public event Action<string> OnCreateLobby;
+    public event Action<CaseType> OnJoiendLobby;
     public event Action<string> OnLobbyNameChange;
     public bool IsPrivate;
 
@@ -35,24 +38,30 @@ public class CreateLobby : MonoBehaviour
         _mainMenu.OnCreateLobby += () => _setLobbyOptionUI.gameObject.SetActive(true);
         createLobbyButton.onClick.AddListener(() =>
         {
-            Loading.instance.Show();
+            Util.instance.LoadingShow();
             if (CheckLobbyName())
             {
                 OnLobbyNameChange?.Invoke(_lobbyName);
                 _setLobbyOptionUI.gameObject.SetActive(false);
+                _caseType = _caseBook.caseType;
                 OnCreateLobby?.Invoke(_caseType);
             }
+        });
+        cancelCreateButton.onClick.AddListener(() =>
+        {
+            _setLobbyOptionUI.gameObject.SetActive(false);
+            Util.instance.MainMenuShow();
         });
     }
 
     private bool CheckLobbyName()
     {
-        _lobbyName = _lobbyNameInput.text;
-        _lobbyNameInput.text = Regex.Replace(_lobbyName, @"[^0-9a-zA-Z°¡-ÆR]", string.Empty);
-        if(_lobbyNameInput.text == string.Empty)
+        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
+        if(!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
         {
-            Loading.instance.Hide();
+            Util.instance.LoadingHide();
             Debug.Log("Æ¯¼ö¹®ÀÚ ¾ÈµÅ! ÀÌ ¸ÓÀú¸®¾ß");
+            _lobbyNameInput.text = string.Empty;
             return false;
         }
         else
@@ -61,4 +70,10 @@ public class CreateLobby : MonoBehaviour
             return true;
         }
     } 
+    public void ClearCreateLobbyOption()
+    {
+        _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Private";
+        IsPrivate = true;
+        _caseType = "Case0";
+    }
 }

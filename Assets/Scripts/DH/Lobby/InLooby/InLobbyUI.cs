@@ -12,6 +12,9 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     [SerializeField] private Transform container;
     [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private Button _readyButton;
+    [SerializeField] private Button _startButton;
+    [SerializeField] private GameObject _hostStartPanel;
+    [SerializeField] private Image _caseImage;
 
     private InLobby _inLobby;
     private string _playerReady = "False";
@@ -23,12 +26,14 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
 
         leaveLobbyButton.onClick.AddListener(() => {
             MainLobby.instance.LeaveLobby();
+            Util.instance.LoadingShow();
         });
         _readyButton.onClick.AddListener(() => 
         {
             _playerReady = MainLobby.instance.PlayerReady == "False" ? "True" : "False";
             MainLobby.instance.UpdatePlayerReady(_playerReady);
         });
+        _startButton.onClick.AddListener(() => MainLobby.instance.GameStart());
     }
     private void Start()
     {
@@ -37,6 +42,7 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         MainLobby.instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         MainLobby.instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
 
+        _hostStartPanel.gameObject.SetActive(false);                                                
         Hide();
     }
 
@@ -84,5 +90,13 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void Show()
     {
         gameObject.SetActive(true);
+        if (!MainLobby.instance.IsLobbyHost())
+        {
+            _hostStartPanel.gameObject.SetActive(true);
+        }
+    }
+    public void CaseImageChange(Sprite sprite)
+    {
+        _caseImage.sprite = sprite;
     }
 }

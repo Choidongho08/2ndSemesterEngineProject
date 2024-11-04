@@ -17,6 +17,7 @@ public class JoinLobbyByCode : MonoBehaviour
         _mainMenu.OnJoinLobbyByCode += () => _child.SetActive(true);
         _joinButton.onClick.AddListener(() =>
         {
+            _inputLobbyCode.text = string.Empty;
             _lobbyCode = _inputLobbyCode.text;
             CodeJoinLobby();
             Hide();
@@ -30,6 +31,7 @@ public class JoinLobbyByCode : MonoBehaviour
     }
     private void CodeJoinLobby()
     {
+        Util.instance.LoadingShow();
         MainLobby.instance.JoinLobbyByCode(_lobbyCode);
     }
 }
