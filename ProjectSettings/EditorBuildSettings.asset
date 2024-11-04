@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DH/DH.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/SJ/Player1/SJ_Gmick3.unity
+    path: Assets/Scenes/SJ/Player1/SJ_Gimick3_1.unity
     guid: 05f35cd663dc67f4eb7f22dd9b29b173
   - enabled: 1
-    path: Assets/Scenes/SJ/Player2/SJ_Gmick3_1.unity
+    path: Assets/Scenes/SJ/Player2/SJ_Gmick3_2.unity
     guid: ef7ca6c39ce4e7b41b6c34b02f2bf280
   m_configObjects: {}

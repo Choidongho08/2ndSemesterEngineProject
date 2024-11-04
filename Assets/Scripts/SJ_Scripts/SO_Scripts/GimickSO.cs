@@ -17,12 +17,12 @@ public class GimickSO : ScriptableObject
     public bool player2HasScissor = false; // 플레이어 나누기 ㅇㅇ
 
     [Header("동상 우산 쪽 기믹")]
-    public bool playerHasUm = false; // true면 우산을 놔둘지 선택
-    public bool playerHasWater = false; // true면 물을 부울지 말지 선택
+    public bool player1HasUm = false; // true면 우산을 놔둘지 선택
+    public bool player2HasWater = false; // true면 물을 부울지 말지 선택
     public bool StatueHasUm = false; // 우산 가지고 있는지 (아래에 StatBlockR머시기와 연결)
     public bool StatueBlockRain = false; // 비가 내려서 막고 있는지
 
     [Header("라디오, 스피커 쪽 기믹")]
-    public int radioChannel; // 수에 따라서 나오는 소리가 다름
+    [Range(1,5)] public int radioChannel; // 수에 따라서 나오는 소리가 다름
     public bool puzzleDone = false; // 퍼즐이 해결 되었는지
 }

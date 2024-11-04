@@ -10,9 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4114a7c28d6e0914aa7de59829bc7847, type: 3}
-  m_Name: GimickPassword
+  m_Name: Gimicks
   m_EditorClassIdentifier: 
   flickPuzzlePassword: 4860
   puzzleSet: 1
   numberCheck: 00001111001000011111
   puzzleEnd: 1
+  itCantEnter: 0
+  player1HasScissor: 0
+  player2HasScissor: 0
+  player1HasUm: 0
+  player2HasWater: 0
+  StatueHasUm: 0
+  StatueBlockRain: 0
+  radioChannel: 1
+  puzzleDone: 0
