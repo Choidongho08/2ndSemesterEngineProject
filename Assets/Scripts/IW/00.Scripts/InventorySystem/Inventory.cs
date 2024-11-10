@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
         ItemSO itemSO = item;
         if (itemSO == null)
         {
-            int random = Random.Range(0, _items.Length);
+            int random = Random.Range(25, _items.Length - 10);
             itemSO = _items[random];
         }
 
@@ -43,6 +43,7 @@ public class Inventory : MonoBehaviour
             // 슬롯이 비어있는지 체크
             if (_inventorySlots[i]._myItem == null)
             {
+                Debug.Log(itemSO);
                 Instantiate(_itemPrefabs, _inventorySlots[i].transform).Initialize(itemSO, _inventorySlots[i]);
                 Debug.Log("아이테무 생성");
                 _icon.sprite = item.ItemIcon;
