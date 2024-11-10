@@ -1447,7 +1447,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 165, y: 180}
@@ -2147,7 +2147,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492287711}
-  - component: {fileID: 1492287712}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -2170,18 +2169,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1492287712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492287710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3d05b0ed9f2cd4dbf2759ed056c04d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1526441719 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3274111855715820125, guid: ba74f10dcf265eb4b846b040e541710b, type: 3}
@@ -2551,6 +2538,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5355186819560485837, guid: ba74f10dcf265eb4b846b040e541710b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718562055244890066, guid: ba74f10dcf265eb4b846b040e541710b, type: 3}
+      propertyPath: m_StartCorner
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
