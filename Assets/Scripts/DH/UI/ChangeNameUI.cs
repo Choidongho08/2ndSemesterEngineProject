@@ -11,6 +11,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     [SerializeField] private Button _cancelButton;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private GameObject _child;
+    [SerializeField] private PlayerSO _playerSo;
 
     private string _playerName;
 
@@ -59,6 +60,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
         else
         {
             Debug.Log("¼º°ø!");
+            _playerSo.playerName = _playerName;
             return true;
         }
     }
@@ -69,6 +71,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     private void UpdatePlayerName()
     {
         MainLobby.instance.UpdatePlayerName(_playerName);
+        _playerSo.playerName = _playerName;
     }
     private void ReadPlayerName(string path, string fileName)
     {
@@ -98,6 +101,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     }
     public string GetPlayerName()
     {
+        _playerSo.playerName = _playerName;
         return _playerName;
     }
 }

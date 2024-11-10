@@ -2046,6 +2046,7 @@ MonoBehaviour:
   _cancelButton: {fileID: 797287102}
   _mainMenu: {fileID: 194889809}
   _child: {fileID: 1544001651}
+  _playerSo: {fileID: 11400000, guid: e20516c0b4f53014aa45d531c7418f55, type: 2}
 --- !u!1 &336226548
 GameObject:
   m_ObjectHideFlags: 0
