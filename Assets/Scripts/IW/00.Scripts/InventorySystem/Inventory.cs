@@ -46,6 +46,7 @@ public class Inventory : MonoBehaviour
                 Debug.Log(itemSO);
                 Instantiate(_itemPrefabs, _inventorySlots[i].transform).Initialize(itemSO, _inventorySlots[i]);
                 Debug.Log("아이테무 생성");
+                _itemPrefabs.GetComponent<RectTransform>().localScale = _inventorySlots[i].transform.localScale;
                 _icon.sprite = item.ItemIcon;
                 _Info.text = item.ItemInfo;
                 return;
