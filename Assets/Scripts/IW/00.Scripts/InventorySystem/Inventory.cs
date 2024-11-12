@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] TextMeshProUGUI _Info;
 
     [Header("Item List")]
-    [SerializeField] ItemSO[] _items;
+    public ItemSO[] _items;
 
     private void Awake()
     {
