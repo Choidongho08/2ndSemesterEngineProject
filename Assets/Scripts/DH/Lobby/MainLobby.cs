@@ -6,6 +6,7 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainLobby : MonoSingleton<MainLobby>
@@ -451,6 +452,7 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             Debug.Log("GameStart");
             OnGameStart?.Invoke();
+            SceneManager.LoadScene(0);
         }
         readyCount = 0;
     }

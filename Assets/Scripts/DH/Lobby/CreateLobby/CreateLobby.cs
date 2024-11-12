@@ -74,6 +74,8 @@ public class CreateLobby : MonoBehaviour
     {
         _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Private";
         IsPrivate = true;
-        _caseType = "Case0";
+        _lobbyNameInput.text = string.Empty;
+        _caseType = "0";
+        NowCase.instance.SetCaseNumber("0");
     }
 }
