@@ -395,6 +395,7 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             try
             {
+                MigrateLobbyHost();
                 await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
 
                 joinedLobby = null;
@@ -425,19 +426,23 @@ public class MainLobby : MonoSingleton<MainLobby>
     }
     private async void MigrateLobbyHost()
     {
-        try
+        if (IsLobbyHost())
         {
-            hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+            try
             {
-                HostId = joinedLobby.Players[1].Id
-            });
+                hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+                {
+                    HostId = joinedLobby.Players[1].Id
+                });
 
-            joinedLobby = hostLobby;
-            PrintPlayers(hostLobby);
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.Log(e);
+                joinedLobby = hostLobby;
+                PrintPlayers(hostLobby);
+                InLobbyUI.instance.HostPanel();
+            }
+            catch (LobbyServiceException e)
+            {
+                Debug.Log(e);
+            }
         }
     }
     public void GameStart()

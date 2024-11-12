@@ -90,9 +90,17 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void Show()
     {
         gameObject.SetActive(true);
+        HostPanel();
+    }
+    public void HostPanel()
+    {
         if (!MainLobby.instance.IsLobbyHost())
         {
             _hostStartPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            _hostStartPanel.gameObject.SetActive(false);
         }
     }
     public void CaseImageChange(Sprite sprite)

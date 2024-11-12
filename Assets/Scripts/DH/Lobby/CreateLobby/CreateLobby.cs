@@ -39,7 +39,7 @@ public class CreateLobby : MonoBehaviour
         createLobbyButton.onClick.AddListener(() =>
         {
             Util.instance.LoadingShow();
-            if (CheckLobbyName())
+            if (CheckLobbySetting())
             {
                 OnLobbyNameChange?.Invoke(_lobbyName);
                 _setLobbyOptionUI.gameObject.SetActive(false);
@@ -54,7 +54,7 @@ public class CreateLobby : MonoBehaviour
         });
     }
 
-    private bool CheckLobbyName()
+    private bool CheckLobbySetting()
     {
         _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
         if(!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
@@ -66,8 +66,18 @@ public class CreateLobby : MonoBehaviour
         }
         else
         {
-            Debug.Log("¼º°ø!");
-            return true;
+            if (_caseBook.caseType != "Case0")
+            {
+                Debug.Log("¼º°ø!");
+                return true;
+            }
+            else
+            {
+                Util.instance.LoadingHide();
+                Debug.Log("½ÇÆÐ!");
+                return false;
+            }
+            
         }
     } 
     public void ClearCreateLobbyOption()
@@ -75,7 +85,7 @@ public class CreateLobby : MonoBehaviour
         _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Private";
         IsPrivate = true;
         _lobbyNameInput.text = string.Empty;
-        _caseType = "0";
+        _caseType = "Case0";
         NowCase.instance.SetCaseNumber("0");
     }
 }
