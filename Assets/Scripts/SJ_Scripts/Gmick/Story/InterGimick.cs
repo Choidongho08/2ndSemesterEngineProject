@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InterGimick : MonoBehaviour, StoryEnd
+public class InterGimick : MonoBehaviour, StoryEnd, ItemCheck
 {
     [SerializeField] private GameObject _storyPan;
     [SerializeField] private StoryTxtSO _story;
@@ -12,6 +12,14 @@ public class InterGimick : MonoBehaviour, StoryEnd
     [SerializeField] private TextMeshProUGUI _text;
 
     private int _storyLine;
+
+    public void ItemCheck()
+    {
+        /*foreach (var item in Inventory.Instance._items)
+        {
+
+        }*/
+    }
 
     public void InteractionGimick()
     {
