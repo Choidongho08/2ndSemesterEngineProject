@@ -7,9 +7,6 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "SO/storyManager")]
 public class StorySO : ScriptableObject
 {
-    [Header("캐릭 정보")]
-    public List<NPCSO> NPC;
-
     [Header("적당한 대사 모음집")]
     public List<StoryTxtSO> TextList; // 캐릭터 일반 대사
 

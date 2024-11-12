@@ -19,6 +19,7 @@ public class GimickSO : ScriptableObject
     [Header("동상 우산 쪽 기믹")]
     public bool player1HasUm = false; // true면 우산을 놔둘지 선택
     public bool player2HasWater = false; // true면 물을 부울지 말지 선택
+    public bool player2Watering = false; // true면 이미 물을 부운 상황
     public bool StatueHasUm = false; // 우산 가지고 있는지 (아래에 StatBlockR머시기와 연결)
     public bool StatueBlockRain = false; // 비가 내려서 막고 있는지
 
