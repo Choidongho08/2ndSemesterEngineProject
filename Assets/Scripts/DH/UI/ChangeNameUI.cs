@@ -51,6 +51,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
         if (!_inputPlayerName.text.Equals(_playerSO.playerName) || _playerSO.playerName == "")
         {
             Util.instance.LoadingHide();
+            Message.instance.SetTitleAndMessageText("ErrorMessage", "특수문자를 사용하시면 안됩니다.");
             Debug.Log("특수문자 안돼! 이 머저리야");
             _inputPlayerName.text = string.Empty;
             return false;

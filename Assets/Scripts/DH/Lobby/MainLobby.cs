@@ -217,6 +217,7 @@ public class MainLobby : MonoSingleton<MainLobby>
     {
         if(lobbyCode == string.Empty)
         {
+            Debug.Log("no LobbyCode");
             Util.instance.LoadingHide();
             Util.instance.MainMenuShow();
             return;
@@ -230,6 +231,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             });
 
             joinedLobby = lobby;
+            Util.instance.MainMenuHide();
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
             OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
@@ -238,6 +240,7 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             Debug.Log(e);
             Util.instance.LoadingHide();
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobby)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobby)].errorCode);
         }
     }
     public async void QuickJoinLobby()
@@ -264,7 +267,6 @@ public class MainLobby : MonoSingleton<MainLobby>
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
-            Util.instance.MainMenuShow();
             Util.instance.LoadingHide();
         }
     }
