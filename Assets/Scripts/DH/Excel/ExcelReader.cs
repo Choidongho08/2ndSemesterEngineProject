@@ -31,7 +31,7 @@ public class ExcelReader : MonoSingleton<ExcelReader>
     private void ReadCSV()
     {
         // 파일 이름.확장자
-        string path = "ErrorCodeExcel.csv";
+        string path = csvFileName+".csv";
 
         // 데이터를 저장하는 리스트
         // 편하게 관리하기 위해 List로 선언
@@ -76,7 +76,7 @@ public class ExcelReader : MonoSingleton<ExcelReader>
             // menu.name에 splitData[0]번째 있는 데이터를 담는다는 의미
             // 즉, menu 객체 name변수에는 splitData[0]에 담긴 "샌드위치"가 들어갑니다.
             menu.name = splitData[0];
-            menu.errorCode = splitData[2];
+            menu.errorCode = splitData[1];
 
             // menu 객체에 다 담았다면 dictionary에 key와 value값으로 저장
             // 이렇게 해두면 dicMenu.Add("샌드위치");로 menu.name, menu.price .. 접근 가능
@@ -84,6 +84,7 @@ public class ExcelReader : MonoSingleton<ExcelReader>
             Debug.Log(menu.name);
             Debug.Log(dictionaryErrorCode.Count); // 잘 들어갔는지 체크
         }
-        Debug.Log(dictionaryErrorCode["QuickJoinLobbyFail"].errorCode);
+        Debug.Log(ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby));
+        Debug.Log(dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
     }
 }

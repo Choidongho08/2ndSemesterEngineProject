@@ -6,29 +6,28 @@ using UnityEngine.UI;
 
 public class Message : MonoSingleton<Message>
 {
-    [SerializeField] private GameObject _top;
-    [SerializeField] private GameObject _detail;
-
-    private Button _okayButton;
-    private TextMeshProUGUI _topTitleText;
-    private TextMeshProUGUI _detailMessageText;
+    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private TextMeshProUGUI _messageText;
+    [SerializeField] private Button _okayButton;
+    [SerializeField] private GameObject _child;
 
     private void Awake()
     {
-        _okayButton = GetComponentInChildren<Button>();
-        _okayButton.onClick.AddListener(() => gameObject.SetActive(false));
-        _topTitleText = _top.GetComponentInChildren<TextMeshProUGUI>();
-        _detailMessageText = _detail.GetComponentInChildren<TextMeshProUGUI>();
+        _okayButton.onClick.AddListener(HideMessage);
     }
 
     public void SetTitleAndMessageText(string titleText, string messageText)
     {
-        _topTitleText.text = titleText;
-        _detailMessageText.text = messageText;
         ShowMessage();
+        _titleText.text = titleText;
+        _messageText.text = messageText;
     }
     private void ShowMessage()
     {
-        gameObject.SetActive(true);
+        _child.SetActive(true);
+    }
+    private void HideMessage()
+    {
+        _child.SetActive(false);
     }
 }
