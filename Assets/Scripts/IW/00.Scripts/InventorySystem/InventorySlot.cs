@@ -31,6 +31,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         _myItem._canvasGroup.blocksRaycasts = true;
 
         //if (_myTag != SlotTag.none)
-        //    Inventory.Singleton.EquipEquipment(_myTag, _myItem);
+        //    Inventory.Singleton.EquipEquipment(_myTag, ItemSO);
     }
 }
