@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InLobby : MonoBehaviour
 {
@@ -15,7 +11,7 @@ public class InLobby : MonoBehaviour
     private void Awake()
     {
         MainLobby.instance.OnLobbyCreate += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode, lobbyName, lobbyCase, sprite);
-        MainLobby.instance.OnLobbyJoined += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode,lobbyName, lobbyCase, sprite);
+        MainLobby.instance.OnLobbyJoined += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode, lobbyName, lobbyCase, sprite);
     }
     private void Lobby(string lobbyCode, string lobbyName, string lobbyCase, Sprite sprite)
     {

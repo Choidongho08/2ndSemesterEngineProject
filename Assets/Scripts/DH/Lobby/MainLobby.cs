@@ -4,7 +4,6 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -215,7 +214,7 @@ public class MainLobby : MonoSingleton<MainLobby>
     }
     public async void JoinLobbyByCode(string lobbyCode)
     {
-        if(lobbyCode == string.Empty)
+        if (lobbyCode == string.Empty)
         {
             Debug.Log("no LobbyCode");
             Util.instance.LoadingHide();
