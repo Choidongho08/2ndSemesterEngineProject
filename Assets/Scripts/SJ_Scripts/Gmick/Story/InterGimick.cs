@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InterGimick : MonoBehaviour, StoryEnd, ItemCheck
+public class InterGimick : MonoBehaviour, StoryEnd
 {
     [SerializeField] private GameObject _storyPan;
     [SerializeField] private StorySO _storyList;
@@ -18,11 +18,11 @@ public class InterGimick : MonoBehaviour, StoryEnd, ItemCheck
 
     private int _storyListNum = 0;
 
-    public void ItemCheck()
+    public void ItemCheck(string needItem) //string으로 바꿔서 버튼 누를때 이름 받아오기 각자
     {
-        foreach (ItemSO item in Inventory.Instance._items)
+        foreach (InventorySlot item in Inventory.Instance._inventorySlots)
         {
-            if (item.ItemName == "빈 병")
+            if (item._myItem.ItemSO.ItemName == "빈 병")
             {
                 ItemIsHere = true;
             }
