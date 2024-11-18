@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using TMPro;
 
-public class InventoryItem : Inventory, IPointerClickHandler
+public class InventoryItem : MonoBehaviour, IPointerClickHandler
 {
     private Image _itemIcon;
     [SerializeField] private ItemSO _currentItem;
     public CanvasGroup _canvasGroup { get; private set; }
 
-    public ItemSO _myItem { get; set; }
+    public ItemSO ItemSO => _currentItem;
     public InventorySlot _activeSlot { get; set; }
 
     [SerializeField] private Image _itemImage;
@@ -30,8 +30,15 @@ public class InventoryItem : Inventory, IPointerClickHandler
         _activeSlot._myItem = this;
         _currentItem = items;
         Debug.Log("현재 들어온 아이템 : " + _currentItem.name);
-        _myItem = items;
-        _itemIcon.GetComponent<Image>().sprite = _currentItem.ItemIcon;
+
+        if(_itemIcon != null && _currentItem.ItemIcon != null)
+        {
+            _itemIcon.sprite = _currentItem.ItemIcon;
+        }
+        else
+        {
+            Debug.LogWarning("ItemIcon 또는 _itemIcon이 null입니다.");
+        }
     }
 
 

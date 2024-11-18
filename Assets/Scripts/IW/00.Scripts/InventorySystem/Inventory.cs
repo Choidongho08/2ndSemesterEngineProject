@@ -46,30 +46,57 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        // LoadInventory();
+        LoadInventory();
     }
 
-    /*SaveInventoryToJson
+    // Save Inventory To Json
     public void SaveInventory()
     {
-        File.WriteAllText(_filePath, JsonUtility.ToJson(this));
+        InvenData data = new InvenData();
+
+        foreach (var slot in _inventorySlots)
+        {
+            if (slot._myItem != null)
+            {
+                data.slots.Add(new ItemSlotData
+                {
+                    itemName = slot._myItem.ItemSO.ItemName
+                });
+            }
+        }
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(_filePath, json);
         Debug.Log("Saving Data");
     }
 
-    public Inventory LoadInventory()
+    public void LoadInventory()
     {
-        if (File.Exists(_filePath))
+        if (!File.Exists(_filePath))
         {
-            string jsonData = File.ReadAllText(_filePath);
-            Debug.Log("Reloading Save Data");
-            return JsonUtility.FromJson<Inventory>(jsonData);  
+            Debug.LogWarning("No Inventory cave file found");
+            return;
         }
-        else
+
+        string json = File.ReadAllText(_filePath);
+        InvenData data = JsonUtility.FromJson<InvenData>(json);
+
+        foreach (var slot in _inventorySlots)
         {
-            Debug.LogError("Save File Not Found");
-            return null;
+            // slot.ClearSlot();
         }
-    }*/
+
+        foreach (var slotData in data.slots)
+        {
+            var itemSO = System.Array.Find(_items, item => item.ItemName == slotData.itemName);
+            if (itemSO != null)
+            {
+                SpawnInventoryItem(itemSO);
+            }
+        }
+
+        Debug.Log("No Inventory data loaded");
+    }
 
     // 아이템 잘 생성되는 지
     public void SpawnInventoryItem(ItemSO item = null)
@@ -92,7 +119,6 @@ public class Inventory : MonoBehaviour
                 _info.text = item.ItemInfo;
 
                 // SaveInventory();
-                Debug.Log(itemSO);
                 ChangeIcon(itemSO);
                 return;
             }
