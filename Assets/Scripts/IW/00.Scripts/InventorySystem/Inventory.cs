@@ -115,11 +115,11 @@ public class Inventory : MonoBehaviour
             {
                 Instantiate(_itemPrefabs, _inventorySlots[i].transform).Initialize(itemSO, _inventorySlots[i]);
                 _itemPrefabs.GetComponent<RectTransform>().localScale = _inventorySlots[i].transform.localScale;
+
                 _icon.sprite = item.ItemIcon;
                 _info.text = item.ItemInfo;
 
-                // SaveInventory();
-                ChangeIcon(itemSO);
+                SaveInventory();
                 return;
             }
         }
