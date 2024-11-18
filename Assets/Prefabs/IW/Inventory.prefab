@@ -908,6 +908,10 @@ PrefabInstance:
       propertyPath: m_StartCorner
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6718562055244890066, guid: ba74f10dcf265eb4b846b040e541710b, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
