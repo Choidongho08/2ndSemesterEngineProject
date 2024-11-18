@@ -1,13 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.Collections.Unicode;
 
 public class InGameTime : MonoBehaviour
 {
@@ -55,11 +50,11 @@ public class InGameTime : MonoBehaviour
     private void OneMonth()
     {
         _month++;
-        if(_month >= 13)
+        if (_month >= 13)
         {
             _month = 1;
             OneYear();
-            return; 
+            return;
         }
         SetText();
     }
@@ -117,14 +112,14 @@ public enum MonthOfDay
 {
     January,
     February,
-    March ,
-    Aprill ,
+    March,
+    Aprill,
     May,
     June,
     July,
     Augest,
     September,
     October,
-    November, 
-    December ,
+    November,
+    December,
 }

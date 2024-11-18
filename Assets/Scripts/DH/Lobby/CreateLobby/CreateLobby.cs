@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,7 +53,7 @@ public class CreateLobby : MonoBehaviour
     private bool CheckLobbySetting()
     {
         _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
-        if(!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
+        if (!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
         {
             Util.instance.LoadingHide();
             Debug.Log("Æ¯¼ö¹®ÀÚ ¾ÈµÅ! ÀÌ ¸ÓÀú¸®¾ß");
@@ -77,9 +73,9 @@ public class CreateLobby : MonoBehaviour
                 Debug.Log("½ÇÆÐ!");
                 return false;
             }
-            
+
         }
-    } 
+    }
     public void ClearCreateLobbyOption()
     {
         _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Private";
