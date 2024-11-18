@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class FlickLight : PuzzleManager
 
     [SerializeField] private string puzzleAns;
     [SerializeField] int a;
+    [SerializeField] private GameObject password;
+
+    private event Action puzzleDone;
 
     public void FlickEbulb()
     {
@@ -17,6 +21,11 @@ public class FlickLight : PuzzleManager
         puzzleAns += "0";
         FlickChecker();
         EndChecking();
+    }
+
+    private void OnEnable()
+    {
+        puzzleDone += ShowPassWord;
     }
 
     public void FlickLED()
@@ -46,6 +55,14 @@ public class FlickLight : PuzzleManager
         {
             _gimick.puzzleEnd = true;
             Debug.Log("ÆÛÁñ ²ý");
+            puzzleDone?.Invoke();
+            BulbSwitch.interactable = false;
+            LEDSwitch.interactable = false;
         }
+    }
+
+    private void ShowPassWord()
+    {
+        password.SetActive(true);
     }
 }
