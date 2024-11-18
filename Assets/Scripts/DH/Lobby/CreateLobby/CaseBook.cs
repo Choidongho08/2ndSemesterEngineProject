@@ -10,7 +10,7 @@ public class CaseBook : MonoBehaviour
     private Sprite _caseSprite;
     private int _caseNumber;
 
-    public string caseType;
+    public string caseType = "Case0";
 
     private void Awake()
     {

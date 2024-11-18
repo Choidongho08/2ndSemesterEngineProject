@@ -9,7 +9,6 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     [SerializeField] private Image _playerReadyImage;
 
     private Player player;
-    private string _playerReady;
 
 
     public void UpdatePlayer(Player player)
