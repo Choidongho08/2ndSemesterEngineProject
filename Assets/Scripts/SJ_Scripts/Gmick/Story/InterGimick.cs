@@ -22,10 +22,11 @@ public class InterGimick : MonoBehaviour, StoryEnd
     {
         foreach (ItemSO item in Inventory.Instance._collectedItem)
         {
-            if (item.ItemName == "ºó º´")
+            if (item.ItemName == needItem)
             {
                 ItemIsHere = true;
             }
+            Debug.Log(item.ItemName);
         }
         if (ItemIsHere)
         {
