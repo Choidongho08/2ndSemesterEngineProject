@@ -61,6 +61,9 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        if (_collectedItem == null)
+            _collectedItem = new List<ItemSO>();
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -200,7 +203,12 @@ public class Inventory : MonoBehaviour
 
     public void OnItemClicked(ItemSO itemSO)
     {
-        if (!_collectedItem.Contains(itemSO))
+        if (itemSO == null)
+        {
+            Debug.LogError("itemSO is Null");
+            return;
+        }
+        if (!_collectedItem.Exists(item => item.ItemName == itemSO.ItemName))
         {
             _collectedItem.Add(itemSO);
             Debug.Log("Item Added : " + itemSO.ItemName);
