@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         {
             if (Inventory._carriedItem == null) return;
             SetItem(Inventory._carriedItem);
+            
         }
     }
 

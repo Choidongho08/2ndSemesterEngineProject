@@ -73,7 +73,6 @@ public class FieldItem : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            _inventory.SetActive(true);
             this.gameObject.SetActive(false);
             onItemGet?.Invoke();
         }
