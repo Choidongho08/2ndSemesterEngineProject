@@ -17,6 +17,15 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void ClearSlot()
+    {
+        if (_myItem != null)
+        {
+            Destroy(_myItem.gameObject);
+            _myItem = null; // ∫Û ΩΩ∑‘¿∏∑Œ √ ±‚»≠
+        }
+    }
+
     public void SetItem(InventoryItem item)
     {
         Inventory._carriedItem = null;

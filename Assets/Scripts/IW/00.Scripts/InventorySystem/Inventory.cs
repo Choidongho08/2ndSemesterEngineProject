@@ -36,16 +36,40 @@ public class Inventory : MonoBehaviour
     [Header("Item List")]
     public ItemSO[] _items;
 
+    private void OnEnable()
+    {
+        if (_icon == null || _info == null)
+        {
+            _icon = GameObject.Find("IconImage").GetComponent<Image>();
+            _info = GameObject.Find("InfoText").GetComponent<TextMeshProUGUI>();
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
         _fItem = GetComponent<FieldItem>();
 
         _filePath = Application.persistentDataPath + "/Inventory.json";
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
+        if (_icon == null || _info == null)
+        {
+            _icon = GameObject.Find("Item Image").GetComponent<Image>();
+            _info = GameObject.Find("Item Info").GetComponent<TextMeshProUGUI>();
+        }
+
         LoadInventory();
     }
 
@@ -117,7 +141,7 @@ public class Inventory : MonoBehaviour
                 _itemPrefabs.GetComponent<RectTransform>().localScale = _inventorySlots[i].transform.localScale;
 
                 _icon.sprite = item.ItemIcon;
-                _info.text = item.ItemInfo;
+                _info.text = item.ItemInfo; // 다른씬에서 작업할 때 NullReference
 
                 SaveInventory();
                 return;
@@ -156,8 +180,16 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        _icon.sprite = item.ItemIcon;
-        _info.text = item.ItemInfo;
-        Debug.Log("Icon and Info updated for item: " + item.ItemName);
+        if (item != null)
+        {
+            _icon.sprite = item.ItemIcon;
+            _info.text = item.ItemInfo;
+        }
+        else
+        {
+            Debug.Log("Item is null");
+            _icon.sprite = null;
+            _info.text = "";
+        }
     }
 }

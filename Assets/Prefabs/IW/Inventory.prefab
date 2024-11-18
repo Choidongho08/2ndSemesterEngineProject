@@ -220,7 +220,7 @@ MonoBehaviour:
   _draggablesTransform: {fileID: 3116285081452423611}
   _itemPrefabs: {fileID: 343800610638290382, guid: c1e7e29a388dbe94e98176ef43979084, type: 3}
   _icon: {fileID: 1606227111473506422}
-  _Info: {fileID: 1268663317251019323}
+  _info: {fileID: 1268663317251019323}
   _items:
   - {fileID: 11400000, guid: c8f1521e50906b14faa5152f5c61d034, type: 2}
   - {fileID: 11400000, guid: 6ea1fa480fcc1514497a4b08bd0ba277, type: 2}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 4234250734005656348}
   - component: {fileID: 1268663317251019323}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Item Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 1808215041013890124}
   - component: {fileID: 1606227111473506422}
   m_Layer: 5
-  m_Name: ItemImage
+  m_Name: Item Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
