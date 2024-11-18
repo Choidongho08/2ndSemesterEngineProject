@@ -275,6 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d429ec3397b921a46b264d809d093e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeSprite: {fileID: 836357009}
+  _timeSpriteSo: {fileID: 11400000, guid: b4098d10ddecf48489a7425ee0ee2054, type: 2}
+  _minute: 3
 --- !u!1 &830925599
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +358,7 @@ GameObject:
   - component: {fileID: 836357010}
   - component: {fileID: 836357009}
   m_Layer: 5
-  m_Name: Time
+  m_Name: TimeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
