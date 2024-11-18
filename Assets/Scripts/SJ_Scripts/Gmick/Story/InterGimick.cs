@@ -20,9 +20,9 @@ public class InterGimick : MonoBehaviour, StoryEnd
 
     public void ItemCheck(string needItem) //string으로 바꿔서 버튼 누를때 이름 받아오기 각자
     {
-        foreach (InventorySlot item in Inventory.Instance._inventorySlots)
+        foreach (ItemSO item in Inventory.Instance._collectedItem)
         {
-            if (item._myItem.ItemSO.ItemName == "빈 병")
+            if (item.ItemName == "빈 병")
             {
                 ItemIsHere = true;
             }
