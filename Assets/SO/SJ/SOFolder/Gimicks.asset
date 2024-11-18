@@ -21,7 +21,13 @@ MonoBehaviour:
   player2HasScissor: 0
   player1HasUm: 0
   player2HasWater: 0
+  player2Watering: 0
   StatueHasUm: 0
   StatueBlockRain: 0
   radioChannel: 1
+  sound: []
   puzzleDone: 0
+  radioGimickPass: 
+  StatuGimickPass: 
+  RadioPassWord: 
+  StatuPassWord: 

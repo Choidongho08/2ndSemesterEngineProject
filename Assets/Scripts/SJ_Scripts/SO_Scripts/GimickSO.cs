@@ -25,9 +25,14 @@ public class GimickSO : ScriptableObject
 
     [Header("라디오, 스피커 쪽 기믹")]
     [Range(1,5)] public int radioChannel; // 수에 따라서 나오는 소리가 다름
+    public List<AudioSource> sound; // 수에 따른 나올 소리
     public bool puzzleDone = false; // 퍼즐이 해결 되었는지
 
-    
+    [Header("비번들")]
+    public string radioGimickPass; //라디오 기믹 비밀번호
+    public string StatuGimickPass; //동상 기믹 비밀번호
+    public string RadioPassWord; //라디오 기믹 비밀번호 입력
+    public string StatuPassWord; //동상 기믹 비밀번호 입력
 }
 
 public interface ItemCheck
