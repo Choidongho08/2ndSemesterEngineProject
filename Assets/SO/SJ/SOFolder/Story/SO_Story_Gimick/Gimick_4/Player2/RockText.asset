@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: WaterText
+  m_Name: RockText
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uADF8\uB0E5 \uB3CC\uC774\uB2E4."
+  - "\uADF8\uC678 \uD2B9\uBCC4\uD55C \uAC74 \uC5C6\uC5B4\uBCF4\uC778\uB2E4."
   stopPoint: 0
