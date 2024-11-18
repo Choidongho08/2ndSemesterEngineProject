@@ -8,6 +8,6 @@ public class SelectCriminal : MonoBehaviour
 
     public void Initialize()
     {
-
+        
     }
 }
