@@ -26,9 +26,9 @@ public class Inventory : MonoBehaviour
 
     private FieldItem _fItem;
 
-    [SerializeField] InventorySlot[] _inventorySlots;
-    [SerializeField] Transform _draggablesTransform;
-    [SerializeField] InventoryItem _itemPrefabs;
+    public InventorySlot[] _inventorySlots;
+    public Transform _draggablesTransform;
+    public InventoryItem _itemPrefabs;
 
     [SerializeField] Image _icon;
     [SerializeField] TextMeshProUGUI _info;
