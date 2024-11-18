@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed21bea62339ea54e8a840753c338c8a, type: 3}
-  m_Name: Gimick4Text
+  m_Name: Gimick4_2Text
   m_EditorClassIdentifier: 
-  TextList: []
+  TextList:
+  - {fileID: 11400000, guid: 6c7d4827d719d554b89cddde60ae2064, type: 2}
+  - {fileID: 11400000, guid: afa6e48e27772b64fa81e07e35c9f50a, type: 2}
   isthisNPCImportant: 0
   isthisNPCcanQnA: 0

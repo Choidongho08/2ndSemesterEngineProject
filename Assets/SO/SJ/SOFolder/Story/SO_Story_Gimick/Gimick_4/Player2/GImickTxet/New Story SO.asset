@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: DoneText
+  m_Script: {fileID: 11500000, guid: ed21bea62339ea54e8a840753c338c8a, type: 3}
+  m_Name: New Story SO
   m_EditorClassIdentifier: 
-  ChaTxts:
-  - "\uC774\uBBF8 \uBB3C\uC744 \uBD80\uC6E0\uB2E4"
-  stopPoint: 0
+  TextList:
+  - {fileID: 11400000, guid: a8506c63f653c244f8d464497db05492, type: 2}
+  isthisNPCImportant: 0
+  isthisNPCcanQnA: 0
