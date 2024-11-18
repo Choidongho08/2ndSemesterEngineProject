@@ -36,6 +36,9 @@ public class Inventory : MonoBehaviour
     [Header("Item List")]
     public ItemSO[] _items;
 
+    [Header("Collected Items List")]
+    public List<ItemSO> _collectedItem = new List<ItemSO>();
+
     private void OnEnable()
     {
         if (_icon == null || _info == null)
@@ -107,7 +110,7 @@ public class Inventory : MonoBehaviour
 
         foreach (var slot in _inventorySlots)
         {
-            // slot.ClearSlot();
+            slot.ClearSlot();
         }
 
         foreach (var slotData in data.slots)
@@ -192,6 +195,19 @@ public class Inventory : MonoBehaviour
             Debug.Log("Item is null");
             _icon.sprite = null;
             _info.text = "";
+        }
+    }
+
+    public void OnItemClicked(ItemSO itemSO)
+    {
+        if (!_collectedItem.Contains(itemSO))
+        {
+            _collectedItem.Add(itemSO);
+            Debug.Log("Item Added : " + itemSO.ItemName);
+        }
+        else
+        {
+            Debug.Log("Item is already in the list");
         }
     }
 }

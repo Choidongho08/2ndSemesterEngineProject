@@ -12,7 +12,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     [SerializeField] private ItemSO _currentItem;
     public CanvasGroup _canvasGroup { get; private set; }
 
-    public ItemSO ItemSO => _currentItem;
+    public ItemSO ItemSO { get; private set; }
     public InventorySlot _activeSlot { get; set; }
 
     [SerializeField] private Image _itemImage;
@@ -29,6 +29,8 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         _activeSlot = parent;
         _activeSlot._myItem = this;
         _currentItem = items;
+        ItemSO = items;
+        parent.SetItem(this);
         Debug.Log("현재 들어온 아이템 : " + _currentItem.name);
 
         if(_itemIcon != null && _currentItem.ItemIcon != null)
@@ -49,7 +51,10 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
             Debug.Log("Clicked on item : " + _currentItem.name);
             Inventory.Instance.ChangeIcon(_currentItem);
 
-            // Inventory.Instance.SetCarriedItem(this);
+            if (ItemSO != null)
+            {
+                Inventory.Instance.OnItemClicked(ItemSO);
+            }
         }
         else
         {
