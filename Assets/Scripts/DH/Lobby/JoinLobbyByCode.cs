@@ -10,16 +10,14 @@ public class JoinLobbyByCode : MonoBehaviour
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private GameObject _child;
 
-    private string _lobbyCode;
 
     private void Awake()
     {
         _mainMenu.OnJoinLobbyByCode += () => _child.SetActive(true);
         _joinButton.onClick.AddListener(() =>
         {
+            CodeJoinLobby(_inputLobbyCode.text);
             _inputLobbyCode.text = string.Empty;
-            _lobbyCode = _inputLobbyCode.text;
-            CodeJoinLobby();
             Hide();
         });
         _cancelButton.onClick.AddListener(() => { Hide(); });
@@ -29,9 +27,9 @@ public class JoinLobbyByCode : MonoBehaviour
     {
         _child.SetActive(false);
     }
-    private void CodeJoinLobby()
+    private void CodeJoinLobby(string lobbyCode)
     {
         Util.instance.LoadingShow();
-        MainLobby.instance.JoinLobbyByCode(_lobbyCode);
+        MainLobby.instance.JoinLobbyByCode(lobbyCode);
     }
 }

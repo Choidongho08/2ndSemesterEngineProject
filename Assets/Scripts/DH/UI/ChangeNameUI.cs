@@ -11,14 +11,13 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     [SerializeField] private Button _cancelButton;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private GameObject _child;
-
-    private string _playerName;
+    [SerializeField] private PlayerSO _playerSO;
 
 
     private void Start()
     {
-        MainLobby.instance.UpdatePlayerName(_playerName);
-        _mainMenu.GetPlayerName(_playerName);
+        MainLobby.instance.UpdatePlayerName(_playerSO.playerName);
+        _mainMenu.GetPlayerName(_playerSO.playerName);
     }
     private void Awake()
     {
@@ -33,7 +32,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
             {
                 WritePlayerName(path, fileName);
                 UpdatePlayerName();
-                _mainMenu.GetPlayerName(_playerName);
+                _mainMenu.GetPlayerName(_playerSO.playerName);
                 Hide();
                 _inputPlayerName.text = string.Empty;
             }
@@ -48,10 +47,12 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
 
     private bool ChangePlayerName()
     {
-        _playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
-        if (!_inputPlayerName.text.Equals(_playerName) || _playerName == "")
+        _playerSO.playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
+        if (!_inputPlayerName.text.Equals(_playerSO.playerName) || _playerSO.playerName == "")
         {
             Util.instance.LoadingHide();
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail)].name
+                , ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail)].errorCode);
             Debug.Log("Æ¯¼ö¹®ÀÚ ¾ÈµÅ! ÀÌ ¸ÓÀú¸®¾ß");
             _inputPlayerName.text = string.Empty;
             return false;
@@ -68,7 +69,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     }
     private void UpdatePlayerName()
     {
-        MainLobby.instance.UpdatePlayerName(_playerName);
+        MainLobby.instance.UpdatePlayerName(_playerSO.playerName);
     }
     private void ReadPlayerName(string path, string fileName)
     {
@@ -76,28 +77,28 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
         {
             if (File.ReadAllText(path + fileName) != null)
             {
-                _playerName = File.ReadAllText(path + fileName);
+                _playerSO.playerName = File.ReadAllText(path + fileName);
             }
             else
             {
-                _playerName = "Player" + UnityEngine.Random.Range(1, 9090);
-                File.WriteAllText(path + fileName, _playerName);
+                _playerSO.playerName = "Player" + UnityEngine.Random.Range(1, 9090);
+                File.WriteAllText(path + fileName, _playerSO.playerName);
             }
         }
         else
         {
-            _playerName = "Player" + UnityEngine.Random.Range(1, 9090);
-            File.WriteAllText(path + fileName, _playerName);
+            _playerSO.playerName = "Player" + UnityEngine.Random.Range(1, 9090);
+            File.WriteAllText(path + fileName, _playerSO.playerName);
         }
     }
     private void WritePlayerName(string path, string fileName)
     {
         if (File.Exists(path + fileName))
             File.Delete(path + fileName);
-        File.WriteAllText(path + fileName, _playerName);
+        File.WriteAllText(path + fileName, _playerSO.playerName);
     }
     public string GetPlayerName()
     {
-        return _playerName;
+        return _playerSO.playerName;
     }
 }

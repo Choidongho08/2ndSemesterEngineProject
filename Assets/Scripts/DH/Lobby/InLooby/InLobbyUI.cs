@@ -15,9 +15,9 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     [SerializeField] private Button _startButton;
     [SerializeField] private GameObject _hostStartPanel;
     [SerializeField] private Image _caseImage;
+    [SerializeField] private PlayerSO _playerSo;
 
     private InLobby _inLobby;
-    private string _playerReady = "False";
 
     private void Awake()    
     {
@@ -30,8 +30,8 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         });
         _readyButton.onClick.AddListener(() => 
         {
-            _playerReady = MainLobby.instance.PlayerReady == "False" ? "True" : "False";
-            MainLobby.instance.UpdatePlayerReady(_playerReady);
+            _playerSo.playerReady = MainLobby.instance.PlayerReady == "False" ? "True" : "False";
+            MainLobby.instance.UpdatePlayerReady(_playerSo.playerReady);
         });
         _startButton.onClick.AddListener(() => MainLobby.instance.GameStart());
     }
@@ -90,9 +90,17 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void Show()
     {
         gameObject.SetActive(true);
+        HostPanel();
+    }
+    public void HostPanel()
+    {
         if (!MainLobby.instance.IsLobbyHost())
         {
             _hostStartPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            _hostStartPanel.gameObject.SetActive(false);
         }
     }
     public void CaseImageChange(Sprite sprite)
