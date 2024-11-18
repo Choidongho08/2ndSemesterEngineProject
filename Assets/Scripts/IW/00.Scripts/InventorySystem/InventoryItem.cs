@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using TMPro;
 
-public class InventoryItem : MonoBehaviour, IPointerClickHandler
+public class InventoryItem : Inventory, IPointerClickHandler
 {
     private Image _itemIcon;
     [SerializeField] private ItemSO _currentItem;
@@ -14,6 +14,9 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
 
     public ItemSO _myItem { get; set; }
     public InventorySlot _activeSlot { get; set; }
+
+    [SerializeField] private Image _itemImage;
+    [SerializeField] private TextMeshProUGUI _itemText;
 
     private void Awake()
     {
@@ -28,10 +31,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         _currentItem = items;
         Debug.Log("현재 들어온 아이템 : " + _currentItem.name);
         _myItem = items;
-        _itemIcon.GetComponent<Image>().sprite = _currentItem.ItemIcon; // 여기서 오류 | itemIcon 이 null 값
-        Debug.Log(items.sprite);
-        Debug.Log("--------------");
-        Debug.Log(_itemIcon.sprite);
+        _itemIcon.GetComponent<Image>().sprite = _currentItem.ItemIcon;
     }
 
 
@@ -39,7 +39,14 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Inventory.Instance.SetCarriedItem(this);
+            Debug.Log("Clicked on item : " + _currentItem.name);
+            Inventory.Instance.ChangeIcon(_currentItem);
+
+            // Inventory.Instance.SetCarriedItem(this);
+        }
+        else
+        {
+            Debug.LogWarning("No current item assigned to this InventoryItem");
         }
     }
 }
