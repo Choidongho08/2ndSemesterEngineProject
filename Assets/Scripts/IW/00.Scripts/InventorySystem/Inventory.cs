@@ -26,9 +26,9 @@ public class Inventory : MonoBehaviour
 
     private FieldItem _fItem;
 
-    [SerializeField] InventorySlot[] _inventorySlots;
-    [SerializeField] Transform _draggablesTransform;
-    [SerializeField] InventoryItem _itemPrefabs;
+    public InventorySlot[] _inventorySlots;
+    public Transform _draggablesTransform;
+    public InventoryItem _itemPrefabs;
 
     [SerializeField] Image _icon;
     [SerializeField] TextMeshProUGUI _info;
@@ -137,11 +137,13 @@ public class Inventory : MonoBehaviour
             // 슬롯이 비어있는지 체크
             if (_inventorySlots[i]._myItem == null)
             {
-                Instantiate(_itemPrefabs, _inventorySlots[i].transform).Initialize(itemSO, _inventorySlots[i]);
-                _itemPrefabs.GetComponent<RectTransform>().localScale = _inventorySlots[i].transform.localScale;
+                var newItem = Instantiate(_itemPrefabs, _inventorySlots[i].transform);
+                newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
+
+                newItem.Initialize(item, _inventorySlots[i]);
 
                 _icon.sprite = item.ItemIcon;
-                _info.text = item.ItemInfo; // 다른씬에서 작업할 때 NullReference
+                _info.text = item.ItemInfo;
 
                 SaveInventory();
                 return;
