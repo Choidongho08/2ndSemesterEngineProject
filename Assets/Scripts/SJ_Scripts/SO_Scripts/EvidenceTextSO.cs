@@ -14,4 +14,6 @@ public class EvidenceTextSO : ScriptableObject
 
     [Header("이것도 임시지만 범인 찾을 때 제시해야하는 증거(Important)")]
     public List<ItemSO> CorrectEvidence; //맞는 증거
+    public List<string> WrrongEvidenceText; // CorrectEvidence에 없으면 말할 거
+    public List<string> CorrectEvidencText; //있으면 말할 거
 }
