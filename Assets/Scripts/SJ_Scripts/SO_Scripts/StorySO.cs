@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "SO/storyManager")]
+[CreateAssetMenu(menuName = "StorySO/storyManager")]
 public class StorySO : ScriptableObject
 {
     [Header("적당한 대사 모음집")]
