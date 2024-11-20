@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: AsBadF_StoryTxt
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uBB50\uC57C... \uC9C0\uAE08 \uC774\uB7F0 \uC0C1\uD669\uC740!?"
+  - "\uBB50\uC5D0\uC694 \uC544\uC800\uC528?"
+  - "\uC9C0\uAE08 \uB300\uD654\uD560 \uAE30\uBD84 \uC544\uB2C8\uB2C8 \uC800\uB9AC
+    \uAC00\uC694!"
   stopPoint: 0
