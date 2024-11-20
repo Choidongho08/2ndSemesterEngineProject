@@ -18,7 +18,6 @@ public class CreateLobby : MonoBehaviour
     public Button createLobbyButton;
     public Button cancelCreateButton;
     public event Action<string> OnCreateLobby;
-    public event Action<CaseType> OnJoiendLobby;
     public event Action<string> OnLobbyNameChange;
     public bool IsPrivate;
 
