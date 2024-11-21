@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
-  m_Name: MartItem
+  m_Name: Medicine Envelope
   m_EditorClassIdentifier: 
-  ItemName: MartItem
-  ItemInfo: "\uB3D9\uD638\uB294 \uAC9C\uB9C8\uACE0 \uCC28\uC740\uC6B0"
-  ItemIcon: {fileID: 21300000, guid: f10ea96bf5c9f53459d5a886b87be3ce, type: 3}
+  ItemName: Medicine Envelope
+  ItemInfo: "\uB625\uAE00\uC57D\uAD6D \uC57D \uBD09\uD22C\uB2E4. \uC694\uC998 \uC57D
+    \uAC12\uC774 \uB9CE\uC774 \uBE44\uC2F8\uC84C\uAD6C\uB098."
+  ItemIcon: {fileID: 21300000, guid: ada5c369213f1f841b0717190e746a59, type: 3}
   PlayerID: []

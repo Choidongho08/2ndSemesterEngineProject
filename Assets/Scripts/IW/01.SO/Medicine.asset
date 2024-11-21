@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
-  m_Name: Testament
+  m_Name: Medicine
   m_EditorClassIdentifier: 
-  ItemName: Testament
-  ItemInfo: "\uC774\uC775"
-  ItemIcon: {fileID: 0}
+  ItemName: Medicine
+  ItemInfo: "\uC815\uCCB4\uBAA8\uB97C \uC57D\uC774\uB2E4. \uC774 \uC57D\uC73C\uB85C
+    \uC8FD\uC778\uAC78\uAE4C?"
+  ItemIcon: {fileID: 21300000, guid: 5b9a81c1b03b1fd45bd577b17baf79f0, type: 3}
   PlayerID: []
