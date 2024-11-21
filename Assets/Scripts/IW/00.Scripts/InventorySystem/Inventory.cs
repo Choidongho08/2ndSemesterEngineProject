@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class InvenData
@@ -15,6 +17,12 @@ public class InvenData
 public class ItemSlotData
 {
     public string itemName;
+}
+
+[System.Serializable]
+public class CollectedItemData
+{
+    public List<string> collectedItemNames; // ItemName 저장
 }
 
 public class Inventory : MonoBehaviour
@@ -77,10 +85,18 @@ public class Inventory : MonoBehaviour
         }
 
         LoadInventory();
+        LoadCollectedItems();
+    }
+
+    private void Update()
+    {
+        if (_carriedItem == null) return;
+
+        _carriedItem.transform.position = Input.mousePosition;
     }
 
     // Save Inventory To Json
-    public void SaveInventory()
+    private void SaveInventory()
     {
         InvenData data = new InvenData();
 
@@ -100,7 +116,25 @@ public class Inventory : MonoBehaviour
         Debug.Log("Saving Data");
     }
 
-    public void LoadInventory()
+    private void SaveCollectedItems()
+    {
+        Debug.Log("SaveCollectedItems");
+        var collectedItemNames = new List<string>();
+        foreach (var item in _collectedItem)
+        {
+            Debug.Log("add");
+            collectedItemNames.Add(item.ItemName);
+        }
+
+        var data = new CollectedItemData { collectedItemNames = collectedItemNames };
+        string json = JsonUtility.ToJson(data, true);
+        string filePath = Application.persistentDataPath + "/CollectedItems.json";
+        File.WriteAllText(filePath, json);
+        Debug.Log(filePath);
+        Debug.Log(data + " : Collected Items saved");
+    }
+
+    private void LoadInventory()
     {
         if (!File.Exists(_filePath))
         {
@@ -128,17 +162,67 @@ public class Inventory : MonoBehaviour
         Debug.Log("No Inventory data loaded");
     }
 
+    private void LoadCollectedItems()
+    {
+        string filePath = Application.persistentDataPath + "/CollectedItems.json";  
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            var data = JsonUtility.FromJson<CollectedItemData>(json);
+
+            if (data != null && data.collectedItemNames != null)
+            {
+                _collectedItem.Clear();
+                foreach (var itemName in data.collectedItemNames)
+                {
+                    var item = System.Array.Find(_items, i => i.ItemName == itemName);
+                    if (item != null)
+                    {
+                        _collectedItem.Add(item); // 복구된 ItemSO 추가
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Item not found : " + itemName);
+                    }
+                }
+                Debug.Log("Collected Items loaded");
+            }
+        }
+        else
+        {
+            Debug.Log("No collected items file found. Starting with an empty list.");
+            _collectedItem = new List<ItemSO>();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveInventory();
+        SaveCollectedItems();
+    }
+
+    public void OnSceneChange()
+    {
+        SaveInventory();
+        SaveCollectedItems();
+    }
+
+    public void GenerateCollectedItems()
+    {
+        // bool isAlreadyInven = false;
+    }
+
     // 아이템 잘 생성되는 지
     public void SpawnInventoryItem(ItemSO item = null)
     {
         ItemSO itemSO = item;
         if (itemSO == null)
         {
-            int random = Random.Range(25, _items.Length - 10);
+            int random = UnityEngine.Random.Range(25, _items.Length - 10);
             itemSO = _items[random];
         }
 
-        for (int i = 0; i < _inventorySlots.Length; i++)
+        for (int i = 0; i < _inventorySlots.Length;  i++)
         {
             // 슬롯이 비어있는지 체크
             if (_inventorySlots[i]._myItem == null)
@@ -155,13 +239,6 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
-    }
-
-    private void Update()
-    {
-        if (_carriedItem == null) return;
-
-        _carriedItem.transform.position = Input.mousePosition;
     }
 
     public void SetCarriedItem(InventoryItem item)
@@ -203,19 +280,27 @@ public class Inventory : MonoBehaviour
 
     public void OnItemClicked(ItemSO itemSO)
     {
-        if (itemSO == null)
+        try
         {
-            Debug.LogError("itemSO is Null");
-            return;
+            if (itemSO == null)
+            {
+                Debug.LogError("itemSO is Null");
+                return;
+            }
+            if (!_collectedItem.Exists(item => item.ItemName == itemSO.ItemName))
+            {
+                _collectedItem.Add(itemSO);
+                Debug.Log("Item Added : " + itemSO.ItemName);
+                SaveCollectedItems();
+            }
+            else
+            {
+                Debug.Log("Item is already in the list");
+            }
         }
-        if (!_collectedItem.Exists(item => item.ItemName == itemSO.ItemName))
+        catch (Exception e)
         {
-            _collectedItem.Add(itemSO);
-            Debug.Log("Item Added : " + itemSO.ItemName);
-        }
-        else
-        {
-            Debug.Log("Item is already in the list");
+            Debug.LogException(e);
         }
     }
 }

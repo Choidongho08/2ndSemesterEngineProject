@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
-  m_Name: ThinRope
+  m_Name: Rope
   m_EditorClassIdentifier: 
-  ItemName: ThinRope
-  ItemInfo: "\uC587\uC740 \uB85C\uD504\uB2E4. \uC774\uAC8C \uC65C \uC5EC\uAE30\uC788\uC9C0?"
-  ItemIcon: {fileID: 21300000, guid: e95aa27166c599f44a7fbd17018aa842, type: 3}
+  ItemName: Rope
+  ItemInfo: "\uBC27\uC904\uC774\uB2E4. \uC774\uAC78\uB85C \uAD50\uC0B4\uC744 \uD55C
+    \uAC83\uC77C\uAE4C?"
+  ItemIcon: {fileID: 21300000, guid: 23c60ac8114d69544802ec8f387538f6, type: 3}
   PlayerID: []

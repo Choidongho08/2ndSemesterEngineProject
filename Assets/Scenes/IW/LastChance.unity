@@ -1573,6 +1573,10 @@ PrefabInstance:
       propertyPath: _draggablesTransform
       value: 
       objectReference: {fileID: 1295497235}
+    - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
+      propertyPath: _collectedItem.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3238181734666313695, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

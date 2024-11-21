@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
-  m_Name: ThinRope
+  m_Name: Gloves
   m_EditorClassIdentifier: 
-  ItemName: ThinRope
-  ItemInfo: "\uC587\uC740 \uB85C\uD504\uB2E4. \uC774\uAC8C \uC65C \uC5EC\uAE30\uC788\uC9C0?"
-  ItemIcon: {fileID: 21300000, guid: e95aa27166c599f44a7fbd17018aa842, type: 3}
+  ItemName: Gloves
+  ItemInfo: "\uB450\uD23C\uD55C \uBAA9\uC7A5\uAC11\uC774\uB2E4. \uACE0\uB4F1\uD559\uAD50
+    \uC6B4\uB3D9\uD68C \uC774\uD6C4\uB85C\uB294 \uC624\uB79C\uB9CC\uC5D0 \uBCF4\uB124."
+  ItemIcon: {fileID: 21300000, guid: 9474db7b5ee74b74195da3be6205fd95, type: 3}
   PlayerID: []
