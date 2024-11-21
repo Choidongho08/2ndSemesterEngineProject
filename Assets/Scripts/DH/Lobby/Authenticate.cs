@@ -28,11 +28,11 @@ public class Authenticate : MonoBehaviour
         });
         _onMouseEvent.onMouseEnter += () =>
         {
-            _buttonText.transform.DOScale(_buttonTextScale + new Vector3(0.3f, 0.3f, 1), 0.3f);
+            _buttonText.transform.DOScale(_buttonTextScale + new Vector3(0.3f, 0.3f, 1), 0.4f);
         };
         _onMouseEvent.onMouseExit += () =>
         {
-            _buttonText.transform.DOScale(_buttonTextScale, 0.3f);
+            _buttonText.transform.DOScale(_buttonTextScale, 0.5f);
         };
     }
 }
