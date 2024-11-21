@@ -49,10 +49,10 @@ public class ExcelReader : MonoSingleton<ExcelReader>
             menu.errorCode = splitData[1];
 
             dictionaryErrorCode.Add(menu.name, menu);
-            Debug.Log(menu.name);
             Debug.Log(dictionaryErrorCode.Count);
+            Debug.Log(menu.name);
         }
-        Debug.Log(ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby));
+        Debug.Log(ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ManyLobbyRequests));
         Debug.Log(dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
     }
 }

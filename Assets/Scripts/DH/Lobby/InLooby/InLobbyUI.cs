@@ -14,7 +14,6 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     [SerializeField] private Button _readyButton;
     [SerializeField] private Button _startButton;
     [SerializeField] private GameObject _hostStartPanel;
-    [SerializeField] private Image _caseImage;
     [SerializeField] private PlayerSO _playerSo;
 
     private InLobby _inLobby;
@@ -102,9 +101,5 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         {
             _hostStartPanel.gameObject.SetActive(false);
         }
-    }
-    public void CaseImageChange(Sprite sprite)
-    {
-        _caseImage.sprite = sprite;
     }
 }

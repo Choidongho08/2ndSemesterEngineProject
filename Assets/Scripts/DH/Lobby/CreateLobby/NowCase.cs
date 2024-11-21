@@ -17,7 +17,7 @@ public class NowCase : MonoSingleton<NowCase>
 
     public void SetCaseNumber(string txt)
     {
-        _nowCaseTxt.text = $"now case : {txt}";
+        _nowCaseTxt.text = $"사건 번호 : {txt}";
     }
     public int GetCase(CaseType caseType) => caseType switch 
     {

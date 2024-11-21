@@ -9,6 +9,7 @@ public class ErrorEnum : MonoSingleton<ErrorEnum>
         ErrorCodeEnum.CreateLobbyFail_Name => "CreateLobbyFail_Name",
         ErrorCodeEnum.CreateLobbyFail_Case => "CreateLobbyFail_Case",
         ErrorCodeEnum.ChangePlayerNameFail => "ChangePlayerNameFail",
+        ErrorCodeEnum.ManyLobbyRequests => "ManyLobbyRequests",
         _ => throw new Exception("ErrorCode not Defined ")
     };
 }
@@ -17,7 +18,8 @@ public enum ErrorCodeEnum
 {
     QuickJoinLobby,
     CodeJoinLobby,
-    CreateLobbyFail_Name,
+    CreateLobbyFail_Name ,
     CreateLobbyFail_Case,
     ChangePlayerNameFail,
+    ManyLobbyRequests,
 }
