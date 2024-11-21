@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: Sus_StoryTxt
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uD558\uD558, \uBC18\uAC11\uC2B5\uB2C8\uB2E4!"
+  - "\uC9C0\uAE08\uC5D0\uB294 \uB9DE\uC9C0 \uC54A\uC740 \uBD84\uC704\uAE30 \uAC19\uC9C0\uB9CC,
+    \uC5B8\uC81C\uB098 \uC5B4\uB450\uC6B8 \uC21C \uC5C6\uC796\uC544\uC694?"
+  - "\uD615\uC0AC\uB2D8 \uC774\uBC88 \uC0AC\uAC74\uC758 \uBC94\uC778\uC744 \uBC1D\uD600\uBCF4\uC2DC\uAE38
+    \uAE30\uB300\uD558\uBA70!"
+  - "\uC800\uB294 \uC774\uB9CC \uAC00\uBCF4\uACA0\uC2B5\uB2C8\uB2E4!"
   stopPoint: 0

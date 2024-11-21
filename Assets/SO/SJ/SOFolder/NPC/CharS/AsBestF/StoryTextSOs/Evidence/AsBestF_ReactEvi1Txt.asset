@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: AsM_StoryTxt
+  m_Name: AsBestF_ReactEvi1Txt
   m_EditorClassIdentifier: 
   ChaTxts:
-  - "\uC544\uC774\uACE0... \uC6B0\uB9AC A \uC5B4\uB5A1\uD574...."
-  - "\uBABB\uB09C \uC560\uBBF8 \uB0C5\uB450\uACE0 \uC65C \uBA3C\uC800 \uB5A0\uB098\uB2C8..."
+  - "\uC774\uAC74 \uBB54\uAC00\uC694\u2026?"
+  - "\uC774\uAC74\u2026 (\uC544\uC774\uD15C \uC774\uB984)\uC774\uB124\uC694\u2026"
+  - "(\uB300\uCDA9 \uC544\uC774\uD15C \uC124\uBA85)"
   stopPoint: 0

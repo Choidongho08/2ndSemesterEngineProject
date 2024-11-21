@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f824c4174e3e8354e8dd43bbe4125ade, type: 3}
   m_Name: AsBestF_CharInfo
   m_EditorClassIdentifier: 
-  CharName: 
+  CharName: "\uCD5C\uD558\uC724"
   CharImg: {fileID: 0}

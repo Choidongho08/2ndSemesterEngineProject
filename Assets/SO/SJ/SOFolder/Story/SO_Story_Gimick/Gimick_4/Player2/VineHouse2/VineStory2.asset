@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: AsBestF_StoryTxt
+  m_Script: {fileID: 11500000, guid: ed21bea62339ea54e8a840753c338c8a, type: 3}
+  m_Name: VineStory2
   m_EditorClassIdentifier: 
-  ChaTxts: []
-  stopPoint: 0
+  TextList:
+  - {fileID: 11400000, guid: f53ae46d094e0ab47b3bd518fd8c7a54, type: 2}
+  isthisNPCImportant: 0
+  isthisNPCcanQnA: 0
