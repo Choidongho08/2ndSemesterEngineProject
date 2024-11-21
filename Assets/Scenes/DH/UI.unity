@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f3ef5040bd2b747479b9b1811733b5e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7591950ab8c8f04c835ac3ffe339d87, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2377,6 +2377,8 @@ MonoBehaviour:
   _audioVolumeFillImage: {fileID: 792169353}
   _volumDownButton: {fileID: 976348577}
   _volumUpButton: {fileID: 640090404}
+  volume: 0.3
+  audioSource: {fileID: 887632547}
 --- !u!1 &1828681936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,8 +2580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 0}
-  _audioSource: {fileID: 887632547}
-  volume: 0.3
 --- !u!4 &2065940537
 Transform:
   m_ObjectHideFlags: 0
