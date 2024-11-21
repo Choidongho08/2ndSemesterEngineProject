@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/NPC")]
+[CreateAssetMenu(menuName = "CharSO/CharInfo")]
 public class NPCSO : ScriptableObject
 {
     [Header("캐릭 정보")]

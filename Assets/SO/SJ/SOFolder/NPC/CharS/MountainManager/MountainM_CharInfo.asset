@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed21bea62339ea54e8a840753c338c8a, type: 3}
-  m_Name: Gimick4Text
+  m_Script: {fileID: 11500000, guid: f824c4174e3e8354e8dd43bbe4125ade, type: 3}
+  m_Name: MountainM_CharInfo
   m_EditorClassIdentifier: 
-  TextList: []
-  isthisNPCImportant: 0
-  isthisNPCcanQnA: 0
+  CharName: "XX\uC0B0 \uAD00\uB9AC\uC790"
+  CharImg: {fileID: 0}

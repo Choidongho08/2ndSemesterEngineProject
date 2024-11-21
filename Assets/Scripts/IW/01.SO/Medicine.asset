@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
+  m_Name: Medicine
+  m_EditorClassIdentifier: 
+  ItemName: Medicine
+  ItemInfo: "\uC815\uCCB4\uBAA8\uB97C \uC57D\uC774\uB2E4. \uC774 \uC57D\uC73C\uB85C
+    \uC8FD\uC778\uAC78\uAE4C?"
+  ItemIcon: {fileID: 21300000, guid: 5b9a81c1b03b1fd45bd577b17baf79f0, type: 3}
+  PlayerID: []

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Receipt
   m_EditorClassIdentifier: 
   ItemName: Receipt
-  ItemInfo: "\uC6B0\uC9C4\uC774\uB294 \uAC9C\uB9C8\uACE0 \uC774\uB3C4\uD604"
-  ItemIcon: {fileID: 21300000, guid: 9e69c3e12f9ee17458e6be097bb068b2, type: 3}
+  ItemInfo: "\uB9AC\uB4EC\uB9C8\uD2B8 \uC601\uC218\uC99D\uC774\uB2E4. \uB9C8\uD2B8\uC5D0\uC11C
+    \uBB3C\uAC74\uB4E4\uC744 \uB9CE\uC774 \uC0C0\uB098\uBCF4\uB2E4."
+  ItemIcon: {fileID: 21300000, guid: 11239a4db9255d0469cd00087fccd3b0, type: 3}
   PlayerID: []

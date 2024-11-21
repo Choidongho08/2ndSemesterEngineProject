@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
+  m_Name: Hiking_StoryTxt
+  m_EditorClassIdentifier: 
+  ChaTxts:
+  - "\uBB50\uC57C \uCCAD\uB144 \uC9C0\uAE08 \uC5EC\uAE34 \uC5B4\uCA50 \uC77C\uC774\uB798?\uBB50\uC57C
+    \uCCAD\uB144 \uC9C0\uAE08 \uC5EC\uAE34 \uC5B4\uCA50 \uC77C\uC774\uB798?"
+  - "\uC544 \uC0AC\uAC74 \uC870\uC0AC\uD558\uB7EC \uC654\uC5B4?"
+  - "\uC774 \uC0AC\uAC74\uC744 \uB2F4\uB2F9\uD558\uC2E0 \uD615\uC0AC\uB2D8 \uC774\uC2E0\uAC00\uC694?"
+  - "\uCCAD\uB144\uC774 \uC9C4\uC2E4\uC744 \uBC1D\uD600\uC92C\uC73C\uBA74 \uC88B\uACA0\uAD6C\uBA3C."
+  stopPoint: 0

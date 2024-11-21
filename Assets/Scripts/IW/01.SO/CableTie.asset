@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
-  m_Name: UnknownMedicine
+  m_Name: CableTie
   m_EditorClassIdentifier: 
-  ItemName: UnknownMedicine
-  ItemInfo: "\uBAB0\uB77C"
-  ItemIcon: {fileID: 0}
+  ItemName: Cable Tie
+  ItemInfo: "\uCF00\uC774\uBE14 \uD0C0\uC774\uB2E4. \uC774\uAC78\uB85C \uC190\uBAA9\uACFC
+    \uBC1C\uC744 \uACB0\uBC15\uD55C\uAC78\uAE4C?"
+  ItemIcon: {fileID: 21300000, guid: 4ec2937d806b50e4fae72a3f8d3c8a00, type: 3}
   PlayerID: []

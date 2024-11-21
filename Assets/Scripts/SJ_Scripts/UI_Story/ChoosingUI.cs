@@ -10,17 +10,7 @@ public class ChoosingUI : interTNPC
 
     public void JustDoIt()
     {
-        //인벤(증거창) 열기
-        Debug.Log("인벤창 열어");
-
-        /*try
-        {
-            인벤창에 뭐라도 있으면 열기
-        }
-        catch
-        {
-            하나도 없으면 제시할 아이템이 없음을 알리기
-        }*/
+        
     }
 
     public void DontDoThat()

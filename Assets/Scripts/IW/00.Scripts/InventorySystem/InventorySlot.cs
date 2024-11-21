@@ -17,6 +17,15 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void ClearSlot()
+    {
+        if (_myItem != null)
+        {
+            Destroy(_myItem.gameObject);
+            _myItem = null; // ∫Û ΩΩ∑‘¿∏∑Œ √ ±‚»≠
+        }
+    }
+
     public void SetItem(InventoryItem item)
     {
         Inventory._carriedItem = null;
@@ -31,6 +40,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         _myItem._canvasGroup.blocksRaycasts = true;
 
         //if (_myTag != SlotTag.none)
-        //    Inventory.Singleton.EquipEquipment(_myTag, _myItem);
+        //    Inventory.Singleton.EquipEquipment(_myTag, ItemSO);
     }
 }

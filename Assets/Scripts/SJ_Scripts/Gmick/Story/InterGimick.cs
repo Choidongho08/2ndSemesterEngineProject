@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InterGimick : MonoBehaviour, StoryEnd, ItemCheck
+public class InterGimick : MonoBehaviour, StoryEnd
 {
     [SerializeField] private GameObject _storyPan;
     [SerializeField] private StorySO _storyList;
@@ -12,37 +12,36 @@ public class InterGimick : MonoBehaviour, StoryEnd, ItemCheck
     [Header("플레이어 설정")]
     [SerializeField] private TextMeshProUGUI _text;
 
+    private bool ItemIsHere = false;
+
     private int _storyLine;
 
     private int _storyListNum = 0;
 
-    public void ItemCheck()
+    public void ItemCheck(string needItem) //string으로 바꿔서 버튼 누를때 이름 받아오기 각자
     {
-        if (_gimickSO.player2Watering == false)//item.ItemName == "EmptyBottle")
+        Debug.Log("asdf");
+
+        foreach (ItemSO item in Inventory.Instance._collectedItem)
+        {
+            if (item.ItemName == needItem)
+            {
+                ItemIsHere = true;
+            }
+            Debug.Log(item.ItemName);
+        }
+        if (ItemIsHere)
         {
             _storyListNum++;
             _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
             Debug.Log("있음");
             _gimickSO.player2Watering = true;
         }
-        else if(_gimickSO.player2Watering == true)
-        {
-            _storyListNum += 2;
-            _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
-        }
         else
         {
-            //RollBackStory();
             _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
             Debug.Log("없음");
         }
-        /*//foreach (ItemSO item in Inventory.Instance._items)
-        {
-            if(item.ItemName == "EmptyBottle")
-            {
-                // 넣을거 넣기
-            }
-        }*/
     }
 
     public void InteractionGimick()
