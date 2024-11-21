@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed21bea62339ea54e8a840753c338c8a, type: 3}
   m_Name: AsBestF_StoryList
   m_EditorClassIdentifier: 
-  TextList: []
+  TextList:
+  - {fileID: 11400000, guid: 30dec169912d6c844bf72f594f907d2e, type: 2}
   isthisNPCImportant: 0
   isthisNPCcanQnA: 0

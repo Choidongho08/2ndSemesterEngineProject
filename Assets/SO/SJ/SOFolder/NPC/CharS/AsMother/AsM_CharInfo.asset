@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AsM_CharInfo
   m_EditorClassIdentifier: 
   CharName: "A\uC591\uC758 \uC5B4\uBA38\uB2C8"
-  CharImg: {fileID: 0}
+  CharImg: {fileID: 21300000, guid: d44497cc54ff8f941918bb877b91d209, type: 3}
