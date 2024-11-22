@@ -27,8 +27,8 @@ public class CreateLobby : MonoBehaviour
         _lobbyAccessModifyBtn.onClick.AddListener(() =>
         {
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text =
-            _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? "Private" : "Public";
-            IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? false : true;
+            _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "공개" ? "비공개" : "공개";
+            IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "공개" ? false : true;
         });
         _mainMenu.OnCreateLobby += () => _setLobbyOptionUI.gameObject.SetActive(true);
         createLobbyButton.onClick.AddListener(() =>

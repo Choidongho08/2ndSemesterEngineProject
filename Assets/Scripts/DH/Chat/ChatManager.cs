@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class ChatManager : NetworkBehaviour
 {
@@ -12,16 +14,35 @@ public class ChatManager : NetworkBehaviour
     [SerializeField] private TMP_InputField chatInput;
     [SerializeField] private int _maxChatMessage;
     [SerializeField] private PlayerSO _playerSO;
+    [SerializeField] private Button _chatButton;
+    [SerializeField] private Image _chatOpenImage;
+    [SerializeField] private RectTransform _chat;
 
-    List<ChatMessage> _chatMessageList = new List<ChatMessage>();
+    private List<ChatMessage> _chatMessageList = new List<ChatMessage>();
+    private bool _chatOpen = false;
 
     public static ChatManager Singleton;
     public string playerName;
 
-
-
     private void Awake() 
-    { ChatManager.Singleton = this; }
+    { 
+        ChatManager.Singleton = this;
+        _chatButton.onClick.AddListener(() => 
+        {
+            if (_chatOpen)
+            {
+                _chat.DOMoveY(-282f, 0.3f);
+                _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
+                _chatOpen = false;
+            }
+            else
+            {
+                _chat.transform.DOMoveY(303f, 0.3f);
+                _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+                _chatOpen = true;
+            }
+        });
+    }
 
     private void Update() 
     {
@@ -49,7 +70,7 @@ public class ChatManager : NetworkBehaviour
     private void ChatAddOnList(ChatMessage CM)
     {
         _chatMessageList.Add(CM);
-        if (_chatMessageList.Count >= _maxChatMessage)
+        if (_chatMessageList.Count > _maxChatMessage)
         {
             List<ChatMessage> CMList = _chatMessageList.FindAll(chatMessage => chatMessage != null);
             _chatMessageList = CMList.ToList();
