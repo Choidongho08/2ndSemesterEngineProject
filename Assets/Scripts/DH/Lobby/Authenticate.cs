@@ -15,12 +15,8 @@ public class Authenticate : MonoBehaviour
     {
         _onMouseEvent = GetComponent<OnMouseEvent>();
         _buttonTextScale = _buttonText.transform.localScale;
-    }
 
-    private void Start()
-    {
-        _authenticateBtn.gameObject.SetActive(true);
-        _authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
+        _authenticateBtn.onClick.AddListener(() =>
         {
             Util.instance.LoadingShow();
             MainLobby.instance.Authenticate(ChangeNameUI.instance.GetPlayerName());
@@ -35,4 +31,5 @@ public class Authenticate : MonoBehaviour
             _buttonText.transform.DOScale(_buttonTextScale, 0.5f);
         };
     }
+
 }
