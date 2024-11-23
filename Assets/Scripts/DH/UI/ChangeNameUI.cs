@@ -22,7 +22,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
     private void Awake()
     {
         string path = Application.persistentDataPath + "/";
-        string fileName = "SaveFile";
+        string fileName = "SaveFile_PlayerName";
 
         ReadPlayerName(path, fileName);
         _mainMenu.OnChangeName += () => _child.SetActive(true);

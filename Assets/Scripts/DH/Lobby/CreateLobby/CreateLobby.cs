@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +18,6 @@ public class CreateLobby : MonoBehaviour
     public Button createLobbyButton;
     public Button cancelCreateButton;
     public event Action<string> OnCreateLobby;
-    public event Action<CaseType> OnJoiendLobby;
     public event Action<string> OnLobbyNameChange;
     public bool IsPrivate;
 
@@ -56,10 +51,11 @@ public class CreateLobby : MonoBehaviour
 
     private bool CheckLobbySetting()
     {
-        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
-        if(!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
+        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾]", "", RegexOptions.Singleline);
+        if (!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
         {
             Util.instance.LoadingHide();
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CreateLobbyFail_Name)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CreateLobbyFail_Name)].errorCode);
             Debug.Log("Æ¯¼ö¹®ÀÚ ¾ÈµÅ! ÀÌ ¸ÓÀú¸®¾ß");
             _lobbyNameInput.text = string.Empty;
             return false;
@@ -77,9 +73,9 @@ public class CreateLobby : MonoBehaviour
                 Debug.Log("½ÇÆÐ!");
                 return false;
             }
-            
+
         }
-    } 
+    }
     public void ClearCreateLobbyOption()
     {
         _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Private";

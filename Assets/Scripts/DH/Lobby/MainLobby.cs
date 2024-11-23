@@ -4,7 +4,6 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -42,8 +41,8 @@ public class MainLobby : MonoSingleton<MainLobby>
     public string KeyPlayerReady = "PlayerReady";
     public string KeyCaseBook = "CaseBook";
     public event Action OnAfterAuthenticate;
-    public event Action<string, string, string, Sprite> OnLobbyCreate;
-    public event Action<string, string, string, Sprite> OnLobbyJoined;
+    public event Action<string, string, string> OnLobbyCreate;
+    public event Action<string, string, string> OnLobbyJoined;
     public event Action OnGameStart;
     public string PlayerReady
     {
@@ -150,7 +149,6 @@ public class MainLobby : MonoSingleton<MainLobby>
     }
     private async void CreateLobby(string caseType)
     {
-        Debug.Log(_createLobby.IsPrivate);
         Player player = GetPlayer();
         try
         {
@@ -169,7 +167,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             hostLobby = lobby;
 
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
-            OnLobbyCreate?.Invoke(lobby.LobbyCode, _lobbyName, caseType, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
+            OnLobbyCreate?.Invoke(lobby.LobbyCode, _lobbyName, caseType);
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
             _createLobby.gameObject.SetActive(false);
         }
@@ -215,7 +213,7 @@ public class MainLobby : MonoSingleton<MainLobby>
     }
     public async void JoinLobbyByCode(string lobbyCode)
     {
-        if(lobbyCode == string.Empty)
+        if (lobbyCode == string.Empty)
         {
             Debug.Log("no LobbyCode");
             Util.instance.LoadingHide();
@@ -234,7 +232,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             Util.instance.MainMenuHide();
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
-            OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
+            OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value);
         }
         catch (LobbyServiceException e)
         {
@@ -262,12 +260,14 @@ public class MainLobby : MonoSingleton<MainLobby>
             joinedLobby = lobby;
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
-            OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value, _caseBook.GetCaseSprite(lobby.Data[KeyCaseBook].Value));
+            OnLobbyJoined?.Invoke(lobby.LobbyCode, lobby.Name, lobby.Data[KeyCaseBook].Value);
         }
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
             Util.instance.LoadingHide();
+            Util.instance.MainMenuShow();
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
         }
     }
     private Player GetPlayer()
@@ -360,6 +360,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             catch (LobbyServiceException e)
             {
                 Debug.Log(e);
+                Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ManyLobbyRequests)].name, (ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ManyLobbyRequests)].errorCode));
             }
         }
     }

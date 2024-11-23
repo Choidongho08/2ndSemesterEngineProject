@@ -8,6 +8,13 @@ public class MouseEnterExitEvents : MonoBehaviour, IPointerEnterHandler, IPointe
 {
     public event Action OnEnterMouse;
     public event Action OnExitMouse;
+    public Vector3 objectLocalScale;
+
+    private void Start()
+    {
+        objectLocalScale = transform.localScale;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         OnEnterMouse?.Invoke();

@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InLobby : MonoBehaviour
 {
@@ -14,16 +10,15 @@ public class InLobby : MonoBehaviour
 
     private void Awake()
     {
-        MainLobby.instance.OnLobbyCreate += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode, lobbyName, lobbyCase, sprite);
-        MainLobby.instance.OnLobbyJoined += (lobbyCode, lobbyName, lobbyCase, sprite) => Lobby(lobbyCode,lobbyName, lobbyCase, sprite);
+        MainLobby.instance.OnLobbyCreate += (lobbyCode, lobbyName, lobbyCase) => Lobby(lobbyCode, lobbyName, lobbyCase);
+        MainLobby.instance.OnLobbyJoined += (lobbyCode, lobbyName, lobbyCase) => Lobby(lobbyCode, lobbyName, lobbyCase);
     }
-    private void Lobby(string lobbyCode, string lobbyName, string lobbyCase, Sprite sprite)
+    private void Lobby(string lobbyCode, string lobbyName, string lobbyCase)
     {
         _lobbyCode.text = lobbyCode;
         _lobbyName.text = lobbyName;
         _lobbyCase.text = lobbyCase;
         _lobby.SetActive(true);
         Util.instance.LoadingHide();
-        InLobbyUI.instance.CaseImageChange(sprite);
     }
 }

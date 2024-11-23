@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using TMPro;
 using UnityEngine;
@@ -17,31 +18,46 @@ public class MainMenu : MonoBehaviour
     public event Action OnJoinLobbyByCode;
     public event Action OnCreateLobby;
 
+
     private void Awake()
     {
         _changePlayerNameButton.onClick.AddListener(() => OnChangeName?.Invoke());
-        _quickJoinLobbyButton.onClick.AddListener(() => 
+        _quickJoinLobbyButton.onClick.AddListener(() =>
         {
             MainLobby.instance.QuickJoinLobby();
             _childGameObject.SetActive(false);
-            Util.instance.LoadingShow(); 
+            Util.instance.LoadingShow();
         });
-        _joinLobbyByCodeButton.onClick.AddListener(() =>  OnJoinLobbyByCode?.Invoke());
-        _createLobbyButton.onClick.AddListener(() => 
+        _joinLobbyByCodeButton.onClick.AddListener(() => OnJoinLobbyByCode?.Invoke());
+        _createLobbyButton.onClick.AddListener(() =>
         {
             OnCreateLobby?.Invoke();
             _childGameObject.SetActive(false);
             _createLobby.gameObject.SetActive(true);
-            _createLobby.ClearCreateLobbyOption(); 
+            _createLobby.ClearCreateLobbyOption();
         });
         MainLobby.instance.OnAfterAuthenticate += () =>
         {
             Util.instance.LoadingHide();
             _childGameObject.SetActive(true);
         };
+        _quickJoinLobbyButton.GetComponent<MouseEnterExitEvents>().OnEnterMouse += () => { DoScaleUp(_quickJoinLobbyButton.gameObject, _quickJoinLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale); };
+        _quickJoinLobbyButton.GetComponent<MouseEnterExitEvents>().OnExitMouse += () => { DoScaleDown(_quickJoinLobbyButton.gameObject, _quickJoinLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale); };
+        _joinLobbyByCodeButton.GetComponent<MouseEnterExitEvents>().OnEnterMouse += () => { DoScaleUp(_joinLobbyByCodeButton.gameObject, _joinLobbyByCodeButton.GetComponent<MouseEnterExitEvents>().objectLocalScale); };
+        _joinLobbyByCodeButton.GetComponent<MouseEnterExitEvents>().OnExitMouse += () => { DoScaleDown(_joinLobbyByCodeButton.gameObject, _joinLobbyByCodeButton.GetComponent<MouseEnterExitEvents>().objectLocalScale); };
+        _createLobbyButton.GetComponent<MouseEnterExitEvents>().OnEnterMouse += () => { DoScaleUp(_createLobbyButton.gameObject, _createLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale); };
+        _createLobbyButton.GetComponent<MouseEnterExitEvents>().OnExitMouse += () => { DoScaleDown(_createLobbyButton.gameObject, _createLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale); };
     }
     public void GetPlayerName(string playerName)
     {
         _playerName.text = playerName;
+    }
+    private void DoScaleUp(GameObject gameObject, Vector3 localScale)
+    {
+        gameObject.transform.DOScale(localScale + new Vector3(0.15f, 0.15f), 0.2f);
+    }
+    private void DoScaleDown(GameObject gameObject, Vector3 localScale)
+    {
+        gameObject.transform.DOScale(localScale, 0.2f);
     }
 }
