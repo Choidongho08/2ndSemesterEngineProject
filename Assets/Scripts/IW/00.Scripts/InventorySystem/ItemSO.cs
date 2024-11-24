@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "ItemSO", menuName = "Item So", order = 0)]
+[CreateAssetMenu(fileName = "ItemSO", menuName = "Item SO", order = 0)]
 public class ItemSO : ScriptableObject
 {
     [Header("아이템 정보")]

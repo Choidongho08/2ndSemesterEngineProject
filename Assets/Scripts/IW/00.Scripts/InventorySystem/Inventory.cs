@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 [System.Serializable]
 public class InvenData
@@ -27,6 +28,9 @@ public class CollectedItemData
 
 public class Inventory : MonoBehaviour
 {
+    private int _currentStartIndex = 0; // 현재 보여지는 아이템의 시작 인덱스
+    private int _maxVisibleSlots = 10; // 
+
     private string _filePath;
 
     public static Inventory Instance;
@@ -86,13 +90,68 @@ public class Inventory : MonoBehaviour
 
         LoadInventory();
         LoadCollectedItems();
+        GenerateCollectedItems();
     }
 
     private void Update()
     {
         if (_carriedItem == null) return;
+        else if (_collectedItem != null) _carriedItem.transform.position = Input.mousePosition;
 
-        _carriedItem.transform.position = Input.mousePosition;
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (_currentStartIndex > 0)
+            {
+                _currentStartIndex--;
+                ScrollInventory(-1);
+                UpdateInventorySlots();
+                Debug.Log("moved left : currentIndex = " + _currentStartIndex);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (_currentStartIndex < _collectedItem.Count - _maxVisibleSlots)
+            {
+                _currentStartIndex++;
+                UpdateInventorySlots();
+                ScrollInventory(1);
+                Debug.Log("moved right : currentIndex : " + _currentStartIndex);
+            }
+        }
+    }
+
+    private void UpdateInventorySlots()
+    {
+        foreach (var slot in _inventorySlots)
+        {
+            slot.ClearSlot();
+        }
+
+        for (int i = 0; i < _maxVisibleSlots; i++)
+        {
+            int itemIndex = _currentStartIndex + i;
+
+            if (itemIndex >= 0 && itemIndex < _collectedItem.Count)
+            {
+                SpawnInventoryItem(_collectedItem[itemIndex]);
+            }
+        }
+    }
+
+    private void ScrollInventory(int dir)
+    {
+        int newIndex = _currentStartIndex + dir;
+
+        // 리스트 경계 처리
+        if (newIndex < 0 || newIndex + _maxVisibleSlots > _collectedItem.Count)
+        {
+            Debug.Log("Reached inventory bounds");
+            return;
+        }
+
+        _currentStartIndex = newIndex;
+
+        UpdateInventorySlots();
     }
 
     // Save Inventory To Json
@@ -153,13 +212,18 @@ public class Inventory : MonoBehaviour
         foreach (var slotData in data.slots)
         {
             var itemSO = System.Array.Find(_items, item => item.ItemName == slotData.itemName);
-            if (itemSO != null)
+            if (itemSO != null && _collectedItem.Contains(itemSO))
             {
                 SpawnInventoryItem(itemSO);
             }
+            else
+            {
+                Debug.Log("Item " + slotData.itemName + " is not collected. Skipping spawn");
+            }
         }
 
-        Debug.Log("No Inventory data loaded");
+        GenerateCollectedItems();
+        Debug.Log("Inventory data loaded");
     }
 
     private void LoadCollectedItems()
@@ -205,11 +269,31 @@ public class Inventory : MonoBehaviour
     {
         SaveInventory();
         SaveCollectedItems();
+        GenerateCollectedItems();
     }
 
     public void GenerateCollectedItems()
     {
-        // bool isAlreadyInven = false;
+        _currentStartIndex = 0;
+        UpdateInventorySlots();
+        foreach (var itemSO in _collectedItem)
+        {
+            bool isAlreadyInInventory = false;
+
+            foreach (var slot in _inventorySlots)
+            {
+                if (slot._myItem != null && slot._myItem.ItemSO == itemSO)
+                {
+                    isAlreadyInInventory = true;
+                    break;
+                }
+            }
+
+            if (!isAlreadyInInventory)
+            {
+                SpawnInventoryItem(itemSO);
+            }
+        }
     }
 
     // 아이템 잘 생성되는 지
@@ -218,8 +302,21 @@ public class Inventory : MonoBehaviour
         ItemSO itemSO = item;
         if (itemSO == null)
         {
-            int random = UnityEngine.Random.Range(25, _items.Length - 10);
-            itemSO = _items[random];
+            Debug.LogError("SpawnInventoryItem called with null ItemSO");
+            //int random = UnityEngine.Random.Range(0, _items.Length);
+            //itemSO = _items[random];
+            return;
+        }
+
+        if (item == null)
+        {
+            Debug.LogError("SpawnInventoryItem called");
+        }
+
+        if (!_collectedItem.Contains(itemSO))
+        {
+            Debug.Log("Item " + itemSO.ItemName + " is not collected. Skipping spawn");
+            return;
         }
 
         for (int i = 0; i < _inventorySlots.Length;  i++)
@@ -239,6 +336,8 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+
+        Debug.LogWarning("No empty slots available for the Item.");
     }
 
     public void SetCarriedItem(InventoryItem item)
