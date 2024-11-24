@@ -5,7 +5,6 @@ using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainLobby : MonoSingleton<MainLobby>
@@ -216,6 +215,7 @@ public class MainLobby : MonoSingleton<MainLobby>
         if (lobbyCode == string.Empty)
         {
             Debug.Log("no LobbyCode");
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Empty)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Empty)].errorCode);
             Util.instance.LoadingHide();
             Util.instance.MainMenuShow();
             return;
@@ -237,8 +237,9 @@ public class MainLobby : MonoSingleton<MainLobby>
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Code)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Code)].errorCode);
             Util.instance.LoadingHide();
-            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobby)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobby)].errorCode);
+
         }
     }
     public async void QuickJoinLobby()
@@ -267,7 +268,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             Debug.Log(e);
             Util.instance.LoadingHide();
             Util.instance.MainMenuShow();
-            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobbyFail)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobbyFail)].errorCode);
         }
     }
     private Player GetPlayer()
@@ -433,10 +434,13 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             try
             {
-                hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+                if (lobby.Players.Count == 2)
                 {
-                    HostId = joinedLobby.Players[1].Id
-                });
+                    hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+                    {
+                        HostId = joinedLobby.Players[1].Id
+                    });
+                }
 
                 joinedLobby = hostLobby;
                 PrintPlayers(hostLobby);
@@ -460,7 +464,6 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             Debug.Log("GameStart");
             OnGameStart?.Invoke();
-            SceneManager.LoadScene(0);
         }
         readyCount = 0;
     }

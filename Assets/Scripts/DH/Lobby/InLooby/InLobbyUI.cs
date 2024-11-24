@@ -13,7 +13,6 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private Button _readyButton;
     [SerializeField] private Button _startButton;
-    [SerializeField] private GameObject _hostStartPanel;
     [SerializeField] private PlayerSO _playerSo;
 
     private InLobby _inLobby;
@@ -40,8 +39,7 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         MainLobby.instance.OnJoinedLobbyUpdate += UpdateLobby_Event;
         MainLobby.instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         MainLobby.instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
-
-        _hostStartPanel.gameObject.SetActive(false);                                                
+                                       
         Hide();
     }
 
@@ -95,11 +93,8 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     {
         if (!MainLobby.instance.IsLobbyHost())
         {
-            _hostStartPanel.gameObject.SetActive(true);
-        }
-        else
-        {
-            _hostStartPanel.gameObject.SetActive(false);
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.YouAreNotHost)].name,
+                ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.YouAreNotHost)].errorCode);
         }
     }
 }

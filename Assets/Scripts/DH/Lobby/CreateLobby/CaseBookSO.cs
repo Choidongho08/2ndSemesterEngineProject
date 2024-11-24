@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/CaseBook")]
 public class CaseBookSO : ScriptableObject
 {
+    public string caseName;
     public int caseNumber;
     public Transform prefab;
     public Sprite sprite;

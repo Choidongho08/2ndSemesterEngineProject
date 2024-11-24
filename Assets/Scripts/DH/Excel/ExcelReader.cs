@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ExcelReader : MonoSingleton<ExcelReader>
 {
-    public string csvFileName = "ErrorCodeExcel";
+    [SerializeField] private string csvFileName = "ErrorCodeExcel";
 
-    public Dictionary<string, ErrorCode> dictionaryErrorCode = new Dictionary<string, ErrorCode>(); // 상품명 : menu(상품 이름, 가격, 정보)
+    public Dictionary<string, ErrorCode> dictionaryErrorCode = new Dictionary<string, ErrorCode>(); 
 
     [System.Serializable]
     public class ErrorCode
@@ -14,8 +14,7 @@ public class ExcelReader : MonoSingleton<ExcelReader>
         public string name;
         public string errorCode;
     }
-
-    private void Start()
+    void Start()
     {
         ReadCSV();
     }
@@ -26,22 +25,22 @@ public class ExcelReader : MonoSingleton<ExcelReader>
 
         List<ErrorCode> errorCodeList = new List<ErrorCode>();
 
+        TextAsset csvFile = Resources.Load<TextAsset>(csvFileName);
+
         StreamReader reader = new StreamReader(Application.dataPath + "/" + path);
 
         bool isFinish = false;
 
-
         while (isFinish == false)
         {
-            string data = reader.ReadLine(); 
-
+            string data = reader.ReadLine();
             if (data == null)
             {
                 isFinish = true;
                 break;
             }
 
-            var splitData = data.Split(','); 
+            var splitData = data.Split(',');
 
             ErrorCode menu = new ErrorCode();
 
@@ -49,10 +48,7 @@ public class ExcelReader : MonoSingleton<ExcelReader>
             menu.errorCode = splitData[1];
 
             dictionaryErrorCode.Add(menu.name, menu);
-            Debug.Log(dictionaryErrorCode.Count);
-            Debug.Log(menu.name);
         }
-        Debug.Log(ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ManyLobbyRequests));
-        Debug.Log(dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
+
     }
 }

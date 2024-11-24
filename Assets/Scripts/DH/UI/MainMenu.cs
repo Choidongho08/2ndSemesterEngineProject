@@ -27,14 +27,20 @@ public class MainMenu : MonoBehaviour
             MainLobby.instance.QuickJoinLobby();
             _childGameObject.SetActive(false);
             Util.instance.LoadingShow();
+            DoScaleDown(_quickJoinLobbyButton.gameObject, _quickJoinLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale);
         });
-        _joinLobbyByCodeButton.onClick.AddListener(() => OnJoinLobbyByCode?.Invoke());
+        _joinLobbyByCodeButton.onClick.AddListener(() => 
+        {
+            OnJoinLobbyByCode?.Invoke();
+            DoScaleDown(_joinLobbyByCodeButton.gameObject, _joinLobbyByCodeButton.GetComponent<MouseEnterExitEvents>().objectLocalScale);
+        });
         _createLobbyButton.onClick.AddListener(() =>
         {
             OnCreateLobby?.Invoke();
             _childGameObject.SetActive(false);
             _createLobby.gameObject.SetActive(true);
             _createLobby.ClearCreateLobbyOption();
+            DoScaleDown(_createLobbyButton.gameObject, _createLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale);
         });
         MainLobby.instance.OnAfterAuthenticate += () =>
         {
