@@ -24,7 +24,7 @@ public class NextText : interTNPC
         }
         else
         {
-            _storyLine.QnA();
+            _storyLine.RollBackStory();
         }
     }
 }

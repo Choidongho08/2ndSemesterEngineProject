@@ -26,17 +26,6 @@ public class QnACut : interTNPC, StoryEnd
     }
 
 
-    public void QnA()
-    {
-        if(_story.isthisNPCcanQnA || _story.isthisNPCImportant)
-        {
-            choosingPan.SetActive(true);
-        }
-        else
-        {
-            RollBackStory();
-        }
-    }
 
     public void EndOfQnA()
     {
@@ -49,9 +38,6 @@ public class QnACut : interTNPC, StoryEnd
         _storyLine = 0;
         _charTxt.text = _Text.ChaTxts[_storyLine];
         storyPan.SetActive(false);
-        choosingPan.SetActive(false);
-        _QnA = false;
-        _important = false;
     }
 }
     public interface StoryEnd

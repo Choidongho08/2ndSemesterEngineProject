@@ -6,29 +6,7 @@ using UnityEngine;
 public class interTNPC : MonoBehaviour
 {
     [SerializeField] protected GameObject storyPan;
-    [SerializeField] protected GameObject choosingPan;
-    protected bool _QnA = false;
-    protected bool _important = false;
-    protected int whatNpc;
 
-    private void WhatIsNPC(string tag)
-    {
-        switch (tag)
-        {
-            case "NPC(background)":
-                Debug.Log("대충 대사");
-                return;
-            case "NPC(QnA)":
-                Debug.Log("대충 대사와 선택지");
-                return;
-            case "NPC(important)":
-                Debug.Log("대충 대사와 선택지 그리고 증거 제시");
-                return;
-            default:
-                Debug.LogError("님 태그 안 넣었거나 잘못 넣은 듯? NPC 관련으로 넣자");
-                return;
-        }
-    }
     private void StoryOn()
     {
         storyPan.SetActive(true);
@@ -36,7 +14,6 @@ public class interTNPC : MonoBehaviour
 
     public void InteractiveNPC()
     {
-        WhatIsNPC(gameObject.tag);
         StoryOn();
     }
 }
