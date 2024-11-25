@@ -16,39 +16,36 @@ public class ExcelReader : MonoSingleton<ExcelReader>
     }
     void Start()
     {
+        
         ReadCSV();
     }
 
     private void ReadCSV()
     {
-        string path = csvFileName + ".csv";
-
-        List<ErrorCode> errorCodeList = new List<ErrorCode>();
-
         TextAsset csvFile = Resources.Load<TextAsset>(csvFileName);
-
-        StreamReader reader = new StreamReader(Application.dataPath + "/" + path);
-
-        bool isFinish = false;
-
-        while (isFinish == false)
+        if (csvFile != null)
         {
-            string data = reader.ReadLine();
-            if (data == null)
+            string[] lines = csvFile.text.Split('\n');
+            foreach (string line in lines)
             {
-                isFinish = true;
-                break;
+                string[] fields = line.Split(',');
+
+                if (fields[0] == string.Empty)
+                    break;
+
+                ErrorCode menu = new ErrorCode();
+
+                menu.name = fields[0];
+                Debug.Log(menu.name);
+                menu.errorCode = fields[1];
+                Debug.Log(menu.errorCode);
+
+                dictionaryErrorCode.Add(menu.name, menu);
             }
-
-            var splitData = data.Split(',');
-
-            ErrorCode menu = new ErrorCode();
-
-            menu.name = splitData[0];
-            menu.errorCode = splitData[1];
-
-            dictionaryErrorCode.Add(menu.name, menu);
         }
-
+        else
+        {
+            Debug.LogError("CSV 파일을 찾을 수 없습니다.");
+        }
     }
 }
