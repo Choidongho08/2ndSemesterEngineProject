@@ -9,8 +9,8 @@ public class SJ_ChangeBackground : MonoBehaviour
 
     private void Start()
     {
-            _lastBackGround = _backgroundList[2];
-            _lastBackGround.SetActive(true);
+        _lastBackGround = _backgroundList[2];
+        _lastBackGround.SetActive(true);
     }
 
 
@@ -19,15 +19,17 @@ public class SJ_ChangeBackground : MonoBehaviour
         _lastBackGround.SetActive(false);
         _backgroundList[number].SetActive(true);
         _lastBackGround = _backgroundList[number];
-
-
-        /*//try
-        {
-
-        }
-        catch
-        {
-            
-        }*/
     }
+    
+    public void ChkChangeBackGroundBtn(int number)
+    {
+        if (InterGimick.ItemIsHere)
+        {
+            _lastBackGround.SetActive(false);
+            _backgroundList[number].SetActive(true);
+            _lastBackGround = _backgroundList[number];
+        }
+    }
+
+
 }

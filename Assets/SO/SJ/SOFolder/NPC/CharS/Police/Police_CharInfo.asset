@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Police_CharInfo
   m_EditorClassIdentifier: 
   CharName: "\uB2F4\uB2F9 \uD615\uC0AC"
-  CharImg: {fileID: 0}
+  CharImg: {fileID: 21300000, guid: 0c6e63dca581d354dbdf377c1d236678, type: 3}

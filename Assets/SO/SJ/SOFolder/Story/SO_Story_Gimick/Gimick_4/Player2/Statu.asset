@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f824c4174e3e8354e8dd43bbe4125ade, type: 3}
-  m_Name: Hiking_CharInfo
+  m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
+  m_Name: Statu
   m_EditorClassIdentifier: 
-  CharName: "\uB4F1\uC0B0\uD68C \uD68C\uC7A5"
-  CharImg: {fileID: 21300000, guid: ebc535fc5af116a4faf9af3ae4cd9b8b, type: 3}
+  ChaTxts: []
+  stopPoint: 0

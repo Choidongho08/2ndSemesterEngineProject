@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PasswordBtn : PuzzleManager
 {
     [SerializeField] private GameObject passwordPan;
+    [SerializeField] private GameObject TrueBill;
 
     public void PanelOpen()
     {
@@ -20,7 +21,6 @@ public class PasswordBtn : PuzzleManager
     public void RadioBtnpassword(string btnNum)
     {
         _gimick.RadioPassWord += btnNum;
-        Debug.Log(btnNum);
     }
 
     public void RadioCheckPassword()
@@ -28,10 +28,11 @@ public class PasswordBtn : PuzzleManager
         if(_gimick.RadioPassWord == _gimick.radioGimickPass)
         {
             gameObject.GetComponent<Button>().interactable = false;
+            PanelClose();
+            TrueBill.SetActive(true);
         }
         else
         {
-            Debug.Log("Æ²¸²");
             ResetNum();
         }
     }

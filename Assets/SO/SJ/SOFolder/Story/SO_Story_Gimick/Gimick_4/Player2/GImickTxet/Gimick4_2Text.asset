@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextList:
   - {fileID: 11400000, guid: 6c7d4827d719d554b89cddde60ae2064, type: 2}
+  - {fileID: 11400000, guid: 098548aa2a9b1b447a725f3d6d8f2bee, type: 2}
   - {fileID: 11400000, guid: afa6e48e27772b64fa81e07e35c9f50a, type: 2}
   isthisNPCImportant: 0
   isthisNPCcanQnA: 0

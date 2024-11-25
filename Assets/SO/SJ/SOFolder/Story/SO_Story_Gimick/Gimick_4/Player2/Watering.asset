@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: Hiking_StoryTxt
+  m_Name: Watering
   m_EditorClassIdentifier: 
   ChaTxts:
-  - "\uBB50\uC57C \uCCAD\uB144 \uC9C0\uAE08 \uC5EC\uAE34 \uC5B4\uCA50 \uC77C\uC774\uB798?"
-  - "\uC544 \uC0AC\uAC74 \uC870\uC0AC\uD558\uB7EC \uC654\uC5B4?"
-  - "\uCCAD\uB144\uC774 \uC9C4\uC2E4\uC744 \uBC1D\uD600\uC92C\uC73C\uBA74 \uC88B\uACA0\uAD6C\uBA3C."
+  - "\uC791\uC740 \uAD6C\uBA4D\uC774\uB2E4."
+  - "\uBB34\uC5B8\uAC00\uB97C \uB123\uAC70\uB098 \uBD80\uC6CC\uBCFC\uC218 \uC788\uC744
+    \uAC83 \uAC19\uB2E4."
+  - "\uADFC\uCC98\uC5D0 \uB0C7\uAC00\uC5D0\uC11C \uBB3C\uC744 \uBC1B\uC544 \uBD80\uC6CC\uC57C
+    \uACA0\uB2E4."
+  - "\uB0C7\uAC00\uC5D0\uC11C \uCC44\uC6CC \uC628 \uBB3C\uC744 \uBD80\uC6E0\uB2E4."
   stopPoint: 0
