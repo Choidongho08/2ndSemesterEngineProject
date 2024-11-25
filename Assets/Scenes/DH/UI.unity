@@ -1503,6 +1503,7 @@ GameObject:
   - component: {fileID: 706838414}
   - component: {fileID: 706838416}
   - component: {fileID: 706838415}
+  - component: {fileID: 706838417}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -1567,6 +1568,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706838413}
   m_CullTransparentMesh: 1
+--- !u!114 &706838417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706838413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &792169351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,9 +2274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d258f7f547a27649afc121b71f34a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatMessagePrefab: {fileID: 3105236472809020981, guid: f8e08cc55268af44dadd993cadb509ac, type: 3}
-  chatContent: {fileID: 1988202227}
-  chatInput: {fileID: 1996844996}
+  _chatMessagePrefab: {fileID: 3105236472809020981, guid: f8e08cc55268af44dadd993cadb509ac, type: 3}
+  _chatContent: {fileID: 1988202227}
+  _chatInput: {fileID: 1996844996}
   _maxChatMessage: 10
   _playerSO: {fileID: 11400000, guid: a719e7428b0586c4caff177e302dd334, type: 2}
   _chatButton: {fileID: 884851944}

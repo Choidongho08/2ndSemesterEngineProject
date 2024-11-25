@@ -9,9 +9,9 @@ using DG.Tweening;
 
 public class ChatManager : NetworkBehaviour
 {
-    [SerializeField] private ChatMessage chatMessagePrefab;
-    [SerializeField] private CanvasGroup chatContent;
-    [SerializeField] private TMP_InputField chatInput;
+    [SerializeField] private ChatMessage _chatMessagePrefab;
+    [SerializeField] private CanvasGroup _chatContent;
+    [SerializeField] private TMP_InputField _chatInput;
     [SerializeField] private int _maxChatMessage;
     [SerializeField] private PlayerSO _playerSO;
     [SerializeField] private Button _chatButton;
@@ -43,13 +43,12 @@ public class ChatManager : NetworkBehaviour
             }
         });
     }
-
     private void Update() 
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            SendChatMessage(chatInput.text, _playerSO.playerName);
-            chatInput.text = "";
+            SendChatMessage(_chatInput.text, _playerSO.playerName);
+            _chatInput.text = "";
         }
     }
 
@@ -63,7 +62,7 @@ public class ChatManager : NetworkBehaviour
    
     private ChatMessage AddMessage(string msg)
     {
-        ChatMessage CM = Instantiate(chatMessagePrefab, chatContent.transform);
+        ChatMessage CM = Instantiate(_chatMessagePrefab, _chatContent.transform);
         CM.SetText(msg);
         return CM;
     }

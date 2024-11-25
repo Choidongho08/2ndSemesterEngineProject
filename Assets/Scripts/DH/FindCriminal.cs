@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,11 +18,15 @@ public class FindCriminal : MonoBehaviour
     private float _maxClickTime = 3f;
     private float _currentClickTime = 0f;
     private float _fill;
-    
-    public static event Action onVote;
+    private float _voteFill;
+    private int _voteCount;
+
+    public static FindCriminal Singleton;
+    public event Action OnFindCriminal;
 
     private void Awake()
     {
+        FindCriminal.Singleton = this;
         _windowButton.onClick.AddListener(WindowOpening);
         _windowPosition = gameObject.transform.position;
     }
@@ -35,23 +40,21 @@ public class FindCriminal : MonoBehaviour
             if (_currentClickTime > _maxClickTime)
             {
                 Debug.Log("Vote");
-                onVote?.Invoke();
                 _isVote = true;
                 PointerUp();
+                VoteServerRpc();
                 return;
             }
         }
     }
-
     public void PointerDown()
     {
+        _findFill.fillAmount = 0f;
         _isClick = true;
     }
     public void PointerUp()
     {
         _isClick = false;
-        _fill = 0;
-        _findFill.fillAmount = _fill;
         _currentClickTime = 0;
     }
     private void WindowOpening()
@@ -73,4 +76,26 @@ public class FindCriminal : MonoBehaviour
             _windowButton.GetComponentInChildren<Image>().transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
+    private void Vote()
+    {
+        _voteCount++;
+        _voteFill += 0.5000f;
+        _findFill.fillAmount = _voteFill;
+        if ( _voteCount == 2)
+        {
+            OnFindCriminal?.Invoke();
+            Debug.Log("GoCriminal");
+        }
+    }
+    [ServerRpc]
+    private void VoteServerRpc() // 클라가 서버한테
+    {
+        VoteClientRpc();
+    }
+    [ClientRpc]
+    private void VoteClientRpc() // 서버가 클라들한테
+    {
+        FindCriminal.Singleton.Vote();
+    }
+    
 }
