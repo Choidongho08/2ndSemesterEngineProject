@@ -8,13 +8,12 @@ public class Authenticate : MonoBehaviour
     [SerializeField] private GameObject _authenticateUI;
     [SerializeField] private Button _authenticateBtn;
     [SerializeField] private TextMeshProUGUI _mainTitleText, _buttonText;
+    [SerializeField] private OnMouseEvent _onMouseEvent;
 
-    private OnMouseEvent _onMouseEvent;
     private Vector3 _buttonTextScale;
 
     private void Awake()
     {
-        _onMouseEvent = GetComponent<OnMouseEvent>();
         _buttonTextScale = _buttonText.transform.localScale;
 
         _authenticateBtn.onClick.AddListener(() =>

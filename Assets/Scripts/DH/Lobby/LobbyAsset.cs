@@ -7,7 +7,6 @@ public class LobbyAsset : MonoSingleton<LobbyAsset>
 
     public string GetSprite(MainLobby.PlayerReadyEnum playerReady)
     {
-        Debug.Log(playerReady.ToString());
         switch (playerReady.ToString())
         {
             case "True": 

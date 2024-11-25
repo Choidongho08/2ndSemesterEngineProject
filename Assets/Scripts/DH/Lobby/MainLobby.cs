@@ -168,6 +168,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
             OnLobbyCreate?.Invoke(lobby.LobbyCode, _lobbyName, caseType);
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+
             _createLobby.gameObject.SetActive(false);
         }
         catch (LobbyServiceException e)
@@ -444,7 +445,6 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                 joinedLobby = hostLobby;
                 PrintPlayers(hostLobby);
-                InLobbyUI.instance.HostPanel();
             }
             catch (LobbyServiceException e)
             {

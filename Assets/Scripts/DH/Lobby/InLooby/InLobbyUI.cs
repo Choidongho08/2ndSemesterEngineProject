@@ -35,12 +35,10 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     }
     private void Start()
     {
-        MainLobby.instance.OnJoinedLobby += UpdateLobby_Event;
         MainLobby.instance.OnJoinedLobbyUpdate += UpdateLobby_Event;
         MainLobby.instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         MainLobby.instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
-                                       
-        Hide();
+
     }
 
     private void LobbyManager_OnLeftLobby(object sender, System.EventArgs e)
@@ -55,6 +53,7 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void UpdateLobby()
     {
         UpdateLobby(MainLobby.instance.GetJoinedLobby());
+
     }
 
     private void UpdateLobby(Lobby lobby)
@@ -69,8 +68,6 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
             lobbyPlayerSingleUI.UpdatePlayer(player);
         }
 
-
-        Show();
     }
     private void ClearLobby()
     {
@@ -84,12 +81,7 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     {
         gameObject.SetActive(false);
     }
-    private void Show()
-    {
-        gameObject.SetActive(true);
-        HostPanel();
-    }
-    public void HostPanel()
+    public void NotHost()
     {
         if (!MainLobby.instance.IsLobbyHost())
         {
