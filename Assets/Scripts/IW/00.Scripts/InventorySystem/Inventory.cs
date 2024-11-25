@@ -29,7 +29,7 @@ public class CollectedItemData
 public class Inventory : MonoBehaviour
 {
     private int _currentStartIndex = 0; // 현재 보여지는 아이템의 시작 인덱스
-    private int _maxVisibleSlots = 10; // 
+    private int _maxVisibleSlots = 10; // 최대로 보여질 아이템의 인덱스
 
     private string _filePath;
 
@@ -214,6 +214,7 @@ public class Inventory : MonoBehaviour
             var itemSO = System.Array.Find(_items, item => item.ItemName == slotData.itemName);
             if (itemSO != null && _collectedItem.Contains(itemSO))
             {
+                _collectedItem.Add(itemSO);
                 SpawnInventoryItem(itemSO);
             }
             else
@@ -329,8 +330,8 @@ public class Inventory : MonoBehaviour
 
                 newItem.Initialize(item, _inventorySlots[i]);
 
-                _icon.sprite = item.ItemIcon;
-                _info.text = item.ItemInfo;
+                //_icon.sprite = item.ItemIcon;
+                //_info.text = item.ItemInfo;
 
                 SaveInventory();
                 return;
@@ -390,6 +391,7 @@ public class Inventory : MonoBehaviour
             {
                 _collectedItem.Add(itemSO);
                 Debug.Log("Item Added : " + itemSO.ItemName);
+                SpawnInventoryItem(itemSO);
                 SaveCollectedItems();
             }
             else
