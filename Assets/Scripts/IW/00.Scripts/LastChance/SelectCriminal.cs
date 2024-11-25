@@ -29,7 +29,7 @@ public class SelectCriminal : MonoBehaviour
             
             for (int i = 0; i < _charL.Count; i++)
             {
-
+                _charL[i].transform.position = _charL[i - 1].transform.position;
             }
 
         }

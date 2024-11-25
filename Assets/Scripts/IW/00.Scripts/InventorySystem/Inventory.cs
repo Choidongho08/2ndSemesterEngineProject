@@ -330,9 +330,6 @@ public class Inventory : MonoBehaviour
 
                 newItem.Initialize(item, _inventorySlots[i]);
 
-                //_icon.sprite = item.ItemIcon;
-                //_info.text = item.ItemInfo;
-
                 SaveInventory();
                 return;
             }
