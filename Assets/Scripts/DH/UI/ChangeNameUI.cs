@@ -47,7 +47,7 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
 
     private bool ChangePlayerName()
     {
-        _playerSO.playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
+        _playerSO.playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾]", "", RegexOptions.Singleline);
         if (!_inputPlayerName.text.Equals(_playerSO.playerName) || _playerSO.playerName == "")
         {
             Util.instance.LoadingHide();

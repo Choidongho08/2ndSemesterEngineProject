@@ -31,13 +31,13 @@ public class ChatManager : NetworkBehaviour
         {
             if (_chatOpen)
             {
-                _chat.DOMoveY(-282f, 0.3f);
+                _chat.DOLocalMoveY(-311f, 0.3f);
                 _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
                 _chatOpen = false;
             }
             else
             {
-                _chat.transform.DOMoveY(303f, 0.3f);
+                _chat.transform.DOLocalMoveY(-132f, 0.3f);
                 _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                 _chatOpen = true;
             }

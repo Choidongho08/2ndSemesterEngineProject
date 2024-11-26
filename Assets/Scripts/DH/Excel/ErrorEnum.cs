@@ -12,6 +12,7 @@ public class ErrorEnum : MonoSingleton<ErrorEnum>
         ErrorCodeEnum.CodeJoinLobbyFail_Empty => "CodeJoinLobbyFail_Empty",
         ErrorCodeEnum.ManyLobbyRequests => "ManyLobbyRequests",
         ErrorCodeEnum.YouAreNotHost => "YouAreNotHost",
+        ErrorCodeEnum.LobbyPlayerReady => "LobbyPlayerReady",
         _ => throw new Exception("ErrorCode not Defined ")
     };
 }
@@ -26,4 +27,5 @@ public enum ErrorCodeEnum
     ChangePlayerNameFail,
     ManyLobbyRequests,
     YouAreNotHost,
+    LobbyPlayerReady,
 }

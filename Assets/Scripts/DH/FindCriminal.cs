@@ -49,7 +49,7 @@ public class FindCriminal : MonoBehaviour
     }
     public void PointerDown()
     {
-        _findFill.fillAmount = 0f;
+        _findFill.fillAmount = _voteFill;
         _isClick = true;
     }
     public void PointerUp()
@@ -63,16 +63,14 @@ public class FindCriminal : MonoBehaviour
         {
             _isOpenWindow = true; // ø≠æÓ¡‹
 
-            gameObject.transform.DOKill();
-            gameObject.transform.DOMoveX(2160f, 0.3f);
+            gameObject.transform.DOLocalMoveX(275, 0.3f);
             _windowButton.GetComponentInChildren<Image>().transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         else
         {
             _isOpenWindow = false; // ¥›æ∆¡‹
 
-            gameObject.transform.DOKill();
-            gameObject.transform.DOMoveX(2830f, 0.3f);
+            gameObject.transform.DOLocalMoveX(480, 0.3f);
             _windowButton.GetComponentInChildren<Image>().transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }

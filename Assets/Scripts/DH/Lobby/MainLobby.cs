@@ -32,6 +32,7 @@ public class MainLobby : MonoSingleton<MainLobby>
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
     public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
+    public event EventHandler<EventArgs> OnGameStarted;
     public class OnLobbyListChangedEventArgs : EventArgs
     {
         public List<Lobby> lobbyList;
@@ -39,10 +40,12 @@ public class MainLobby : MonoSingleton<MainLobby>
     public string KeyPlayerName = "PlayerName";
     public string KeyPlayerReady = "PlayerReady";
     public string KeyCaseBook = "CaseBook";
+    public const string KeyStartGame = "Start";
     public event Action OnAfterAuthenticate;
     public event Action<string, string, string> OnLobbyCreate;
     public event Action<string, string, string> OnLobbyJoined;
     public event Action OnGameStart;
+    
     public string PlayerReady
     {
         get
@@ -137,6 +140,16 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                     joinedLobby = null;
                 }
+                if (joinedLobby.Data[KeyStartGame].Value != "0")
+                {
+                    if (!IsLobbyHost())
+                    {
+                        MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
+                    }
+                    joinedLobby = null;
+
+                    OnGameStart?.Invoke();
+                }
             }
 
         }
@@ -158,6 +171,7 @@ public class MainLobby : MonoSingleton<MainLobby>
                 Data = new Dictionary<string, DataObject>
                 {
                     {KeyCaseBook, new DataObject(DataObject.VisibilityOptions.Public, caseType, DataObject.IndexOptions.S1) },
+                    {KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, "0") }
                 },
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(_lobbyName, 2, createLobbyOptions);
@@ -326,6 +340,7 @@ public class MainLobby : MonoSingleton<MainLobby>
                 Data = new Dictionary<string, DataObject>
                 {
                     {KeyCaseBook, new DataObject(DataObject.VisibilityOptions.Public, caseBook.ToString(), DataObject.IndexOptions.S1) },
+                    {KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member)}
                 }
             });
 
@@ -452,20 +467,29 @@ public class MainLobby : MonoSingleton<MainLobby>
             }
         }
     }
-    public void GameStart()
+    public async void GameStart()
     {
-        int readyCount = 0;
-        foreach (Player player in joinedLobby.Players)
+        if (IsLobbyHost())
         {
-            if (player.Data[KeyPlayerReady].Value == "True")
-                readyCount++;
+            try
+            {
+                string relayCode = await MainRelay.instance.CreateRelay();
+
+                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                {
+                    Data = new Dictionary<string, DataObject>
+                    {
+                        { KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                    },
+                });
+
+                joinedLobby = lobby;
+            }
+            catch (LobbyServiceException e)
+            {
+                Debug.Log(e);
+            }
         }
-        if (readyCount == 2)
-        {
-            Debug.Log("GameStart");
-            OnGameStart?.Invoke();
-        }
-        readyCount = 0;
     }
     public bool IsLobbyHost()
     {

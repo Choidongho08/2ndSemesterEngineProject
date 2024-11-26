@@ -53,7 +53,6 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void UpdateLobby()
     {
         UpdateLobby(MainLobby.instance.GetJoinedLobby());
-
     }
 
     private void UpdateLobby(Lobby lobby)
