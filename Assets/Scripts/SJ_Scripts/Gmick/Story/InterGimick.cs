@@ -74,12 +74,28 @@ public class InterGimick : MonoBehaviour, StoryEnd
         _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
     }
 
+    public void StatueInteractionGimick(GameObject password)
+    {
+        if(!_gimickSO.player2Watering)
+        {
+            _storyListNum = 0;
+            _storyPan.SetActive(true);
+            _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
+        }
+        else
+        {
+            _storyListNum = 1;
+            _storyPan.SetActive(true);
+            _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
+            password.SetActive(true);
+        }
+    }
+
     public void NextStory()
     {
         _storyLine++;
         if (_storyLine != _storyList.TextList[_storyListNum].ChaTxts.Count)
         {
-            Debug.Log("го");
             _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
         }
         else

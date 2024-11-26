@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Gimicks
   m_EditorClassIdentifier: 
   flickPuzzlePassword: 4860
-  puzzleSet: 1
-  numberCheck: 00001111001000011111
-  puzzleEnd: 1
+  puzzleSet: 0
+  numberCheck: 
+  puzzleEnd: 0
   itCantEnter: 0
   player1HasScissor: 0
   player2HasScissor: 0
@@ -24,10 +24,20 @@ MonoBehaviour:
   player2Watering: 0
   StatueHasUm: 0
   StatueBlockRain: 0
-  radioChannel: 1
-  sound: []
+  radioChannel: 5
+  sound:
+  - {fileID: 8300000, guid: 1f390e2fabd5c58429b45042763cddb2, type: 3}
+  - {fileID: 8300000, guid: 9a36118fc60e1a5469295bf09580af0c, type: 3}
+  - {fileID: 8300000, guid: 60b36d851b896d84ea24ac27a714e15f, type: 3}
+  - {fileID: 8300000, guid: c53c212069c48d6438fc0358c25d2545, type: 3}
+  - {fileID: 8300000, guid: 7230d0e6fae866d4fb07db97b7ca0102, type: 3}
+  - {fileID: 8300000, guid: 75009527da57dfe44b865e7793acdc5e, type: 3}
+  - {fileID: 8300000, guid: e3c7c1454d14be0449c221119426c87e, type: 3}
+  - {fileID: 8300000, guid: 43a96a0629ba4aa438cd55982858add4, type: 3}
+  - {fileID: 8300000, guid: 4594e479c36d19d4e9865eee52602e20, type: 3}
+  - {fileID: 8300000, guid: 09042c123683a4f478c1d6db1186f566, type: 3}
   puzzleDone: 0
-  radioGimickPass: 6573
-  StatuGimickPass: 
-  RadioPassWord: 6573
+  radioGimickPass: 65732
+  StatuGimickPass: 1536
+  RadioPassWord: 
   StatuPassWord: 
