@@ -1,19 +1,47 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SelectCriminal : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _charL;
 
+    [SerializeField] private Ease _easyType = Ease.OutBack;
+
+    [SerializeField] private InventoryItem _invenItem;
+
     public Transform _draggablesTransform;
     public Transform _lRestTransform;
     public Transform _rRestTransform;
 
+    public GameObject _inventory;
+
     public int _currentIndex = 0; // 현재 캐릭터 인덱스
+
+    private void Awake()
+    {
+        _invenItem = FindObjectOfType<InventoryItem>();
+        if (_invenItem == null)
+        {
+            Debug.LogError("Failed to find Inven in the scene");
+        }
+    }
 
     private void Start()
     {
+        if (_invenItem != null)
+        {
+            // 리스너 추가
+            _invenItem.OnItemSelectEvent.AddListener(SelectItem);
+        }
+        else
+        {
+            Debug.LogError("InventoryItem is not assigned");
+        }
+
+
         // 초기 위치 설정
         UpdateCharPosi();
     }
@@ -65,6 +93,18 @@ public class SelectCriminal : MonoBehaviour
 
     public void Proposal()
     {
-        Debug.Log("Select Criminal");
+        _inventory.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 5), 1f).SetEase(_easyType);
+    }
+
+    public void SelectItem(ItemSO itemSO)
+    {
+        if (itemSO != null)
+        {
+            Debug.Log("Event received in SelectCriminal for item " + itemSO.ItemName);
+        }
+        else
+        {
+            Debug.LogWarning("Received null ItemSO in SelectItem");
+        }
     }
 }
