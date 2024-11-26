@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using TMPro;
+using UnityEngine.Events;
+
+public class ItemEvent : UnityEvent<ItemSO> { }
 
 public class InventoryItem : MonoBehaviour, IPointerClickHandler
 {
@@ -18,10 +21,19 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _itemImage;
     [SerializeField] private TextMeshProUGUI _itemText;
 
+    [Header("Item Events")]
+    public ItemEvent OnItemSelectEvent = new ItemEvent(); // 최종 선택에서 보내줄 아이템 SO 이벤트
+
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _itemIcon = GetComponent<Image>();
+
+        // 이벤트를 초기화 해주기
+        if (OnItemSelectEvent == null)
+        {
+            OnItemSelectEvent = new ItemEvent();
+        }
     }
 
     public void Initialize(ItemSO items, InventorySlot parent)
@@ -54,6 +66,20 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
             if (ItemSO != null)
             {
                 Inventory.Instance.OnItemClicked(ItemSO);
+            }
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (OnItemSelectEvent != null)
+            {
+                Debug.Log("Right Click Event : " + _currentItem.ItemName + ", invoking event.......");
+
+                // 이벤트 호출 + ItemSO 보내기
+                OnItemSelectEvent?.Invoke(_currentItem);
+            }
+            else
+            {
+                Debug.LogWarning("OnItemSelected is null");
             }
         }
         else

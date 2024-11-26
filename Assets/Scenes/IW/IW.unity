@@ -182,18 +182,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 154b5b571ba14314bab0fcec92953760, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
         m_Mode: 2
         m_Arguments:
@@ -304,18 +292,6 @@ MonoBehaviour:
   onItemGet:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 663cc646a06640145982bab3cb04ed7a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
@@ -463,18 +439,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: c8f1521e50906b14faa5152f5c61d034, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
         m_Mode: 2
         m_Arguments:
@@ -542,18 +506,6 @@ MonoBehaviour:
   onItemGet:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7a31fe3ebe5c2374aae3e7b1d897825d, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
@@ -661,18 +613,6 @@ MonoBehaviour:
   onItemGet:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 6339c7baee5dd8b489058992cc780f88, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
@@ -1050,7 +990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
       propertyPath: _items.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
       propertyPath: _items.Array.data[0]
@@ -1069,6 +1009,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 663cc646a06640145982bab3cb04ed7a, type: 2}
     - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
+      propertyPath: _items.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9015f70b0281ef143ba0a780f63ffebe, type: 2}
+    - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
       propertyPath: _items.Array.data[5]
       value: 
       objectReference: {fileID: 11400000, guid: 677cdd4dde85fc8418927a495617023c, type: 2}
@@ -1082,6 +1026,10 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6339c7baee5dd8b489058992cc780f88, type: 2}
     - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
       propertyPath: _items.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 154b5b571ba14314bab0fcec92953760, type: 2}
+    - target: {fileID: 3003676100723608516, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
+      propertyPath: _items.Array.data[9]
       value: 
       objectReference: {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
     - target: {fileID: 3238181734666313695, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
@@ -1520,18 +1468,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
         m_Mode: 2
         m_Arguments:
@@ -1637,18 +1573,6 @@ MonoBehaviour:
   onItemGet:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 6ea1fa480fcc1514497a4b08bd0ba277, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
@@ -1789,18 +1713,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 677cdd4dde85fc8418927a495617023c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
         m_Mode: 2
         m_Arguments:
@@ -1908,18 +1820,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: a62b85f4e80afd440b3b0f337a51081f, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
         m_Mode: 2
         m_Arguments:
@@ -2025,18 +1925,6 @@ MonoBehaviour:
   onItemGet:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880104013}
-        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SpawnInventoryItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 9015f70b0281ef143ba0a780f63ffebe, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 880104013}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OnItemClicked
