@@ -275,14 +275,21 @@ public class Inventory : MonoBehaviour
 
     public void GenerateCollectedItems()
     {
+        foreach (var slot in _inventorySlots)
+        {
+            slot.ClearSlot();
+        }
+
         _currentStartIndex = 0;
         UpdateInventorySlots();
+
         foreach (var itemSO in _collectedItem)
         {
             bool isAlreadyInInventory = false;
 
             foreach (var slot in _inventorySlots)
             {
+                // 슬롯이 이미 아이템을 가지고 있는가?
                 if (slot._myItem != null && slot._myItem.ItemSO == itemSO)
                 {
                     isAlreadyInInventory = true;
@@ -292,9 +299,32 @@ public class Inventory : MonoBehaviour
 
             if (!isAlreadyInInventory)
             {
-                SpawnInventoryItem(itemSO);
+                foreach (var slot in _inventorySlots)
+                {
+                    if (slot._myItem = null) // 비어있는 슬롯에만 추가해주기
+                    {
+                        var newItem = Instantiate(_itemPrefabs, slot.transform);
+                        newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
+
+                        newItem.Initialize(itemSO, slot);
+                        slot.SetItem(newItem);
+
+                        // 핸들러 연결
+                        var suggestEvidence = FindObjectOfType<SuggestEvidence>();
+                        if (suggestEvidence != null)
+                        {
+                            newItem.OnSubmitEvidence.AddListener(suggestEvidence.HandleEvidenceSubmission);
+                        }
+                        else
+                        {
+                            Debug.Log("SuggestEvidence scr not found in the scene");
+                        }
+                        break;
+                    }
+                }
             }
         }
+        Debug.Log("Collected items generated and added to inventory");
     }
 
     // 아이템 잘 생성되는 지

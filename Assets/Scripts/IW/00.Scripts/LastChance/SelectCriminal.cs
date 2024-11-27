@@ -3,47 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class SelectCriminal : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _charL;
-
-    [SerializeField] private Ease _easyType = Ease.OutBack;
-
-    [SerializeField] private InventoryItem _invenItem;
+    [SerializeField] private List<GameObject> _charL; // 캐릭터 패널
+    [SerializeField] private List<GameObject> _charI; // 캐릭터 이미지 패널
 
     public Transform _draggablesTransform;
     public Transform _lRestTransform;
     public Transform _rRestTransform;
 
-    public GameObject _inventory;
+    public GameObject SelectEnvidence;
+    public GameObject CharImage;
 
-    public int _currentIndex = 0; // 현재 캐릭터 인덱스
-
-    private void Awake()
-    {
-        _invenItem = FindObjectOfType<InventoryItem>();
-        if (_invenItem == null)
-        {
-            Debug.LogError("Failed to find Inven in the scene");
-        }
-    }
+    public int _currentIndex = 0; // 현재 캐릭터 인덱스;
 
     private void Start()
     {
-        if (_invenItem != null)
-        {
-            // 리스너 추가
-            _invenItem.OnItemSelectEvent.AddListener(SelectItem);
-        }
-        else
-        {
-            Debug.LogError("InventoryItem is not assigned");
-        }
-
-
         // 초기 위치 설정
         UpdateCharPosi();
+
+        SelectEnvidence?.SetActive(false);
     }
 
     private void UpdateCharPosi()
@@ -93,18 +75,18 @@ public class SelectCriminal : MonoBehaviour
 
     public void Proposal()
     {
-        _inventory.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 5), 1f).SetEase(_easyType);
-    }
+        SelectEnvidence?.SetActive(true);
 
-    public void SelectItem(ItemSO itemSO)
-    {
-        if (itemSO != null)
+        for (int i = 0; i < _charL.Count; i++)
         {
-            Debug.Log("Event received in SelectCriminal for item " + itemSO.ItemName);
-        }
-        else
-        {
-            Debug.LogWarning("Received null ItemSO in SelectItem");
+            if (_charL[i].transform.position == _draggablesTransform.position)
+            {
+                Debug.Log("Load Select Criminal " + _charL[i]);
+                CharImage.GetComponent<Image>().sprite = _charL[i].GetComponent<Image>().sprite;
+                CharImage.GetComponent<RectTransform>().sizeDelta = _charI[i].GetComponent<RectTransform>().sizeDelta;
+                CharImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(_charI[i].GetComponent<RectTransform>().anchoredPosition.x, 
+                    _charI[i].GetComponent<RectTransform>().anchoredPosition.y);
+            }
         }
     }
 }
