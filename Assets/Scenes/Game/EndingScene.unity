@@ -493,7 +493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &909273064
 RectTransform:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ MonoBehaviour:
     \uC81C\uC6B0\uB294 \uB370\uC5D0 \uC131\uACF5\uD55C\uB2E4."
   - "\uADF8 \uC774\uD6C4 A\uC591\uC744 \uC0B4\uD574\uD558\uAE30\uB294 \uC26C\uC6E0\uC744\uAEBC\uC57C.\n\uADF8\uB9AC\uACE0,
     \uC6D0\uB798\uC600\uB2E4\uBA74 \uC774\uC81C \uC911\uC694\uD55C \uC99D\uAC70\uC778
-    \uC601\uC218\uC99D\uC744 \uCC98\uBD84\uD588\uC744 \uAC83."
+    \uC601\uC218\uC99D\uC744 \uCC98\uBD84\uD588\uC744 \uB54C"
   - "\uD558\uC9C0\uB9CC \uC99D\uAC70 \uC778\uBA78 \uC804 \uC804\uC774\uD604\uC0C1\uC774
     \uC77C\uC5B4\uB09C\uB2E4.\n\uACB0\uAD6D \uBC94\uC778\uC740 \uC804\uC774\uD604\uC0C1\uB54C\uBB38\uC5D0
     \uC911\uC694\uD55C \uC601\uC218\uC99D\uC744 \uC783\uC5B4\uBC84\uB838\uACE0\n\uC774\uB294
@@ -888,7 +888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1257304827
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,6 @@ public class RSJ_EndingStr : MonoBehaviour
         try
         {
             _text.text = _storyList[_storyLine];
-            ChangeBackGround();
         }
         catch (Exception)
         {
@@ -41,17 +40,5 @@ public class RSJ_EndingStr : MonoBehaviour
         _text.text = _storyList[_storyLine];
         backGround.SetActive(false);
         EndingPan.SetActive(true);
-    }
-
-    private void ChangeBackGround()
-    {
-        if (_storyLine == 2)
-            backGround.GetComponent<Image>().sprite = storyImage[1];
-        else if (_storyLine == 4)
-            backGround.GetComponent<Image>().sprite = storyImage[2];
-        else if (_storyLine == 6)
-            backGround.GetComponent<Image>().sprite = storyImage[3];
-        else if (_storyLine == 7)
-            backGround.GetComponent<Image>().sprite = storyImage[0];
     }
 }
