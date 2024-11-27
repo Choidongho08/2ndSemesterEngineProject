@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class QnACut : interTNPC, StoryEnd
+public class QnACut : interTNPC, IStoryEnd
 {
     [Header("¼³Á¤")]
     public StoryTxtSO _Text;
@@ -40,7 +40,4 @@ public class QnACut : interTNPC, StoryEnd
         storyPan.SetActive(false);
     }
 }
-    public interface StoryEnd
-    {
-        void RollBackStory();
-    }
+

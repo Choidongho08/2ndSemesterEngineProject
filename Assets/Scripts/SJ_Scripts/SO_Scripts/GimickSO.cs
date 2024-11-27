@@ -35,7 +35,7 @@ public class GimickSO : ScriptableObject
     public string StatuPassWord; //동상 기믹 비밀번호 입력
 }
 
-public interface ItemCheck
+public interface IItemCheck
 {
     void ItemCheck();
 }

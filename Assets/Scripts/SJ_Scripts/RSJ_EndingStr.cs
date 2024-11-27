@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class RSJ_EndingStr : MonoBehaviour
 {
@@ -21,20 +22,15 @@ public class RSJ_EndingStr : MonoBehaviour
         _text.text = _storyList[_storyLine];
     }
 
-    private void Start()
-    {
-        _text.text = _text.text.Replace("\\n", "\n");
-    }
-
     public void NextStory()
     {
         _storyLine++;
-        if (_storyLine != _storyList.Count)
+        try
         {
             _text.text = _storyList[_storyLine];
             ChangeBackGround();
         }
-        else
+        catch (Exception)
         {
             EndStory();
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class InterGimick : MonoBehaviour, StoryEnd
+public class InterGimick : MonoBehaviour, IStoryEnd
 {
     [SerializeField] private GameObject _storyPan;
     [SerializeField] private StorySO _storyList;

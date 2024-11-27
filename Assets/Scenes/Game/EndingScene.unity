@@ -599,9 +599,9 @@ MonoBehaviour:
   backGround: {fileID: 909273063}
   storyImage:
   - {fileID: 21300000, guid: 87e3399d53152f745adcdb11487fd859, type: 3}
-  - {fileID: 21300000, guid: 4c9b23b2be4bc3848817dbcf2ca9c519, type: 3}
-  - {fileID: 21300000, guid: d8f832155ad2d03489d65e44598cb194, type: 3}
   - {fileID: 21300000, guid: a903eb3baecbfb041977f72341d13bef, type: 3}
+  - {fileID: 21300000, guid: d8f832155ad2d03489d65e44598cb194, type: 3}
+  - {fileID: 21300000, guid: 4c9b23b2be4bc3848817dbcf2ca9c519, type: 3}
   EndingPan: {fileID: 1257304826}
   _storyList:
   - "\uC774\uBC88 \uC0AC\uAC74\uB3C4 \uC5EC\uB7EC\uBAA8\uB85C \uB2E4\uC0AC\uB2E4\uB09C\uD55C
