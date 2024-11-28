@@ -82,11 +82,11 @@ public class scrSuggestEvidence : MonoBehaviour
         if (thisIsRightEvi)
         {
             // SO �Ǻ����ִ°Ÿ� �����ϱ�
-            if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[i].ItemName == itemSO.ItemName && _isEvidenceCorrect)
+            if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[0].ItemName == itemSO.ItemName)
             {
                 Debug.Log("Correct Evidence : " + itemSO);
 
-                return; 
+                return;
             }
             else
             {
