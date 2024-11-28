@@ -21,6 +21,8 @@ public class scrSuggestEvidence : MonoBehaviour
 
     private Vector2 _trInven;
 
+    private bool _isEvidenceCorrect;
+
     private void Awake()
     {
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
@@ -33,6 +35,7 @@ public class scrSuggestEvidence : MonoBehaviour
         foreach (var item in inventoryItems)
         {
             item.OnSubmitEvidence.AddListener(HandleEvidenceSubmission);
+            Debug.Log("Added Listener");
         }
     }
 
@@ -61,21 +64,24 @@ public class scrSuggestEvidence : MonoBehaviour
 
     private void ProcessEvidence(ItemSO itemSO)
     {
+        _isEvidenceCorrect = true;
+
         // 증거 제출 처리 로직 추가
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
-        // SO 판별해주는거만 구현하기
-        if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[0].ItemName == itemSO.ItemName)
+        for (int i = 0; i < _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence.Count; i++)
         {
-            Debug.Log("Correct Evidence : " + itemSO);
-            // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
-            // for (int i = 0; i < )
-        }
-        else
-        {
-            Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+            // SO 판별해주는거만 구현하기
+            if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[i].ItemName == itemSO.ItemName && _isEvidenceCorrect)
+            {
+                Debug.Log("Correct Evidence : " + itemSO);
+
+                return; 
+            }
+            else
+            {
+                Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+            }
         }
     }
-
-    
 }

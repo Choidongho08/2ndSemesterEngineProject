@@ -347,7 +347,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "**\uC0B0 \uACFC\uB9AC\uC790\uAC00 \uBC94\uC778\uC77C\uAE4C?"
+  m_text: "**\uC0B0 \uAD00\uB9AC\uC790\uAC00 \uBC94\uC778\uC77C\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
   m_sharedMaterial: {fileID: 370270405986739486, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
@@ -577,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &113981488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -666,10 +666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d96bc8e2e8eb64f96ebe56d3321853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EvidenceSO:
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  _easyType: 28
-  _inventory: {fileID: 931464583}
 --- !u!1 &116607859
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +881,7 @@ GameObject:
   - component: {fileID: 144806170}
   - component: {fileID: 144806169}
   m_Layer: 5
-  m_Name: Character 2
+  m_Name: Parents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,7 +1033,7 @@ GameObject:
   - component: {fileID: 236242938}
   - component: {fileID: 236242937}
   m_Layer: 5
-  m_Name: Character 6
+  m_Name: BadF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1289,7 +1285,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00061035156}
-  m_SizeDelta: {x: 1268.2103, y: 199.7688}
+  m_SizeDelta: {x: 1380.1232, y: 199.7688}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &363714476
 MonoBehaviour:
@@ -1311,7 +1307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A\uC758 \uCE5C\uAD6C X\uAC00 \uBC94\uC778\uC77C\uAE4C?"
+  m_text: "A\uC758 \uCE5C\uAD6C \uC870\uC11C\uC548\uC774 \uBC94\uC778\uC77C\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
   m_sharedMaterial: {fileID: 370270405986739486, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
@@ -1577,7 +1573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC544\uC8FC\uBA38\uB2C8\uAC00 \uBC94\uC778\uC77C\uAE4C?"
+  m_text: "A\uC591\uC758 \uC5B4\uBA38\uB2C8\uAC00 \uBC94\uC778\uC77C\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
   m_sharedMaterial: {fileID: 370270405986739486, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
@@ -1973,7 +1969,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00061035156}
-  m_SizeDelta: {x: 1268.2103, y: 199.7688}
+  m_SizeDelta: {x: 1331.2994, y: 199.7688}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &577433985
 MonoBehaviour:
@@ -1995,7 +1991,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A\uC758 \uCE5C\uAD6C Z\uAC00 \uBC94\uC778\uC77C\uAE4C?"
+  m_text: "A\uC758 \uCE5C\uAD6C \uC1A1\uC608\uD76C\uAC00 \uBC94\uC778\uC77C\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
   m_sharedMaterial: {fileID: 370270405986739486, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
@@ -2084,7 +2080,7 @@ GameObject:
   - component: {fileID: 748953947}
   - component: {fileID: 748953946}
   m_Layer: 5
-  m_Name: Character 4
+  m_Name: Criminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2312,7 +2308,7 @@ GameObject:
   - component: {fileID: 924969349}
   - component: {fileID: 924969351}
   m_Layer: 5
-  m_Name: Character 1
+  m_Name: Detective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2407,7 +2403,7 @@ GameObject:
   - component: {fileID: 1020442926}
   - component: {fileID: 1020442925}
   m_Layer: 5
-  m_Name: Character 3
+  m_Name: Club President
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2815,7 +2811,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1967564163129493128, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1087285148}
   m_SourcePrefab: {fileID: 100100000, guid: 4637444fe98d14944b35473487fe53f7, type: 3}
 --- !u!224 &1087285144 stripped
 RectTransform:
@@ -2833,6 +2832,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a106f5cf94279cb4080ee5ed9ddcd2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1087285148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931464583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3d05b0ed9f2cd4dbf2759ed056c04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentItem: {fileID: 0}
+  _itemImage: {fileID: 0}
+  _itemText: {fileID: 0}
+  OnSubmitEvidence:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1118611760
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,7 +3421,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 113981491}
-        m_TargetAssemblyTypeName: SuggestEvidence, Assembly-CSharp
+        m_TargetAssemblyTypeName: scrSuggestEvidence, Assembly-CSharp
         m_MethodName: EvidenceSuggest
         m_Mode: 1
         m_Arguments:
@@ -3540,7 +3557,7 @@ GameObject:
   - component: {fileID: 1245642055}
   - component: {fileID: 1245642054}
   m_Layer: 5
-  m_Name: Character 7
+  m_Name: B Store Casher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4376,7 +4393,7 @@ GameObject:
   - component: {fileID: 1662723587}
   - component: {fileID: 1662723586}
   m_Layer: 5
-  m_Name: Character 9
+  m_Name: Mountain Security Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4453,7 +4470,7 @@ GameObject:
   - component: {fileID: 1728786993}
   - component: {fileID: 1728786992}
   m_Layer: 5
-  m_Name: Character 5
+  m_Name: BF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4530,7 +4547,7 @@ GameObject:
   - component: {fileID: 1757836032}
   - component: {fileID: 1757836031}
   m_Layer: 5
-  m_Name: Character 8
+  m_Name: C Store Casher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5049,7 +5066,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00061035156}
-  m_SizeDelta: {x: 1268.2103, y: 199.7688}
+  m_SizeDelta: {x: 1367.6971, y: 199.7688}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1914105673
 MonoBehaviour:
@@ -5071,7 +5088,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A\uC758 \uCE5C\uAD6C Y\uAC00 \uBC94\uC778\uC77C\uAE4C?"
+  m_text: "A\uC758 \uCE5C\uAD6C \uCD5C\uD558\uC724\uC774 \uBC94\uC778\uC77C\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
   m_sharedMaterial: {fileID: 370270405986739486, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
@@ -5439,19 +5456,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974818579}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 113981491}
-        m_TargetAssemblyTypeName: SuggestEvidence, Assembly-CSharp
-        m_MethodName: EvidenceSuggest
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1974818579
 MonoBehaviour:
   m_ObjectHideFlags: 0
