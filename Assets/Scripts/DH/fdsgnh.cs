@@ -1,29 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class fdsgnh : MonoBehaviour
+public class fdsgnh : NetworkBehaviour 
 {
-    [SerializeField] private FindCriminal _findCriminal;
-    [SerializeField] private ChatManager _chatManager;
+    [SerializeField] private GameObject _chatManager;
+
+    private GameObject _chatManagerInstance;
+    private NetworkObject _chatManagerNetworkObj;
 
     private string _playerId;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        var findCriminal = Instantiate(_findCriminal);
-        var chatManager = Instantiate(_chatManager);
+        if (!IsServer)
+            return;
 
-        findCriminal.gameObject.SetActive(true);
-        chatManager.gameObject.SetActive(true);
+        _chatManagerInstance = Instantiate(_chatManager);
 
-        findCriminal.GetComponent<NetworkObject>().Spawn();
-        chatManager.GetComponent<NetworkObject>().Spawn();
+        _chatManagerNetworkObj = _chatManagerInstance.GetComponent<NetworkObject>();
+        _chatManagerNetworkObj.Spawn();
     }
+
 }

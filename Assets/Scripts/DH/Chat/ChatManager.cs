@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 public class ChatManager : NetworkBehaviour
 {
     [SerializeField] private ChatMessage _chatMessagePrefab;
-    [SerializeField] private CanvasGroup _chatContent;
+    [SerializeField] private GameObject _chatContent;
     [SerializeField] private TMP_InputField _chatInput;
     [SerializeField] private int _maxChatMessage;
     [SerializeField] private PlayerSO _playerSO;
@@ -60,6 +61,8 @@ public class ChatManager : NetworkBehaviour
     }
     private void AddMessage(string msg)
     {
+        Debug.Log(msg);
+        Debug.Log(_chatContent);
         ChatMessage CM = Instantiate(_chatMessagePrefab, _chatContent.transform);
         CM.SetText(msg);
     }
@@ -71,7 +74,7 @@ public class ChatManager : NetworkBehaviour
     }
     [ClientRpc]
     private void ReceiveChatMessageClientRpc(string message, ClientRpcParams clientRpcParams = default)
-    {
-        ChatManager.Singleton.AddMessage(message);
+    { //FixedString128Bytes
+        AddMessage(message);
     }
 }
