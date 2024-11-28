@@ -66,7 +66,7 @@ public class scrSuggestEvidence : MonoBehaviour
     {
         bool thisIsRightEvi = false;
 
-        // ���� ���� ó�� ���� �߰�
+        // 증거 제출 처리 로직 추가
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
         foreach (var item in _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence)
@@ -78,20 +78,15 @@ public class scrSuggestEvidence : MonoBehaviour
             }
         }
 
-        // SO �Ǻ����ִ°Ÿ� �����ϱ�
+        // SO 판별해주는거만 구현하기
         if (thisIsRightEvi)
         {
-            // SO �Ǻ����ִ°Ÿ� �����ϱ�
-            if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[i].ItemName == itemSO.ItemName && _isEvidenceCorrect)
-            {
-                Debug.Log("Correct Evidence : " + itemSO);
-
-                return; 
-            }
-            else
-            {
-                Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
-            }
+            Debug.Log("Correct Evidence : " + itemSO);
+            // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
+        }
+        else
+        {
+            Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
         }
     }
 }

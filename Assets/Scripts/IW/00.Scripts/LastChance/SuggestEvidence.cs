@@ -86,6 +86,4 @@ public class SuggestEvidence : MonoBehaviour
             Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
         }
     }
-
-    private void 
 }
