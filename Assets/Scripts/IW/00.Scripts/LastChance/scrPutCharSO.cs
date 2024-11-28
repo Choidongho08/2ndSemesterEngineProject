@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class scrPutCharSO : MonoBehaviour
 {
-    [SerializeField] private EvidenceTextSO _soChar;
+    public EvidenceTextSO _soChar;
 }

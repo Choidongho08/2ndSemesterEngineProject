@@ -11,6 +11,8 @@ public class SelectCriminal : MonoBehaviour
     [SerializeField] private List<GameObject> _charL; // 캐릭터 패널
     [SerializeField] private List<GameObject> _charI; // 캐릭터 이미지 패널
 
+    public GameObject _objCurrentPanel;
+
     public Transform _draggablesTransform;
     public Transform _lRestTransform;
     public Transform _rRestTransform;
@@ -81,6 +83,7 @@ public class SelectCriminal : MonoBehaviour
         {
             if (_charL[i].transform.position == _draggablesTransform.position)
             {
+                _objCurrentPanel = _charL[i];
                 Debug.Log("Load Select Criminal " + _charL[i]);
                 CharImage.GetComponent<Image>().sprite = _charL[i].GetComponent<Image>().sprite;
                 CharImage.GetComponent<RectTransform>().sizeDelta = _charI[i].GetComponent<RectTransform>().sizeDelta;

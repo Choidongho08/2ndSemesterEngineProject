@@ -17,12 +17,14 @@ public class SuggestEvidence : MonoBehaviour
     private Inventory _scrInventory;
     private InventoryItem _scrInventoryItem;
     private EvidenceTextSO _scrEvidenceTextSO;
+    private SelectCriminal _scrSelectCriminal;
 
     private Vector2 _trInven;
 
     private void Awake()
     {
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
+        _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
     }
 
     private void Start()
@@ -63,5 +65,14 @@ public class SuggestEvidence : MonoBehaviour
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
         // SO 판별해주는거만 구현하기
+        if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[0].ItemName == itemSO.ItemName)
+        {
+            Debug.Log("Correct Evidence : " + itemSO);
+            // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
+        }
+        else
+        {
+            Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+        }
     }
 }
