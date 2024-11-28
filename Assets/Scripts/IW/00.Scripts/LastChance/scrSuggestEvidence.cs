@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 
-public class SuggestEvidence : MonoBehaviour
+public class scrSuggestEvidence : MonoBehaviour
 {
     public List<EvidenceTextSO> EvidenceSO;
 
@@ -69,10 +69,13 @@ public class SuggestEvidence : MonoBehaviour
         {
             Debug.Log("Correct Evidence : " + itemSO);
             // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
+            // for (int i = 0; i < )
         }
         else
         {
             Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
         }
     }
+
+    
 }
