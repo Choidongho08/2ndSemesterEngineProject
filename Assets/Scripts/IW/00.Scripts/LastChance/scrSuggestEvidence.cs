@@ -77,8 +77,5 @@ public class scrSuggestEvidence : MonoBehaviour
         }
     }
 
-    private void SelectEvidence(ItemSO itemSO)
-    {
-
-    }
+    
 }
