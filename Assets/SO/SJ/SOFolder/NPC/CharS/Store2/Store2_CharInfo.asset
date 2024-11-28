@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f824c4174e3e8354e8dd43bbe4125ade, type: 3}
-  m_Name: MountainM_CharInfo
+  m_Name: Store2_CharInfo
   m_EditorClassIdentifier: 
-  CharName: "XX\uC0B0 \uAD00\uB9AC\uC790"
-  CharImg: {fileID: 21300000, guid: 636688afe0328cf45bb1d40b43fb9703, type: 3}
+  CharName: "\uAC00\uAC8C \uC8FC\uC778 2"
+  CharImg: {fileID: 21300000, guid: 19e266167a7e9774fa32e1f006caf9cb, type: 3}

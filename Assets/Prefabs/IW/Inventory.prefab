@@ -232,6 +232,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6339c7baee5dd8b489058992cc780f88, type: 2}
   - {fileID: 11400000, guid: 154b5b571ba14314bab0fcec92953760, type: 2}
   - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
+  - {fileID: 11400000, guid: 5794114f44771884b877941bd8ad4401, type: 2}
+  - {fileID: 11400000, guid: 48361455aa2f41440b4919dd113bdeac, type: 2}
+  - {fileID: 11400000, guid: 520b225b4d45bd644a072d689bbbdc9d, type: 2}
+  - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
+  - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
   _collectedItem: []
 --- !u!222 &6165392108559532313
 CanvasRenderer:
