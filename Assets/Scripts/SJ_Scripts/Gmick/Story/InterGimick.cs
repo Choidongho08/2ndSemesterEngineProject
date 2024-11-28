@@ -59,12 +59,12 @@ public class InterGimick : MonoBehaviour, IStoryEnd
         {
             InteractionGimick();
         }
-        
     }
 
     public void ChangeImg(Sprite sprite)
     {
-        gameObject.GetComponentInChildren<Image>().sprite = sprite;
+        if(ItemIsHere)
+            gameObject.GetComponentInChildren<Image>().sprite = sprite;
     }
 
     public void InteractionGimick()
@@ -88,6 +88,7 @@ public class InterGimick : MonoBehaviour, IStoryEnd
             _storyPan.SetActive(true);
             _text.text = _storyList.TextList[_storyListNum].ChaTxts[_storyLine];
             password.SetActive(true);
+            GetComponentInChildren<Button>().enabled = false;
         }
     }
 

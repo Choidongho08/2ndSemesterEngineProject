@@ -10,7 +10,7 @@ public class FlickLight : PuzzleManager
     [SerializeField] private Button LEDSwitch;
 
     [SerializeField] private string puzzleAns;
-    [SerializeField] int a;
+    [SerializeField] int a = 0;
     [SerializeField] private GameObject password;
 
     private event Action puzzleDone;

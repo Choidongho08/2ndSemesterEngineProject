@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f824c4174e3e8354e8dd43bbe4125ade, type: 3}
-  m_Name: MountainM_CharInfo
+  m_Script: {fileID: 11500000, guid: ed21bea62339ea54e8a840753c338c8a, type: 3}
+  m_Name: Store2_StoryList
   m_EditorClassIdentifier: 
-  CharName: "XX\uC0B0 \uAD00\uB9AC\uC790"
-  CharImg: {fileID: 21300000, guid: 636688afe0328cf45bb1d40b43fb9703, type: 3}
+  TextList:
+  - {fileID: 11400000, guid: 0ed99857f5df3934686a4542b2a7b9bb, type: 2}
+  isthisNPCImportant: 0
+  isthisNPCcanQnA: 0
