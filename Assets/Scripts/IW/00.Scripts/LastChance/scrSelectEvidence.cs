@@ -57,7 +57,7 @@ public class scrSelectEvidence : MonoBehaviour
 
     private void SelectEvidence(ItemSO itemSO)
     {
-        // Debug.Log("Select Evidence : " + itemSO.ItemName);
+        Debug.Log("Select Evidence : " + itemSO.ItemName);
 
         // for (int i = 0; i < _scrSelectCriminal)
     }
