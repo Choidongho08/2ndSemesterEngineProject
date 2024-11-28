@@ -66,7 +66,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
             if (ItemSO != null)
             {
                 Debug.Log("Right Clicked : " + ItemSO.ItemName);
-                OnSubmitEvidence.Invoke(ItemSO);
+                OnSubmitEvidence?.Invoke(ItemSO);
             }
             else
             {
