@@ -30,7 +30,7 @@ public class CreateLobby : MonoBehaviour
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "°ø°³" ? "ºñ°ø°³" : "°ø°³";
             IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "°ø°³" ? false : true;
         });
-        _mainMenu.OnCreateLobby += () => _setLobbyOptionUI.gameObject.SetActive(true);
+        _mainMenu.OnCreateLobby += () => { _setLobbyOptionUI.gameObject.SetActive(true); };
         createLobbyButton.onClick.AddListener(() =>
         {
             Util.instance.LoadingShow();
@@ -51,7 +51,7 @@ public class CreateLobby : MonoBehaviour
 
     private bool CheckLobbySetting()
     {
-        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾]", "", RegexOptions.Singleline);
+        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾¤¿-¤Ó]", "", RegexOptions.Singleline);
         if (!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
         {
             Util.instance.LoadingHide();

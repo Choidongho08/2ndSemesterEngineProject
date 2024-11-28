@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -13,24 +12,14 @@ public class GameManager : MonoBehaviour
 
     private void GameStart()
     {
+       
         if (MainLobby.instance.IsLobbyHost())
         {
-            StartGameServerRpc();
+            SceneManager.LoadScene("UI");
         }
         else
         {
-            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.YouAreNotHost)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.YouAreNotHost)].errorCode);
-            return;
+            SceneManager.LoadScene("UI");
         }
-    }
-    [ServerRpc]
-    private void StartGameServerRpc()
-    {
-        StartGameClientRpc();
-    }
-    [ClientRpc]
-    private void StartGameClientRpc()
-    {
-        SceneManager.LoadScene(2);
     }
 }

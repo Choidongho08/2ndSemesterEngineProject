@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
+using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
@@ -12,6 +13,7 @@ public class MainRelay : MonoSingleton<MainRelay>
     private async void Start()
     {
         await UnityServices.InitializeAsync();
+        DontDestroyOnLoad(gameObject);
     }
 
     public async Task<string> CreateRelay()

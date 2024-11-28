@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainLobby : MonoSingleton<MainLobby>
@@ -32,7 +34,6 @@ public class MainLobby : MonoSingleton<MainLobby>
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
     public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
-    public event EventHandler<EventArgs> OnGameStarted;
     public class OnLobbyListChangedEventArgs : EventArgs
     {
         public List<Lobby> lobbyList;
@@ -140,14 +141,15 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                     joinedLobby = null;
                 }
+                    Debug.Log(joinedLobby.Data[KeyStartGame].Value);
                 if (joinedLobby.Data[KeyStartGame].Value != "0")
                 {
                     if (!IsLobbyHost())
                     {
                         MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
                     }
-                    joinedLobby = null;
-
+                    joinedLobby = null; 
+                    Util.instance.LoadingShow();
                     OnGameStart?.Invoke();
                 }
             }
@@ -469,7 +471,7 @@ public class MainLobby : MonoSingleton<MainLobby>
     }
     public async void GameStart()
     {
-        if (IsLobbyHost())
+        if (IsLobbyHost() && GameStartPlayers())
         {
             try
             {
@@ -484,12 +486,29 @@ public class MainLobby : MonoSingleton<MainLobby>
                 });
 
                 joinedLobby = lobby;
+                Util.instance.LoadingShow();
+                OnGameStart?.Invoke();
             }
             catch (LobbyServiceException e)
             {
+                Util.instance.LoadingHide();
                 Debug.Log(e);
             }
         }
+        else
+        {
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].errorCode);
+        }
+    }
+    private bool GameStartPlayers()
+    {
+        int count = 0;
+        for (int i = 0; i < joinedLobby.Players.Count; i++)
+        {
+            if(joinedLobby.Players[i].Data[KeyPlayerReady].Value == "True")
+                count++;
+        }
+        return count == 2;
     }
     public bool IsLobbyHost()
     {

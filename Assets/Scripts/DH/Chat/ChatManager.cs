@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Netcode;
-using TMPro;
-using System.Linq;
-using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections.Generic;
+using TMPro;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatManager : NetworkBehaviour
 {
@@ -18,21 +16,22 @@ public class ChatManager : NetworkBehaviour
     [SerializeField] private Image _chatOpenImage;
     [SerializeField] private RectTransform _chat;
 
+
     private List<ChatMessage> _chatMessageList = new List<ChatMessage>();
     private bool _chatOpen = false;
 
     public static ChatManager Singleton;
     public string playerName;
 
-    private void Awake() 
-    { 
+    private void Awake()
+    {
         ChatManager.Singleton = this;
-        _chatButton.onClick.AddListener(() => 
+        _chatButton.onClick.AddListener(() =>
         {
             if (_chatOpen)
             {
                 _chat.DOLocalMoveY(-311f, 0.3f);
-                _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
+                _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
                 _chatOpen = false;
             }
             else
@@ -43,50 +42,36 @@ public class ChatManager : NetworkBehaviour
             }
         });
     }
-    private void Update() 
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            SendChatMessage(_chatInput.text, _playerSO.playerName);
+            SendChatMessage(_chatInput.text, _playerSO.playerName); 
             _chatInput.text = "";
         }
     }
 
     public void SendChatMessage(string _message, string _fromWho = null)
-    { 
-        if(string.IsNullOrWhiteSpace(_message)) return;
+    {
+        if (string.IsNullOrWhiteSpace(_message)) return;
 
-        string S = _fromWho + " > " +  _message;
-        SendChatMessageServerRpc(S); 
+        string S = _fromWho + " > " + _message;
+        SendChatMessageServerRpc(S);
     }
-   
-    private ChatMessage AddMessage(string msg)
+    private void AddMessage(string msg)
     {
         ChatMessage CM = Instantiate(_chatMessagePrefab, _chatContent.transform);
         CM.SetText(msg);
-        return CM;
-    }
-    private void ChatAddOnList(ChatMessage CM)
-    {
-        _chatMessageList.Add(CM);
-        if (_chatMessageList.Count > _maxChatMessage)
-        {
-            List<ChatMessage> CMList = _chatMessageList.FindAll(chatMessage => chatMessage != null);
-            _chatMessageList = CMList.ToList();
-            Destroy(_chatMessageList[0].gameObject);
-        }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SendChatMessageServerRpc(string message)
+    private void SendChatMessageServerRpc(string message, ServerRpcParams serverRpcParams = default)
     {
         ReceiveChatMessageClientRpc(message);
     }
-
     [ClientRpc]
-    private void ReceiveChatMessageClientRpc(string message)
+    private void ReceiveChatMessageClientRpc(string message, ClientRpcParams clientRpcParams = default)
     {
-        ChatMessage CM = ChatManager.Singleton.AddMessage(message);
-        ChatManager.Singleton.ChatAddOnList(CM);
+        ChatManager.Singleton.AddMessage(message);
     }
 }

@@ -9,6 +9,7 @@ public class ErrorEnum : MonoSingleton<ErrorEnum>
         ErrorCodeEnum.CreateLobbyFail_Name => "CreateLobbyFail_Name",
         ErrorCodeEnum.CreateLobbyFail_Case => "CreateLobbyFail_Case",
         ErrorCodeEnum.ChangePlayerNameFail => "ChangePlayerNameFail",
+        ErrorCodeEnum.ChangePlayerNameFail_Length => "ChangePlayerNameFail_Length",
         ErrorCodeEnum.CodeJoinLobbyFail_Empty => "CodeJoinLobbyFail_Empty",
         ErrorCodeEnum.ManyLobbyRequests => "ManyLobbyRequests",
         ErrorCodeEnum.YouAreNotHost => "YouAreNotHost",
@@ -25,7 +26,9 @@ public enum ErrorCodeEnum
     CreateLobbyFail_Name,
     CreateLobbyFail_Case,
     ChangePlayerNameFail,
+    ChangePlayerNameFail_Length,
     ManyLobbyRequests,
     YouAreNotHost,
     LobbyPlayerReady,
+
 }

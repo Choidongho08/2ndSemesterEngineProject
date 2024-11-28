@@ -17,7 +17,7 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
 
     private InLobby _inLobby;
 
-    private void Awake()    
+    private void Awake()
     {
         _inLobby = GetComponentInParent<InLobby>();
         playerSingleTemplate.gameObject.SetActive(false);
@@ -25,22 +25,36 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         leaveLobbyButton.onClick.AddListener(() => {
             MainLobby.instance.LeaveLobby();
             Util.instance.LoadingShow();
+            gameObject.SetActive(false);
         });
-        _readyButton.onClick.AddListener(() => 
+        _readyButton.onClick.AddListener(() =>
         {
             _playerSo.playerReady = MainLobby.instance.PlayerReady == "False" ? "True" : "False";
             MainLobby.instance.UpdatePlayerReady(_playerSo.playerReady);
         });
-        _startButton.onClick.AddListener(() => MainLobby.instance.GameStart());
+        _startButton.onClick.AddListener(() =>
+        {
+            MainLobby.instance.GameStart();
+        });
     }
     private void Start()
     {
         MainLobby.instance.OnJoinedLobbyUpdate += UpdateLobby_Event;
         MainLobby.instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         MainLobby.instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
-
+    }
+    private void OnEnable()
+    {
+        StartButton();
     }
 
+    private void StartButton()
+    {
+        if (MainLobby.instance.IsLobbyHost())
+            _startButton.gameObject.SetActive(true);
+        else
+            _startButton.gameObject.SetActive(false);
+    }
     private void LobbyManager_OnLeftLobby(object sender, System.EventArgs e)
     {
         ClearLobby();
@@ -52,7 +66,7 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     }
     private void UpdateLobby()
     {
-        UpdateLobby(MainLobby.instance.GetJoinedLobby());
+        UpdateLobby(MainLobby.instance.GetJoinedLobby());   
     }
 
     private void UpdateLobby(Lobby lobby)
@@ -79,13 +93,5 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void Hide()
     {
         gameObject.SetActive(false);
-    }
-    public void NotHost()
-    {
-        if (!MainLobby.instance.IsLobbyHost())
-        {
-            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.YouAreNotHost)].name,
-                ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.YouAreNotHost)].errorCode);
-        }
     }
 }
