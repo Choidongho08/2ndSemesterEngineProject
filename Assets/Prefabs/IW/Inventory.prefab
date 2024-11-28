@@ -192,7 +192,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.8074951, y: 1131}
-  m_SizeDelta: {x: -132.0438, y: -114.6019}
+  m_SizeDelta: {x: -132.0437, y: -114.60193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3003676100723608516
 MonoBehaviour:
@@ -217,7 +217,7 @@ MonoBehaviour:
   - {fileID: 5097733430042423648}
   - {fileID: 4565415905753814222}
   - {fileID: 8017029057885949711}
-  _draggablesTransform: {fileID: 3116285081452423611}
+  _draggablesTransform: {fileID: 0}
   _itemPrefabs: {fileID: 343800610638290382, guid: c1e7e29a388dbe94e98176ef43979084, type: 3}
   _icon: {fileID: 1606227111473506422}
   _info: {fileID: 1268663317251019323}
@@ -235,7 +235,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5794114f44771884b877941bd8ad4401, type: 2}
   - {fileID: 11400000, guid: 48361455aa2f41440b4919dd113bdeac, type: 2}
   - {fileID: 11400000, guid: 520b225b4d45bd644a072d689bbbdc9d, type: 2}
-  - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
   - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
   _collectedItem: []
 --- !u!222 &6165392108559532313
