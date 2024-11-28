@@ -21,6 +21,8 @@ public class scrSuggestEvidence : MonoBehaviour
 
     private Vector2 _trInven;
 
+    private bool _isEvidenceCorrect;
+
     private void Awake()
     {
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
@@ -33,6 +35,7 @@ public class scrSuggestEvidence : MonoBehaviour
         foreach (var item in inventoryItems)
         {
             item.OnSubmitEvidence.AddListener(HandleEvidenceSubmission);
+            Debug.Log("Added Listener");
         }
     }
 
@@ -63,7 +66,7 @@ public class scrSuggestEvidence : MonoBehaviour
     {
         bool thisIsRightEvi = false;
 
-        // Áõ°Å Á¦Ãâ Ã³¸® ·ÎÁ÷ Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
         foreach (var item in _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence)
@@ -75,18 +78,20 @@ public class scrSuggestEvidence : MonoBehaviour
             }
         }
 
-        // SO ÆÇº°ÇØÁÖ´Â°Å¸¸ ±¸ÇöÇÏ±â
+        // SO ï¿½Çºï¿½ï¿½ï¿½ï¿½Ö´Â°Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
         if (thisIsRightEvi)
         {
-            Debug.Log("Correct Evidence : " + itemSO);
-            // bool °ª ³Ö¾îÁà¼­ ¾ÆÀÌÅÛ SO ´Ù Áá´ÂÁö ÆÇº°ÇÏ±â
-            // for (int i = 0; i < )
-        }
-        else
-        {
-            Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+            // SO ï¿½Çºï¿½ï¿½ï¿½ï¿½Ö´Â°Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+            if (_scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence[i].ItemName == itemSO.ItemName && _isEvidenceCorrect)
+            {
+                Debug.Log("Correct Evidence : " + itemSO);
+
+                return; 
+            }
+            else
+            {
+                Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+            }
         }
     }
-
-    
 }
