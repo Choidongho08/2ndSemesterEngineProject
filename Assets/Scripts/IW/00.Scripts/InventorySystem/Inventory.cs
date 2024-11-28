@@ -310,14 +310,14 @@ public class Inventory : MonoBehaviour
                         slot.SetItem(newItem);
 
                         // 핸들러 연결
-                        var suggestEvidence = FindObjectOfType<SuggestEvidence>();
+                        var suggestEvidence = FindObjectOfType<scrSuggestEvidence>();
                         if (suggestEvidence != null)
                         {
                             newItem.OnSubmitEvidence.AddListener(suggestEvidence.HandleEvidenceSubmission);
                         }
                         else
                         {
-                            Debug.Log("SuggestEvidence scr not found in the scene");
+                            Debug.Log("scrSuggestEvidence scr not found in the scene");
                         }
                         break;
                     }
