@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActEvidence:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   NoneActTxts:
   - "\uC774 \uC99D\uAC70\uB294 \uC62C\uBC14\uB978 \uC99D\uAC70\uAC00 \uC544\uB2D9\uB2C8\uB2E4"
   ActTxts:
-  - "\uC774 \uC99D\uAC70\uB294 \uB9DE\uB294 \uC99D\uAC70 \uC785\uB2C8\uB2E4"
+  - {fileID: 0}
   stopPoint: 0
   PlayerAndNPC:
   - "\uD50C\uB808\uC774\uC5B4"
   - "\uB354\uBBF8"
   CorrectEvidence:
   - {fileID: 0}
+  WrrongEvidenceText: []
+  CorrectEvidencText: []
