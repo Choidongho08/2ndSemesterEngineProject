@@ -34,8 +34,7 @@ public class Vote : NetworkBehaviour
             _voteCurrentTime += Time.deltaTime;
             Voting();
         }
-        if (!_isVote && !_isVoted)
-            _voteButton.GetComponent<Image>().fillAmount = 0f;
+           
     }
 
     private void VoteWindow()
@@ -84,11 +83,10 @@ public class Vote : NetworkBehaviour
     }
     public void VoteButtonUp()
     {
-        
+        if(!_isVote && !_isVoted)
+            _voteButton.GetComponent<Image>().fillAmount = 0f;
         _isVote = false;
         _voteCurrentTime = 0f;
-
-        
     }
     private void Voted()
     {
@@ -100,7 +98,7 @@ public class Vote : NetworkBehaviour
             Debug.Log("Voted");
         }
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void OnVoteServerRpc()
     {
         OnVoteClientRpc();

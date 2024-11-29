@@ -30,21 +30,27 @@ public class CreateLobby : MonoBehaviour
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "공개" ? "비공개" : "공개";
             IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "공개" ? false : true;
         });
-        _mainMenu.OnCreateLobby += () => { _setLobbyOptionUI.gameObject.SetActive(true); };
+        _mainMenu.OnCreateLobby += () => 
+        {
+            _setLobbyOptionUI.gameObject.SetActive(true); 
+            
+        };
         createLobbyButton.onClick.AddListener(() =>
         {
             Util.instance.LoadingShow();
+            _caseType = _caseBook.caseType;
             if (CheckLobbySetting())
             {
                 OnLobbyNameChange?.Invoke(_lobbyName);
                 _setLobbyOptionUI.gameObject.SetActive(false);
-                _caseType = _caseBook.caseType;
                 OnCreateLobby?.Invoke(_caseType);
             }
         });
         cancelCreateButton.onClick.AddListener(() =>
         {
+            ClearCreateLobbyOption();
             _setLobbyOptionUI.gameObject.SetActive(false);
+            NowCase.instance.HideText();
             Util.instance.MainMenuShow();
         });
     }
@@ -62,15 +68,16 @@ public class CreateLobby : MonoBehaviour
         }
         else
         {
-            if (_caseBook.caseType != "Case0")
+            if (_caseType != "Case0")
             {
                 Debug.Log("성공!");
                 return true;
             }
             else
             {
+                Debug.Log(_caseType);
                 Util.instance.LoadingHide();
-                Debug.Log("실패!");
+                Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CreateLobbyFail_Case)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CreateLobbyFail_Case)].errorCode);
                 return false;
             }
 

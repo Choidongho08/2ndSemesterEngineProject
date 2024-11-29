@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,12 +11,15 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
 {
     [SerializeField] private Transform playerSingleTemplate;
     [SerializeField] private Transform container;
-    [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private Button _readyButton;
     [SerializeField] private Button _startButton;
+    [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private PlayerSO _playerSo;
+    [SerializeField] private CreateLobby _createLobby;
 
     private InLobby _inLobby;
+
+
 
     private void Awake()
     {
@@ -23,8 +27,10 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         playerSingleTemplate.gameObject.SetActive(false);
 
         leaveLobbyButton.onClick.AddListener(() => {
-            MainLobby.instance.LeaveLobby();
+            _createLobby.ClearCreateLobbyOption();
             Util.instance.LoadingShow();
+            MainLobby.instance.LeaveLobby();
+            NowCase.instance.HideText();
             gameObject.SetActive(false);
         });
         _readyButton.onClick.AddListener(() =>

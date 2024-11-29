@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -19,12 +20,12 @@ public class MainLobby : MonoSingleton<MainLobby>
     private string _playerName;
     private string _playerReady = "False";
     private string _lobbyName;
+    private int _worldNumber;
 
     [SerializeField] private Button _createLobbyBtn;
     [SerializeField] private Button _quickJoinLobby;
     [SerializeField] private CaseBook _caseBook;
     [SerializeField] private CreateLobby _createLobby;
-
     public class LobbyEventArgs : EventArgs
     {
         public Lobby lobby;
@@ -45,7 +46,6 @@ public class MainLobby : MonoSingleton<MainLobby>
     public event Action OnAfterAuthenticate;
     public event Action<string, string, string> OnLobbyCreate;
     public event Action<string, string, string> OnLobbyJoined;
-    public event Action OnGameStart;
     
     public string PlayerReady
     {
@@ -144,13 +144,13 @@ public class MainLobby : MonoSingleton<MainLobby>
                     Debug.Log(joinedLobby.Data[KeyStartGame].Value);
                 if (joinedLobby.Data[KeyStartGame].Value != "0")
                 {
+                    await GameStartTask();
                     if (!IsLobbyHost())
                     {
                         MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
                     }
                     joinedLobby = null; 
                     Util.instance.LoadingShow();
-                    OnGameStart?.Invoke();
                 }
             }
 
@@ -184,8 +184,6 @@ public class MainLobby : MonoSingleton<MainLobby>
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
             OnLobbyCreate?.Invoke(lobby.LobbyCode, _lobbyName, caseType);
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
-
-            _createLobby.gameObject.SetActive(false);
         }
         catch (LobbyServiceException e)
         {
@@ -452,16 +450,17 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             try
             {
-                if (lobby.Players.Count == 2)
+                if (joinedLobby.Players.Count == 2)
                 {
                     hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
                     {
                         HostId = joinedLobby.Players[1].Id
-                    });
+                    }); 
+                    joinedLobby = hostLobby;
+                    PrintPlayers(hostLobby);
                 }
-
-                joinedLobby = hostLobby;
-                PrintPlayers(hostLobby);
+                else 
+                    return;
             }
             catch (LobbyServiceException e)
             {
@@ -475,6 +474,8 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             try
             {
+                await GameStartTask();
+
                 string relayCode = await MainRelay.instance.CreateRelay();
 
                 Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
@@ -486,8 +487,6 @@ public class MainLobby : MonoSingleton<MainLobby>
                 });
 
                 joinedLobby = lobby;
-                Util.instance.LoadingShow();
-                OnGameStart?.Invoke();
             }
             catch (LobbyServiceException e)
             {
@@ -499,6 +498,13 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].errorCode);
         }
+    }
+    public Task GameStartTask()
+    {
+        Util.instance.LoadingShow();
+        SceneManager.LoadScene("WorldChoice");
+        Util.instance.LoadingHide();
+        return Task.CompletedTask;
     }
     private bool GameStartPlayers()
     {

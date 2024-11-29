@@ -36,10 +36,10 @@ public class MainMenu : MonoBehaviour
         });
         _createLobbyButton.onClick.AddListener(() =>
         {
+            _createLobby.gameObject.SetActive(true);
+            NowCase.instance.ShowText();
             OnCreateLobby?.Invoke();
             _childGameObject.SetActive(false);
-            _createLobby.gameObject.SetActive(true);
-            _createLobby.ClearCreateLobbyOption();
             DoScaleDown(_createLobbyButton.gameObject, _createLobbyButton.GetComponent<MouseEnterExitEvents>().objectLocalScale);
         });
         MainLobby.instance.OnAfterAuthenticate += () =>

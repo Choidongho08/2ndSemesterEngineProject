@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class fdsgnh : NetworkBehaviour 
 {
-    [SerializeField] private GameObject _chatManager;
+    [SerializeField] private GameObject _uiCanvas;
 
     private GameObject _chatManagerInstance;
     private NetworkObject _chatManagerNetworkObj;
@@ -17,10 +17,9 @@ public class fdsgnh : NetworkBehaviour
         if (!IsServer)
             return;
 
-        _chatManagerInstance = Instantiate(_chatManager);
+        _chatManagerInstance = Instantiate(_uiCanvas);
 
         _chatManagerNetworkObj = _chatManagerInstance.GetComponent<NetworkObject>();
         _chatManagerNetworkObj.Spawn();
     }
-
 }
