@@ -34,6 +34,7 @@ public class scrSuggestEvidence : MonoBehaviour
         var inventoryItems = FindObjectsOfType<InventoryItem>();
         foreach (var item in inventoryItems)
         {
+            item.OnSubmitEvidence.RemoveAllListeners();
             item.OnSubmitEvidence.AddListener(HandleEvidenceSubmission);
             Debug.Log("Added Listener");
         }
