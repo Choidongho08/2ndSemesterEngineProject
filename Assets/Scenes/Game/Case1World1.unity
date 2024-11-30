@@ -6998,8 +6998,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a3546eab59d0f459f7ce0d2aa7030f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyPan: {fileID: 0}
-  _qnaCut: {fileID: 1936134449}
+  talkingPan: {fileID: 0}
+  npcText: {fileID: 0}
+  _storyLine: 0
 --- !u!114 &916578363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7431,8 +7432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a3546eab59d0f459f7ce0d2aa7030f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyPan: {fileID: 0}
-  _qnaCut: {fileID: 1936134449}
+  talkingPan: {fileID: 0}
+  npcText: {fileID: 0}
+  _storyLine: 0
 --- !u!114 &960663914
 MonoBehaviour:
   m_ObjectHideFlags: 0

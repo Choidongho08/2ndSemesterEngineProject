@@ -24,7 +24,7 @@ public class SelectCriminal : MonoBehaviour
 
     public int _currentIndex = 0; // 현재 캐릭터 인덱스;
 
-    private void Start()
+    private void Awake()
     {
         // 초기 위치 설정
         UpdateCharPosi();

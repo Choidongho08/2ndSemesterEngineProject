@@ -16,15 +16,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 663cc646a06640145982bab3cb04ed7a, type: 2}
   - {fileID: 11400000, guid: 677cdd4dde85fc8418927a495617023c, type: 2}
   - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
-  NoneActTxts:
-  - "\uC774 \uBB3C\uAC74\uC740...?"
-  - "\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uC800\uB294 \uCC98\uC74C \uBD05\uB2C8\uB2E4."
-  - "\uB2E4\uC2DC\uD55C\uBC88 \uC0DD\uAC01\uD574\uBCF4\uC2DC\uC8E0."
+  NoneActTxts: {fileID: 11400000, guid: ba110ae329484e5458dc34b6dd4da90c, type: 2}
   ActTxts: []
   stopPoint: 0
-  PlayerAndNPC:
-  - 
-  - 
+  NPC: "\uB2F4\uB2F9 \uACBD\uCC30"
   CorrectEvidence: []
-  WrrongEvidenceText: []
+  WrrongEvidenceText: {fileID: 0}
   CorrectEvidencText: []

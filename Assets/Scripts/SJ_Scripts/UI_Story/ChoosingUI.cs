@@ -6,47 +6,22 @@ using UnityEngine.UI;
 
 public class ChoosingUI : MonoBehaviour
 {
-    public static ChoosingUI instance;
     [SerializeField] private GameObject talkingPan;
-    [SerializeField] private TextMeshProUGUI npcName;
     [SerializeField] private TextMeshProUGUI npcText;
     private StoryTxtSO nowStory;
     public int _storyLine;
 
-    private void Start()
-    {
-        if (instance = null)
-            instance = this;
-    }
 
-    private void SetCharSO(EvidenceTextSO charinfo)
+    private void Update()
     {
-        npcName.text = charinfo.NPC;
-        talkingPan.SetActive(true);
+        nowStory = scrSuggestEvidence.Instance.nowStory;
     }
 
     private void RollBackStory()
     {
         _storyLine = 0;
+        nowStory = null;
         talkingPan.SetActive(false);
-    }
-
-    public void ChkTorF(bool TorF, int eviNum, EvidenceTextSO charText)
-    {
-        if (TorF)
-        {
-            Debug.Log("있음");
-            nowStory = charText.ActTxts[eviNum];
-            npcText.text = nowStory.ChaTxts[0];
-            SetCharSO(charText);
-        }
-        else
-        {
-            Debug.Log("없음");
-            nowStory = charText.NoneActTxts;
-            npcText.text = charText.NoneActTxts.ChaTxts[0];
-            SetCharSO(charText);
-        }
     }
 
     public void NextStory()
