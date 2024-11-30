@@ -488,7 +488,6 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                 OnGameStart?.Invoke();
 
-                HandleLobbyPullForUpdates();
             }
             catch (LobbyServiceException e)
             {

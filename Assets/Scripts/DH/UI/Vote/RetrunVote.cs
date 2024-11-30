@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ReturnVote : NetworkBehaviour
@@ -21,7 +22,7 @@ public class ReturnVote : NetworkBehaviour
     private bool _isVote = false;
     private bool _isVoted = false;
 
-    public event Action OnVoted;
+    public static event Action OnVoted;
 
     private void Awake()
     {
@@ -94,8 +95,8 @@ public class ReturnVote : NetworkBehaviour
         _voteButton.GetComponent<Image>().fillAmount += _currentFillAmount;
         if(_currentFillAmount >= 1f)
         {
+            NetworkManager.SceneManager.LoadScene("Case1", LoadSceneMode.Single);
             OnVoted?.Invoke();
-            NetworkManager.SceneManager.LoadScene("Case1", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
     }
     [ServerRpc(RequireOwnership = false)]

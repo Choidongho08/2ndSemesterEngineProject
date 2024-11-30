@@ -9,18 +9,51 @@ public class GameManager : NetworkBehaviour
 {
     private Canvas _world1Canvas, _world2Canvas;
     private GameObject _world1BackGroundImgManager, _world2BackGroundImgManager;
-    private bool _isHost;
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
         MainLobby.instance.OnGameStart += GameStart;
+        SceneManager.sceneLoaded += Gamestart;
     }
     private void GameStart()
     {
-        _isHost = MainLobby.instance.IsLobbyHost();
-        GameStartServerRpc();
+        
+        NetworkManager.SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}", LoadSceneMode.Single);
+        if (NetworkManager.Singleton.IsConnectedClient)
+        {
+            Debug.Log("Client is connected.");
+        }
+        else
+        {
+            Debug.LogError("Client failed to connect to the server.");
+        }
     }
-    [ServerRpc]
+    private void Gamestart(Scene scene, LoadSceneMode mode)
+    {
+        if (GameObject.Find("World1Canvas").GetComponent<Canvas>() == null) return;
+        else
+        {
+            GameStartServerRpc();
+            _world1Canvas = GameObject.Find("World1Canvas").GetComponent<Canvas>();
+            _world1BackGroundImgManager = GameObject.Find("World1ChangeImgManager");
+            _world2Canvas = GameObject.Find("World2Canvas").GetComponent<Canvas>();
+            _world2BackGroundImgManager = GameObject.Find("World2ChangeImgManager");
+            if (IsHost)
+            {
+                _world2Canvas.gameObject.SetActive(true);
+                _world1Canvas.gameObject.SetActive(false);
+                _world1BackGroundImgManager.gameObject.SetActive(false);
+            }
+            else if (IsClient)
+            {
+                _world1Canvas.gameObject.SetActive(true);
+                _world2Canvas.gameObject.SetActive(false);
+                _world2BackGroundImgManager.gameObject.SetActive(false);
+            }
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
     private void GameStartServerRpc()
     {
         GameStartClientRpc();
@@ -28,26 +61,8 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void GameStartClientRpc()
     {
-        NetworkManager.SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}", LoadSceneMode.Single);
-        SceneChange();
-    }
-    private void SceneChange()
-    {
-        _world1Canvas = GameObject.Find("World1Canvas").GetComponent<Canvas>();
-        _world2Canvas = GameObject.Find("World2Canvas").GetComponent<Canvas>();
-        _world1BackGroundImgManager = GameObject.Find("World1ChangeImgManager");
-        _world2BackGroundImgManager = GameObject.Find("World2ChangeImgManager");
-        if (IsHost)
-        {
-            _world1Canvas.gameObject.SetActive(true);
-            _world2Canvas.gameObject.SetActive(false);
-            _world2BackGroundImgManager.gameObject.SetActive(false);
-        }
-        else if(IsClient)
-        {
-            _world2Canvas.gameObject.SetActive(true);
-            _world1Canvas.gameObject.SetActive(false);
-            _world1BackGroundImgManager .gameObject.SetActive(false);
-        }
+        fdsgnh obj = Instantiate(GameObject.Find("GameObject").GetComponent<fdsgnh>());
+        obj.NetworkObject.Spawn();
+        Util.instance.LoadingHide();
     }
 }
