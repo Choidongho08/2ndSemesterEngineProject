@@ -94,25 +94,32 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Update");
+
         if (_carriedItem == null) return;
         else if (_collectedItem != null) _carriedItem.transform.position = Input.mousePosition;
 
         if (Input.GetKeyDown(KeyCode.A))
         {
+            Debug.Log("A");
             if (_currentStartIndex > 0)
             {
                 _currentStartIndex--;
                 // ScrollInventory(-1);
                 UpdateVisibleItems();
+                UpdateInventorySlots();
                 Debug.Log("moved left : currentIndex = " + _currentStartIndex);
             }
         }
+
         if (Input.GetKeyDown(KeyCode.D))
         {
+            Debug.Log("D");
             if (_currentStartIndex < _collectedItem.Count - _maxVisibleSlots)
             {
                 _currentStartIndex++;
                 UpdateVisibleItems();
+                UpdateInventorySlots();
                 // ScrollInventory(1);
                 Debug.Log("moved right : currentIndex : " + _currentStartIndex);
             }
