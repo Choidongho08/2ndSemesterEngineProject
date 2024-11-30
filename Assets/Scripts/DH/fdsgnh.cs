@@ -1,9 +1,10 @@
 using System;
+using Unity.Multiplayer.Samples.Utilities;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class fdsgnh : NetworkBehaviour 
+public class fdsgnh : NetworkBehaviour
 {
     [SerializeField] private GameObject _uiCanvas;
 
@@ -12,7 +13,7 @@ public class fdsgnh : NetworkBehaviour
 
     private string _playerId;
 
-    public override void OnNetworkSpawn()
+    public override void OnNetworkDespawn()
     {
         if (!IsServer)
             return;

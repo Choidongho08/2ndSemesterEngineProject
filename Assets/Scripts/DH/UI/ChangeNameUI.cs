@@ -53,7 +53,6 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
             Util.instance.LoadingHide();
             Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail)].name
                 , ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail)].errorCode);
-            Debug.Log("특수문자 안돼! 이 머저리야");
             _inputPlayerName.text = string.Empty;
             return false;
         }
@@ -62,13 +61,11 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
             Util.instance.LoadingHide();
             Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail_Length)].name
                 , ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail_Length)].errorCode);
-            Debug.Log("특수문자 안돼! 이 머저리야");
             _inputPlayerName.text = string.Empty;
             return false;
         }
         else
         {
-            Debug.Log("성공!");
             return true;
         }
     }

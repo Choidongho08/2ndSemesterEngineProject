@@ -11,13 +11,18 @@ public class NowCase : MonoSingleton<NowCase>
     [SerializeField] private CaseBook _caseBook;
     [SerializeField]private TextMeshProUGUI _nowCaseTxt;
 
+    private int caseNumber;
 
     public void SetCaseNumber(string txt)
     {
+        caseNumber = int.Parse(txt);
         _nowCaseTxt.gameObject.SetActive(true);
-        WorldChoice.caseNumber = int.Parse(txt);
         _nowCaseTxt.text = $"사건 번호 : {txt}";
         _caseBook.caseType = $"Case{txt}";
+    }
+    public int CaseNumber()
+    {
+        return caseNumber;
     }
     public void HideText()
     {

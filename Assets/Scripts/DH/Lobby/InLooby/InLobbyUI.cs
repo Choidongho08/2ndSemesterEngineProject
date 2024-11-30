@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.Services.Authentication;
+using System.Threading.Tasks;
+using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InLobbyUI : MonoSingleton<InLobbyUI>
@@ -26,7 +24,8 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
         _inLobby = GetComponentInParent<InLobby>();
         playerSingleTemplate.gameObject.SetActive(false);
 
-        leaveLobbyButton.onClick.AddListener(() => {
+        leaveLobbyButton.onClick.AddListener(() =>
+        {
             _createLobby.ClearCreateLobbyOption();
             Util.instance.LoadingShow();
             MainLobby.instance.LeaveLobby();
@@ -79,7 +78,8 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     {
         ClearLobby();
 
-        foreach(Player player in lobby.Players) {
+        foreach (Player player in lobby.Players)
+        {
             Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
             playerSingleTransform.gameObject.SetActive(true);
             PlayerManager lobbyPlayerSingleUI = playerSingleTransform.GetComponent<PlayerManager>();

@@ -36,7 +36,7 @@ public class MainRelay : MonoSingleton<MainRelay>
             return null;
         }
     }
-    public async void JoinCodeRelay(string joinCode)
+    public async Task<bool> JoinCodeRelay(string joinCode)
     {
         try
         {
@@ -44,11 +44,12 @@ public class MainRelay : MonoSingleton<MainRelay>
 
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-            NetworkManager.Singleton.StartClient();
+            return NetworkManager.Singleton.StartClient();
         }
         catch(RelayServiceException e) 
         {
             Debug.Log(e);
+            return false;
         }
     }
 }

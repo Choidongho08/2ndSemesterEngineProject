@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
@@ -46,7 +44,8 @@ public class MainLobby : MonoSingleton<MainLobby>
     public event Action OnAfterAuthenticate;
     public event Action<string, string, string> OnLobbyCreate;
     public event Action<string, string, string> OnLobbyJoined;
-    
+    public event Action OnGameStart;
+
     public string PlayerReady
     {
         get
@@ -124,7 +123,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             lobbyUpdateTimer -= Time.deltaTime;
             if (lobbyUpdateTimer < 0)
             {
-                float lobbyUpdateTimerMax = 1.1f;
+                float lobbyUpdateTimerMax = 1.5f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
@@ -141,16 +140,15 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                     joinedLobby = null;
                 }
-                    Debug.Log(joinedLobby.Data[KeyStartGame].Value);
                 if (joinedLobby.Data[KeyStartGame].Value != "0")
                 {
-                    await GameStartTask();
+                    Util.instance.LoadingShow();
                     if (!IsLobbyHost())
                     {
-                        MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
+                        await MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
+                        OnGameStart?.Invoke();
                     }
-                    joinedLobby = null; 
-                    Util.instance.LoadingShow();
+                    joinedLobby = null;
                 }
             }
 
@@ -455,11 +453,11 @@ public class MainLobby : MonoSingleton<MainLobby>
                     hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
                     {
                         HostId = joinedLobby.Players[1].Id
-                    }); 
+                    });
                     joinedLobby = hostLobby;
                     PrintPlayers(hostLobby);
                 }
-                else 
+                else
                     return;
             }
             catch (LobbyServiceException e)
@@ -474,8 +472,7 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             try
             {
-                await GameStartTask();
-
+                Util.instance.LoadingShow();
                 string relayCode = await MainRelay.instance.CreateRelay();
 
                 Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
@@ -487,6 +484,7 @@ public class MainLobby : MonoSingleton<MainLobby>
                 });
 
                 joinedLobby = lobby;
+                OnGameStart?.Invoke();
             }
             catch (LobbyServiceException e)
             {
@@ -499,19 +497,13 @@ public class MainLobby : MonoSingleton<MainLobby>
             Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].errorCode);
         }
     }
-    public Task GameStartTask()
-    {
-        Util.instance.LoadingShow();
-        SceneManager.LoadScene("WorldChoice");
-        Util.instance.LoadingHide();
-        return Task.CompletedTask;
-    }
+
     private bool GameStartPlayers()
     {
         int count = 0;
         for (int i = 0; i < joinedLobby.Players.Count; i++)
         {
-            if(joinedLobby.Players[i].Data[KeyPlayerReady].Value == "True")
+            if (joinedLobby.Players[i].Data[KeyPlayerReady].Value == "True")
                 count++;
         }
         return count == 2;

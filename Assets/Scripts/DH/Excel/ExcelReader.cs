@@ -36,9 +36,7 @@ public class ExcelReader : MonoSingleton<ExcelReader>
                 ErrorCode menu = new ErrorCode();
 
                 menu.name = fields[0];
-                Debug.Log(menu.name);
                 menu.errorCode = fields[1];
-                Debug.Log(menu.errorCode);
 
                 dictionaryErrorCode.Add(menu.name, menu);
             }
