@@ -9,6 +9,8 @@ TagManager:
   - NPC(important)
   - Inventory
   - Item
+  - SuggestEButton
+  - SelectEButton
   layers:
   - Default
   - TransparentFX

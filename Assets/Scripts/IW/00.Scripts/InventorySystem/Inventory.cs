@@ -31,6 +31,7 @@ public class Inventory : MonoBehaviour
     private int _maxVisibleSlots = 10; // 최대로 보여질 아이템의 인덱스
 
     private string _filePath;
+    private string _currentButtonState;
 
     public static Inventory Instance;
     public static InventoryItem _carriedItem;
@@ -105,6 +106,16 @@ public class Inventory : MonoBehaviour
     {
         if (_carriedItem == null) return;
         else if (_collectedItem != null) _carriedItem.transform.position = Input.mousePosition;
+    }
+
+    public void SetButtonState(string buttonState)
+    {
+        _currentButtonState = buttonState;
+    }
+
+    public string GetCurrentButtonState()
+    {
+        return _currentButtonState;
     }
 
     public void GetKeyCodeA()
@@ -500,12 +511,27 @@ public class Inventory : MonoBehaviour
                 Debug.LogError("itemSO is Null");
                 return;
             }
+            string currentButtonState = Inventory.Instance.GetCurrentButtonState(); // 현재 버튼 상태 가져오기
+
             if (!_collectedItem.Exists(item => item.ItemName == itemSO.ItemName))
             {
                 _collectedItem.Add(itemSO);
                 Debug.Log("Item Added : " + itemSO.ItemName);
                 SpawnInventoryItem(itemSO);
                 SaveCollectedItems();
+
+                if (currentButtonState == "Submit")
+                {
+                    // OnSubmitEvidence.Invoke(itemSO); // Submit 이벤트 처리
+                }
+                else if (currentButtonState == "Suggest")
+                {
+                    // OnSuggestEvidence.Invoke(itemSO); // Suggest 이벤트 처리
+                }
+                else
+                {
+                    Debug.Log("No action for the current button state.");
+                }
             }
             else
             {
@@ -521,5 +547,18 @@ public class Inventory : MonoBehaviour
         {
             Debug.LogException(e);
         }
+    }
+
+    public void OnSubmitEvidence(ItemSO item)
+    {
+        Debug.Log("Submit action triggered for item: " + item.ItemName);
+        // Submit 이벤트 처리 로직
+    }
+
+    // Suggest 이벤트
+    public void OnSuggestEvidence(ItemSO item)
+    {
+        Debug.Log("Suggest action triggered for item: " + item.ItemName);
+        // Suggest 이벤트 처리 로직
     }
 }
