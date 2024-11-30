@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cbbf66ac0875e540bcc0e83661c7d76, type: 3}
-  m_Name: Police
+  m_Name: MountainMan
   m_EditorClassIdentifier: 
   ActEvidence:
-  - {fileID: 11400000, guid: 663cc646a06640145982bab3cb04ed7a, type: 2}
-  - {fileID: 11400000, guid: 677cdd4dde85fc8418927a495617023c, type: 2}
-  - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
+  - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
+  - {fileID: 11400000, guid: 7a31fe3ebe5c2374aae3e7b1d897825d, type: 2}
+  - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
   NoneActTxts: {fileID: 11400000, guid: 13ec65906e9f6574f8e10bc7e555a5f7, type: 2}
   ActTxts:
   - {fileID: 11400000, guid: 2242895c36f77f14fa19834ff685c46e, type: 2}
   - {fileID: 11400000, guid: 8eb3808c89e387d42a027bbba84bffb2, type: 2}
   - {fileID: 11400000, guid: 52934eea4075c3b438f1b8ff48ad6d93, type: 2}
   stopPoint: 0
-  NPC: "\uB2F4\uB2F9 \uACBD\uCC30"
+  NPC: "XX\uC0B0 \uAD00\uB9AC\uC790"
   CorrectEvidence:
   - {fileID: 11400000, guid: 1d4adfe4644d2cd4aa560242ae80ebee, type: 2}
   WrrongEvidenceText: {fileID: 0}
