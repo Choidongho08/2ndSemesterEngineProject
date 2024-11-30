@@ -68,6 +68,10 @@ public class scrSceneManager : MonoBehaviour
     // 씬이 로드될 때마다 호출되는 이벤트 핸들러
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (!gameObject.activeSelf)
+        {
+            Debug.Log("Reactivating Inventory");
+        }
         LoadSuggestEvidence();  // 씬이 변경되었을 때마다 동적 생성 및 삭제 처리
     }
 }

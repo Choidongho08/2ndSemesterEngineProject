@@ -39,6 +39,10 @@ public class FieldItem : MonoBehaviour, IPointerClickHandler
             StartCoroutine(OnInven(1f));
         else if (Input.GetKeyDown(KeyCode.F) && !_isAnimate)
             StartCoroutine(OffInven(1f));
+        else if (Input.GetKeyDown(KeyCode.A))
+            Inventory.Instance.GetKeyCodeA();
+        else if (Input.GetKeyDown(KeyCode.D))
+            Inventory.Instance.GetKeyCodeD();
     }
 
     public void OnAnimate()
