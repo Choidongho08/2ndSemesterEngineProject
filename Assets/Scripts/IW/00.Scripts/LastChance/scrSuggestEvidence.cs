@@ -102,7 +102,7 @@ public class scrSuggestEvidence : MonoBehaviour
         {
             Debug.Log("Correct Evidence : " + itemSO);
             // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
-            nowStory = _scrEvidenceTextSO.ActTxts[_correctEvi];
+            nowStory = _scrEvidenceTextSO.ActTxts[_correctEvi - 1];
             npcText.text = nowStory.ChaTxts[0];
             SetCharSO(_scrEvidenceTextSO);
         }

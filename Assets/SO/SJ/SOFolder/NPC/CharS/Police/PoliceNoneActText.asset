@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: NoneActText
+  m_Name: PoliceNoneActText
   m_EditorClassIdentifier: 
   ChaTxts:
   - "\uC774 \uBB3C\uAC74\uC740 \uBB50\uC8E0...?"
-  - "\uC800\uB294 \uC774\uB7F0\uAC70 \uCC98\uC74C \uBD05\uB2C8\uB2E4."
+  - "\uC774\uAC74 \uBAA9\uC7A5\uAC11 \uC544\uB2D9\uB2C8\uAE4C?"
+  - "\uC544\uB9C8\uB3C4 \uC190\uC5D0 \uD754\uC801\uC744 \uB0A8\uAE30\uC9C0 \uC54A\uAE30
+    \uC704\uD574 \uC0AC\uC6A9 \uD588\uC744 \uAC81\uB2C8\uB2E4."
+  - "\uB2E4\uB978 \uC99D\uAC70\uAC00 \uC788\uC73C\uC2DC\uBA74 \uC800\uC5D0\uAC8C
+    \uBD80\uD0C1\uB4DC\uB9AC\uC8E0."
   stopPoint: 0

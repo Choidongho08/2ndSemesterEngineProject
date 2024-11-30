@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
+  m_Name: PoliceActText 3
+  m_EditorClassIdentifier: 
+  ChaTxts:
+  - "\uC774 \uBB3C\uAC74\uC740 \uBB50\uC8E0...?"
+  - "\uC601\uC218\uC99D\uC774\uB124\uC694...?"
+  - "\uC7A0\uC2DC\uB9CC\uC694? \uC601\uC218\uC99D\uC758 \uB0B4\uC6A9\uC774...?"
+  - "\uC800 \uC601\uC218\uC99D\uC758 \uC57D\uC740 \uD53C\uD574\uC790\uC758 \uC57D\uACFC
+    \uC720\uC0AC\uD55C \uD615\uD0DC\uB124\uC694"
+  - "\uB2E4\uB978 \uC99D\uAC70\uAC00 \uC788\uC73C\uC2DC\uBA74 \uC800\uC5D0\uAC8C
+    \uBD80\uD0C1\uB4DC\uB9AC\uC8E0."
+  stopPoint: 0
