@@ -2,18 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class OnMouseEvent : MonoBehaviour
+public class OnMouseEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public event Action onMouseEnter; 
     public event Action onMouseExit;
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         onMouseEnter?.Invoke();
     }
-    private void OnMouseExit()
+
+    public void OnPointerExit(PointerEventData eventData)
     {
         onMouseExit?.Invoke();
     }
+
 }

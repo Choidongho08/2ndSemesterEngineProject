@@ -5,26 +5,22 @@ using UnityEngine.UI;
 
 public class Authenticate : MonoBehaviour
 {
+    [SerializeField] private GameObject _authenticateUI;
     [SerializeField] private Button _authenticateBtn;
     [SerializeField] private TextMeshProUGUI _mainTitleText, _buttonText;
+    [SerializeField] private OnMouseEvent _onMouseEvent;
 
-    private OnMouseEvent _onMouseEvent;
     private Vector3 _buttonTextScale;
 
     private void Awake()
     {
-        _onMouseEvent = GetComponent<OnMouseEvent>();
         _buttonTextScale = _buttonText.transform.localScale;
-    }
 
-    private void Start()
-    {
-        _authenticateBtn.gameObject.SetActive(true);
-        _authenticateBtn.GetComponentInChildren<Button>().onClick.AddListener(() =>
+        _authenticateBtn.onClick.AddListener(() =>
         {
             Util.instance.LoadingShow();
             MainLobby.instance.Authenticate(ChangeNameUI.instance.GetPlayerName());
-            _authenticateBtn.gameObject.SetActive(false);
+            _authenticateUI.gameObject.SetActive(false);
         });
         _onMouseEvent.onMouseEnter += () =>
         {
@@ -35,4 +31,5 @@ public class Authenticate : MonoBehaviour
             _buttonText.transform.DOScale(_buttonTextScale, 0.5f);
         };
     }
+
 }

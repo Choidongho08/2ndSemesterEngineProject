@@ -27,31 +27,37 @@ public class CreateLobby : MonoBehaviour
         _lobbyAccessModifyBtn.onClick.AddListener(() =>
         {
             _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text =
-            _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? "Private" : "Public";
-            IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "Public" ? false : true;
+            _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "°ø°³" ? "ºñ°ø°³" : "°ø°³";
+            IsPrivate = _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text == "°ø°³" ? false : true;
         });
-        _mainMenu.OnCreateLobby += () => _setLobbyOptionUI.gameObject.SetActive(true);
+        _mainMenu.OnCreateLobby += () => 
+        {
+            _setLobbyOptionUI.gameObject.SetActive(true); 
+            
+        };
         createLobbyButton.onClick.AddListener(() =>
         {
             Util.instance.LoadingShow();
+            _caseType = _caseBook.caseType;
             if (CheckLobbySetting())
             {
                 OnLobbyNameChange?.Invoke(_lobbyName);
                 _setLobbyOptionUI.gameObject.SetActive(false);
-                _caseType = _caseBook.caseType;
                 OnCreateLobby?.Invoke(_caseType);
             }
         });
         cancelCreateButton.onClick.AddListener(() =>
         {
+            ClearCreateLobbyOption();
             _setLobbyOptionUI.gameObject.SetActive(false);
+            NowCase.instance.HideText();
             Util.instance.MainMenuShow();
         });
     }
 
     private bool CheckLobbySetting()
     {
-        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾]", "", RegexOptions.Singleline);
+        _lobbyName = Regex.Replace(_lobbyNameInput.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾¤¿-¤Ó]", "", RegexOptions.Singleline);
         if (!_lobbyNameInput.text.Equals(_lobbyName) || _lobbyName == "")
         {
             Util.instance.LoadingHide();
@@ -62,15 +68,16 @@ public class CreateLobby : MonoBehaviour
         }
         else
         {
-            if (_caseBook.caseType != "Case0")
+            if (_caseType != "Case0")
             {
                 Debug.Log("¼º°ø!");
                 return true;
             }
             else
             {
+                Debug.Log(_caseType);
                 Util.instance.LoadingHide();
-                Debug.Log("½ÇÆÐ!");
+                Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CreateLobbyFail_Case)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CreateLobbyFail_Case)].errorCode);
                 return false;
             }
 
@@ -78,7 +85,7 @@ public class CreateLobby : MonoBehaviour
     }
     public void ClearCreateLobbyOption()
     {
-        _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Private";
+        _lobbyAccessModifyBtn.GetComponentInChildren<TextMeshProUGUI>().text = "ºñ°ø°³";
         IsPrivate = true;
         _lobbyNameInput.text = string.Empty;
         _caseType = "Case0";

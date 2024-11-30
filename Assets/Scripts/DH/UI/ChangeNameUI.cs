@@ -41,25 +41,31 @@ public class ChangeNameUI : MonoSingleton<ChangeNameUI>
                 Hide();
             }
             
-        });
+        }); 
         _cancelButton.onClick.AddListener(() => { Hide(); });
     }
 
     private bool ChangePlayerName()
     {
-        _playerSO.playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR]", "", RegexOptions.Singleline);
+        _playerSO.playerName = Regex.Replace(_inputPlayerName.text, @"[^0-9a-zA-Z°¡-ÆR¤¡-¤¾¤¿-¤Ó]", "", RegexOptions.Singleline);
         if (!_inputPlayerName.text.Equals(_playerSO.playerName) || _playerSO.playerName == "")
         {
             Util.instance.LoadingHide();
             Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail)].name
                 , ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail)].errorCode);
-            Debug.Log("Æ¯¼ö¹®ÀÚ ¾ÈµÅ! ÀÌ ¸ÓÀú¸®¾ß");
+            _inputPlayerName.text = string.Empty;
+            return false;
+        }
+        else if(_inputPlayerName.text.Length > 12)
+        {
+            Util.instance.LoadingHide();
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail_Length)].name
+                , ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ChangePlayerNameFail_Length)].errorCode);
             _inputPlayerName.text = string.Empty;
             return false;
         }
         else
         {
-            Debug.Log("¼º°ø!");
             return true;
         }
     }

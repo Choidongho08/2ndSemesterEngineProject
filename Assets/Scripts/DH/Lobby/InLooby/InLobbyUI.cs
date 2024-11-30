@@ -1,50 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.Services.Authentication;
+using System.Threading.Tasks;
+using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InLobbyUI : MonoSingleton<InLobbyUI>
 {
     [SerializeField] private Transform playerSingleTemplate;
     [SerializeField] private Transform container;
-    [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private Button _readyButton;
     [SerializeField] private Button _startButton;
-    [SerializeField] private GameObject _hostStartPanel;
+    [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private PlayerSO _playerSo;
+    [SerializeField] private CreateLobby _createLobby;
 
     private InLobby _inLobby;
 
-    private void Awake()    
+
+
+    private void Awake()
     {
         _inLobby = GetComponentInParent<InLobby>();
         playerSingleTemplate.gameObject.SetActive(false);
 
-        leaveLobbyButton.onClick.AddListener(() => {
-            MainLobby.instance.LeaveLobby();
+        leaveLobbyButton.onClick.AddListener(() =>
+        {
+            _createLobby.ClearCreateLobbyOption();
             Util.instance.LoadingShow();
+            MainLobby.instance.LeaveLobby();
+            NowCase.instance.HideText();
+            gameObject.SetActive(false);
         });
-        _readyButton.onClick.AddListener(() => 
+        _readyButton.onClick.AddListener(() =>
         {
             _playerSo.playerReady = MainLobby.instance.PlayerReady == "False" ? "True" : "False";
             MainLobby.instance.UpdatePlayerReady(_playerSo.playerReady);
         });
-        _startButton.onClick.AddListener(() => MainLobby.instance.GameStart());
+        _startButton.onClick.AddListener(() =>
+        {
+            MainLobby.instance.GameStart();
+        });
     }
     private void Start()
     {
-        MainLobby.instance.OnJoinedLobby += UpdateLobby_Event;
         MainLobby.instance.OnJoinedLobbyUpdate += UpdateLobby_Event;
         MainLobby.instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         MainLobby.instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
-
-        _hostStartPanel.gameObject.SetActive(false);                                                
-        Hide();
+    }
+    private void OnEnable()
+    {
+        StartButton();
     }
 
+    private void StartButton()
+    {
+        if (MainLobby.instance.IsLobbyHost())
+            _startButton.gameObject.SetActive(true);
+        else
+            _startButton.gameObject.SetActive(false);
+    }
     private void LobbyManager_OnLeftLobby(object sender, System.EventArgs e)
     {
         ClearLobby();
@@ -63,7 +78,8 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     {
         ClearLobby();
 
-        foreach(Player player in lobby.Players) {
+        foreach (Player player in lobby.Players)
+        {
             Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
             playerSingleTransform.gameObject.SetActive(true);
             PlayerManager lobbyPlayerSingleUI = playerSingleTransform.GetComponent<PlayerManager>();
@@ -71,8 +87,6 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
             lobbyPlayerSingleUI.UpdatePlayer(player);
         }
 
-
-        Show();
     }
     private void ClearLobby()
     {
@@ -85,21 +99,5 @@ public class InLobbyUI : MonoSingleton<InLobbyUI>
     private void Hide()
     {
         gameObject.SetActive(false);
-    }
-    private void Show()
-    {
-        gameObject.SetActive(true);
-        HostPanel();
-    }
-    public void HostPanel()
-    {
-        if (!MainLobby.instance.IsLobbyHost())
-        {
-            _hostStartPanel.gameObject.SetActive(true);
-        }
-        else
-        {
-            _hostStartPanel.gameObject.SetActive(false);
-        }
     }
 }

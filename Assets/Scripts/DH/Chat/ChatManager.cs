@@ -1,72 +1,80 @@
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
-using UnityEngine;
-using Unity.Netcode;
 using TMPro;
-using System.Linq;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatManager : NetworkBehaviour
 {
-    [SerializeField] private ChatMessage chatMessagePrefab;
-    [SerializeField] private CanvasGroup chatContent;
-    [SerializeField] private TMP_InputField chatInput;
+    [SerializeField] private ChatMessage _chatMessagePrefab;
+    [SerializeField] private GameObject _chatContent;
+    [SerializeField] private TMP_InputField _chatInput;
     [SerializeField] private int _maxChatMessage;
     [SerializeField] private PlayerSO _playerSO;
+    [SerializeField] private Button _chatButton;
+    [SerializeField] private Image _chatOpenImage;
+    [SerializeField] private RectTransform _chat;
 
-    List<ChatMessage> _chatMessageList = new List<ChatMessage>();
+
+    private List<ChatMessage> _chatMessageList = new List<ChatMessage>();
+    private bool _chatOpen = false;
 
     public static ChatManager Singleton;
     public string playerName;
 
-
-
-    private void Awake() 
-    { ChatManager.Singleton = this; }
-
-    private void Update() 
+    private void Awake()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        ChatManager.Singleton = this;
+        _chatButton.onClick.AddListener(() =>
         {
-            SendChatMessage(chatInput.text, _playerSO.playerName);
-            chatInput.text = "";
+            if (_chatOpen)
+            {
+                _chat.DOLocalMoveY(-311f, 0.3f);
+                _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+                _chatOpen = false;
+            }
+            else
+            {
+                _chat.transform.DOLocalMoveY(-132f, 0.3f);
+                _chatOpenImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+                _chatOpen = true;
+            }
+        });
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SendChatMessage(_chatInput.text, _playerSO.playerName); 
+            _chatInput.text = "";
         }
     }
 
     public void SendChatMessage(string _message, string _fromWho = null)
-    { 
-        if(string.IsNullOrWhiteSpace(_message)) return;
+    {
+        if (string.IsNullOrWhiteSpace(_message)) return;
 
-        string S = _fromWho + " > " +  _message;
-        SendChatMessageServerRpc(S); 
+        string S = _fromWho + " > " + _message;
+        SendChatMessageServerRpc(S);
     }
-   
-    private ChatMessage AddMessage(string msg)
+    private void AddMessage(string msg)
     {
-        ChatMessage CM = Instantiate(chatMessagePrefab, chatContent.transform);
+        Debug.Log(msg);
+        Debug.Log(_chatContent);
+        ChatMessage CM = Instantiate(_chatMessagePrefab, _chatContent.transform);
         CM.SetText(msg);
-        return CM;
-    }
-    private void ChatAddOnList(ChatMessage CM)
-    {
-        _chatMessageList.Add(CM);
-        if (_chatMessageList.Count >= _maxChatMessage)
-        {
-            List<ChatMessage> CMList = _chatMessageList.FindAll(chatMessage => chatMessage != null);
-            _chatMessageList = CMList.ToList();
-            Destroy(_chatMessageList[0].gameObject);
-        }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SendChatMessageServerRpc(string message)
+    private void SendChatMessageServerRpc(string message, ServerRpcParams serverRpcParams = default)
     {
         ReceiveChatMessageClientRpc(message);
     }
-
     [ClientRpc]
-    private void ReceiveChatMessageClientRpc(string message)
-    {
-        ChatMessage CM = ChatManager.Singleton.AddMessage(message);
-        ChatManager.Singleton.ChatAddOnList(CM);
+    private void ReceiveChatMessageClientRpc(string message, ClientRpcParams clientRpcParams = default)
+    { //FixedString128Bytes
+        AddMessage(message);
     }
 }
