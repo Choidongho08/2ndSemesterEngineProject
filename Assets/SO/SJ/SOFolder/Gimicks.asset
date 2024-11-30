@@ -15,7 +15,7 @@ MonoBehaviour:
   flickPuzzlePassword: 7688
   puzzleSet: 1
   numberCheck: 11000100001110011100
-  puzzleEnd: 1
+  puzzleEnd: 0
   itCantEnter: 0
   player1HasScissor: 0
   player2HasScissor: 0
