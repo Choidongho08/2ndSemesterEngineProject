@@ -15,10 +15,9 @@ public class GameManager : MonoBehaviour
 
     private void GameStart()
     {
-        SceneManager.LoadScene("UI");
-        //if(MainLobby.instance.IsLobbyHost())
-        //    SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}World1");
-        //else if(!MainLobby.instance.IsLobbyHost())
-        //    SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}World2");
+        if (MainLobby.instance.IsLobbyHost())
+            SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}World1");
+        else if (!MainLobby.instance.IsLobbyHost())
+            SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}World2");
     }
 }
