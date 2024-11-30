@@ -75,8 +75,17 @@ public class Inventory : MonoBehaviour
         if (_collectedItem == null)
             _collectedItem = new List<ItemSO>();
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Debug.Log("Duplicate Inventory detected");
+            Destroy(gameObject);
+            return;
+        }
     }
 
     private void Start()
@@ -94,35 +103,31 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Update");
-
         if (_carriedItem == null) return;
         else if (_collectedItem != null) _carriedItem.transform.position = Input.mousePosition;
+    }
 
-        if (Input.GetKeyDown(KeyCode.A))
+    public void GetKeyCodeA()
+    {
+        Debug.Log("A");
+        if (_collectedItem.Count == 0) return;
+
+        if (_currentStartIndex > 0)
         {
-            Debug.Log("A");
-            if (_currentStartIndex > 0)
-            {
-                _currentStartIndex--;
-                // ScrollInventory(-1);
-                UpdateVisibleItems();
-                UpdateInventorySlots();
-                Debug.Log("moved left : currentIndex = " + _currentStartIndex);
-            }
+            _currentStartIndex = (_currentStartIndex - 1 + _collectedItem.Count) % _collectedItem.Count;
+            UpdateVisibleItems();
+            Debug.Log("moved left : currentIndex = " + _currentStartIndex);
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.D))
+    public void GetKeyCodeD()
+    {
+        Debug.Log("D");
+        if (_currentStartIndex < _collectedItem.Count - _maxVisibleSlots)
         {
-            Debug.Log("D");
-            if (_currentStartIndex < _collectedItem.Count - _maxVisibleSlots)
-            {
-                _currentStartIndex++;
-                UpdateVisibleItems();
-                UpdateInventorySlots();
-                // ScrollInventory(1);
-                Debug.Log("moved right : currentIndex : " + _currentStartIndex);
-            }
+            _currentStartIndex = (_currentStartIndex + 1) % _collectedItem.Count;
+            UpdateVisibleItems();
+            Debug.Log("moved right : currentIndex : " + _currentStartIndex);
         }
     }
 
@@ -133,25 +138,29 @@ public class Inventory : MonoBehaviour
         {
             int itemIndex = _currentStartIndex + i;
 
+            // 이미 생생되어있으면 초기화, 없으면 새로 생성
+            InventoryItem existingItem = _inventorySlots[i].GetComponentInChildren<InventoryItem>();
+
+            if (existingItem != null)
+            {
+                // 기존 프리팹 삭제
+                Destroy(existingItem.gameObject);
+            }
+
             if (itemIndex >= 0 && itemIndex < _collectedItem.Count)
             {
                 ItemSO itemSO = _collectedItem[itemIndex];
-                // 이미 생생되어있으면 초기화, 없으면 새로 생성
-                InventoryItem inventoryItem = _inventorySlots[i].GetComponent<InventoryItem>();
 
-                if (inventoryItem == null)
-                {
-                    inventoryItem = Instantiate(_itemPrefabs, _inventorySlots[i].transform);
-                    inventoryItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
-                    inventoryItem.Initialize(itemSO, _inventorySlots[i]);
-                }
-                else
-                {
-                    // 이미 있는 인벤 아이템 업데이트
-                    inventoryItem.Initialize(itemSO, _inventorySlots[i]);
-                }
+                InventoryItem newItem = Instantiate(_itemPrefabs, _inventorySlots[i].transform);
+                newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
+                newItem.Initialize(itemSO, _inventorySlots[i]);
 
-                _inventorySlots[i].SetItem(inventoryItem);
+                _inventorySlots[i].SetItem(newItem);
+
+                if (i == 0)
+                {
+                    ChangeIcon(itemSO);
+                }
             }
             else
             {
@@ -479,7 +488,7 @@ public class Inventory : MonoBehaviour
             Debug.Log("Item is null");
             _icon.sprite = null;
             _info.text = "";
-        }
+        }   
     }
 
     public void OnItemClicked(ItemSO itemSO)
