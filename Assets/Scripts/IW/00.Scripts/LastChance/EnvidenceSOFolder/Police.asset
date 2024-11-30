@@ -25,5 +25,5 @@ MonoBehaviour:
   NPC: "\uB2F4\uB2F9 \uACBD\uCC30"
   CorrectEvidence:
   - {fileID: 11400000, guid: 1d4adfe4644d2cd4aa560242ae80ebee, type: 2}
-  WrrongEvidenceText: {fileID: 0}
+  WrrongEvidenceText: {fileID: 11400000, guid: 82582312b9d714d4fb8094bcc9d7b92b, type: 2}
   CorrectEvidencText: []
