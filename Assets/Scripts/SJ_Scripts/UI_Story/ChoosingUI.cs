@@ -1,21 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using TMPro;
 using UnityEngine.UI;
 
-public class ChoosingUI : interTNPC
+public class ChoosingUI : MonoBehaviour
 {
-    [SerializeField] private QnACut _qnaCut;
+    public static ChoosingUI instance;
+    [SerializeField] private GameObject talkingPan;
+    [SerializeField] private TextMeshProUGUI npcName;
+    [SerializeField] private TextMeshProUGUI npcText;
+    private StoryTxtSO nowStory;
+    public int _storyLine;
 
-    public void JustDoIt()
+    private void Start()
     {
-        
+        if (instance = null)
+            instance = this;
     }
 
-    public void DontDoThat()
+    private void SetCharSO(EvidenceTextSO charinfo)
     {
-        Debug.Log("Å¬¸¯");
-        _qnaCut.RollBackStory();
+        npcName.text = charinfo.NPC;
+        talkingPan.SetActive(true);
+    }
+
+    private void RollBackStory()
+    {
+        _storyLine = 0;
+        talkingPan.SetActive(false);
+    }
+
+    public void ChkTorF(bool TorF, int eviNum, EvidenceTextSO charText)
+    {
+        if (TorF)
+        {
+            nowStory = charText.ActTxts[eviNum];
+            npcText.text = nowStory.ChaTxts[0];
+            SetCharSO(charText);
+        }
+        else
+        {
+            nowStory = charText.NoneActTxts;
+            npcText.text = charText.NoneActTxts.ChaTxts[0];
+            SetCharSO(charText);
+        }
+    }
+
+    public void NextStory()
+    {
+        _storyLine++;
+        if (_storyLine != nowStory.ChaTxts.Count)
+        {
+            npcText.text = nowStory.ChaTxts[_storyLine];
+        }
+        else
+        {
+            RollBackStory();
+        }
     }
 }

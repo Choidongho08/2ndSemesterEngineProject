@@ -22,11 +22,13 @@ public class scrSuggestEvidence : MonoBehaviour
     private Vector2 _trInven;
 
     private bool _isEvidenceCorrect;
+    private int _correctEvi;
 
     private void Awake()
     {
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
+        _scrEvidenceTextSO = _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar;
     }
 
     private void Start()
@@ -65,18 +67,22 @@ public class scrSuggestEvidence : MonoBehaviour
     private void ProcessEvidence(ItemSO itemSO)
     {
         bool thisIsRightEvi = false;
+        _correctEvi = 0;
 
         // 증거 제출 처리 로직 추가
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
         foreach (var item in _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence)
         {
+            _correctEvi++;
             if (item.ItemName == itemSO.ItemName)
             {
                 thisIsRightEvi = true;
                 break;
             }
         }
+
+        ChoosingUI.instance.ChkTorF(thisIsRightEvi, _correctEvi,_scrEvidenceTextSO);
 
         // SO 판별해주는거만 구현하기
         if (thisIsRightEvi)
