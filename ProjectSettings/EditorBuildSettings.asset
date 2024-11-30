@@ -6,32 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DH/Main.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Game/StartScene.unity
+    guid: d5c50b64adc42a042a1d6ab9915a395f
   - enabled: 0
     path: Assets/Scenes/SJ/Player1/SJ_Gimick3_1.unity
     guid: 05f35cd663dc67f4eb7f22dd9b29b173
   - enabled: 0
     path: Assets/Scenes/SJ/Player2/SJ_Gmick3_2.unity
     guid: ef7ca6c39ce4e7b41b6c34b02f2bf280
-  - enabled: 0
-    path: Assets/Assets/DH/Multiplayer-Chat-using-Netcode-for-Gameobjects-with-Unity-main
-      (1)/Multiplayer-Chat-using-Netcode-for-Gameobjects-with-Unity-main/Scenes/Main.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/DH/Chat.unity
-    guid: efe398865aaa3cf419b0d20a944380e2
-  - enabled: 0
-    path: Assets/Scenes/DH/UI.unity
-    guid: 67f190b9a93f6b44c9fc61792eaa2b6b
-  - enabled: 0
-    path: Assets/Netcode-Chat-main/Netcode-Chat-main/NetcodeChat/Example/ExampleScene.unity
-    guid: 97e5f2fcd052455448fc60c74d1af476
-  - enabled: 0
-    path: Assets/Scenes/DH/WorldChoice.unity
-    guid: 71668d2cd1af1004b85e1968bf855eb7
   - enabled: 1
-    path: Assets/Scenes/Game/Case1World1.unity
+    path: Assets/Scenes/Game/Case1.unity
     guid: 9192488b88795aa49977f1f6a802d5be
   - enabled: 1
     path: Assets/Scenes/Game/Case1World2.unity
@@ -40,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/EndingScene.unity
     guid: 3740a38167329ea41b9de063540a96f5
   - enabled: 1
-    path: Assets/Scenes/Game/StartScene.unity
-    guid: c8a467b32312f1842b75953ac8c56122
+    path: Assets/Scenes/DH/Main.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}
