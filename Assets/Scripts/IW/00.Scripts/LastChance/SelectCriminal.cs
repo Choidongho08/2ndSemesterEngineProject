@@ -11,7 +11,7 @@ public class SelectCriminal : MonoBehaviour
     [SerializeField] private List<GameObject> _charL; // 캐릭터 패널
     [SerializeField] private List<GameObject> _charI; // 캐릭터 이미지 패널
 
-    [SerializeField] private GameObject _objCurrentPanel;
+    public GameObject _objCurrentPanel;
 
     public Transform _draggablesTransform;
     public Transform _lRestTransform;
@@ -38,6 +38,7 @@ public class SelectCriminal : MonoBehaviour
             {
                 _charL[i].transform.position = _draggablesTransform.position;
                 _charL[i].SetActive(true);
+                _objCurrentPanel = _charL[i];
             }
             else if (i == (_currentIndex - 1 + _charL.Count) % _charL.Count) // 이전 캐릭터 왼쪽 배치
             {
