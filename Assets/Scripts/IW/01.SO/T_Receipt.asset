@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df02a03704c00d541864319e8c31a702, type: 3}
   m_Name: T_Receipt
   m_EditorClassIdentifier: 
-  ItemName: Receipt
+  ItemName: T_Receipt
   ItemInfo: "\uCE04\uB2C8\uB9C8\uD2B8 \uC601\uC218\uC99D\uC774\uB2E4. \uC720\uBA85
     \uBE0C\uB79C\uB4DC\uC758 \uC218\uBA74\uC81C\uB97C \uAD6C\uC785\uD55C \uAE30\uB85D\uC774
     \uB0A8\uC544\uC788\uB2E4."
