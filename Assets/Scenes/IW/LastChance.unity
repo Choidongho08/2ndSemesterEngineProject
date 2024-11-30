@@ -694,6 +694,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
   _easyType: 28
   _inventory: {fileID: 931464583}
+  talkingPan: {fileID: 0}
+  npcName: {fileID: 0}
+  npcText: {fileID: 0}
+  nowStory: {fileID: 0}
 --- !u!114 &113981493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5965,9 +5969,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113981491}
-        m_TargetAssemblyTypeName: scrSuggestEvidence, Assembly-CSharp
-        m_MethodName: EvidenceSuggest
+      - m_Target: {fileID: 113981492}
+        m_TargetAssemblyTypeName: scrSelectEvidence, Assembly-CSharp
+        m_MethodName: EvidenceSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
