@@ -360,6 +360,11 @@ public class Inventory : MonoBehaviour
 
                 newItem.Initialize(item, _inventorySlots[i]);
 
+                newItem.OnSubmitEvidence.RemoveAllListeners();
+                newItem.OnSubmitEvidence.AddListener(scrSuggestEvidence.Instance.HandleEvidenceSubmission);
+                newItem.OnSuggestEvidence.RemoveAllListeners();
+                newItem.OnSuggestEvidence.AddListener(scrSelectEvidence.Instance.HandleEvidenceSubmission);
+
                 SaveInventory();
                 return;
             }

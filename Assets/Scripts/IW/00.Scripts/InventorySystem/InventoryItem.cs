@@ -20,6 +20,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TextMeshProUGUI _itemText;
 
     public UnityEvent<ItemSO> OnSubmitEvidence = new UnityEvent<ItemSO>();
+    public UnityEvent<ItemSO> OnSuggestEvidence = new UnityEvent<ItemSO>();
 
 
     private void Awake()
@@ -60,13 +61,13 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
                 Inventory.Instance.OnItemClicked(ItemSO);
             }
         }
-        
-        if (eventData.button == PointerEventData.InputButton.Right)
+        else if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (ItemSO != null)
             {
                 Debug.Log("Right Clicked : " + ItemSO.ItemName);
                 OnSubmitEvidence.Invoke(ItemSO);
+                OnSuggestEvidence.Invoke(ItemSO);
             }
             else
             {

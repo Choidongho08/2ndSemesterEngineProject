@@ -23,22 +23,33 @@ public class scrSuggestEvidence : MonoBehaviour
 
     private bool _isEvidenceCorrect;
 
+    public static scrSuggestEvidence Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
     }
 
-    private void Start()
-    {
-        var inventoryItems = FindObjectsOfType<InventoryItem>();
-        foreach (var item in inventoryItems)
-        {
-            item.OnSubmitEvidence.RemoveAllListeners();
-            item.OnSubmitEvidence.AddListener(HandleEvidenceSubmission);
-            Debug.Log("Added Listener");
-        }
-    }
+    //private void Start()
+    //{
+    //    var inventoryItems = FindObjectsOfType<InventoryItem>();
+    //    foreach (var item in inventoryItems)
+    //    {
+    //        item.OnSubmitEvidence.RemoveAllListeners();
+    //        item.OnSubmitEvidence.AddListener(HandleEvidenceSubmission);
+    //        Debug.Log("Added Listener");
+    //    }
+    //}
 
     public void EvidenceSuggest()
     {
@@ -49,6 +60,8 @@ public class scrSuggestEvidence : MonoBehaviour
 
     public void HandleEvidenceSubmission(ItemSO itemSO)
     {
+        Debug.Log("HandleEvidenceSubmission called with item: " + (itemSO != null ? itemSO.ItemName : "null"));
+
         if (itemSO != null)
         {
             Debug.Log("Submitted Evidence : " + itemSO.ItemName);
