@@ -899,23 +899,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EvidenceSO:
+  - {fileID: 11400000, guid: 3a51343c87e0b184c9a1efba275b5619, type: 2}
+  - {fileID: 11400000, guid: b0fa53694805e39458b1ed0b642db382, type: 2}
   - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: 9fad8eecf9f5e9b488fab032397c11cb, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
+  - {fileID: 11400000, guid: 9a20ff223226be142ae10a450012fdbe, type: 2}
+  - {fileID: 11400000, guid: ce1945cd3eab4504ab36cdda1ba20f4c, type: 2}
+  - {fileID: 11400000, guid: b164da0f8fdcee341a9ec410401fe457, type: 2}
+  - {fileID: 11400000, guid: 9554966c99faadc4dac938e6057c5a3f, type: 2}
   _easyType: 28
   _inventory: {fileID: 931464583}
   talkingPan: {fileID: 1026582973}
   npcName: {fileID: 1508465227}
   npcText: {fileID: 1454985411}
   nowStory: {fileID: 0}
-  Inventory: {fileID: 0}
+  Inventory: {fileID: 1087285145}
 --- !u!114 &113981492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,22 +927,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvidenceSO:
   - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: 9fad8eecf9f5e9b488fab032397c11cb, type: 2}
+  - {fileID: 11400000, guid: b0fa53694805e39458b1ed0b642db382, type: 2}
   - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
-  - {fileID: 11400000, guid: b0acef5fce0e43440a9403e75e5402d9, type: 2}
+  - {fileID: 11400000, guid: 9a20ff223226be142ae10a450012fdbe, type: 2}
+  - {fileID: 11400000, guid: ce1945cd3eab4504ab36cdda1ba20f4c, type: 2}
+  - {fileID: 11400000, guid: b164da0f8fdcee341a9ec410401fe457, type: 2}
+  - {fileID: 11400000, guid: 9554966c99faadc4dac938e6057c5a3f, type: 2}
   _easyType: 28
   _inventory: {fileID: 931464583}
   talkingPan: {fileID: 1026582973}
   npcName: {fileID: 1508465227}
   npcText: {fileID: 1454985411}
   nowStory: {fileID: 0}
-  Inventory: {fileID: 0}
+  Inventory: {fileID: 1087285145}
 --- !u!114 &113981493
 MonoBehaviour:
   m_ObjectHideFlags: 0
