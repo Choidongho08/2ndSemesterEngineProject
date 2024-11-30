@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
 
 [System.Serializable]
 public class InvenData
