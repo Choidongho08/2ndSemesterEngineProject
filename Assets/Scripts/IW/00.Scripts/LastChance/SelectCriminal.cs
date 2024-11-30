@@ -11,6 +11,8 @@ public class SelectCriminal : MonoBehaviour
     [SerializeField] private List<GameObject> _charL; // 캐릭터 패널
     [SerializeField] private List<GameObject> _charI; // 캐릭터 이미지 패널
 
+    [SerializeField] private Ease _easyType;
+
     public GameObject _objCurrentPanel;
 
     public Transform _draggablesTransform;
@@ -27,7 +29,7 @@ public class SelectCriminal : MonoBehaviour
         // 초기 위치 설정
         UpdateCharPosi();
 
-        SelectEnvidence?.SetActive(false);
+        // SelectEnvidence?.SetActive(false);
     }
 
     private void UpdateCharPosi()
@@ -37,23 +39,23 @@ public class SelectCriminal : MonoBehaviour
             if (i == _currentIndex) // 현재 캐릭터 중앙 배치
             {
                 _charL[i].transform.position = _draggablesTransform.position;
-                _charL[i].SetActive(true);
+                // _charL[i].SetActive(true);
                 _objCurrentPanel = _charL[i];
             }
             else if (i == (_currentIndex - 1 + _charL.Count) % _charL.Count) // 이전 캐릭터 왼쪽 배치
             {
                 _charL[i].transform.position = _lRestTransform.position;
-                _charL[i].SetActive(true);
+                // _charL[i].SetActive(true);
             }
             else if (i == (_currentIndex + 1) % _charL.Count) // 다음 캐릭터 오른쪽 배치
             {
                 _charL[i].transform.position = _rRestTransform.position;
-                _charL[i].SetActive(true);
+                // _charL[i].SetActive(true);
             }
             else // 나머지는 캐릭터 화면에서 보이지 않는 위치로
             {
                 _charL[i].transform.position = _rRestTransform.position; // 화면 밖
-                _charL[i].SetActive(false);
+                // _charL[i].SetActive(false);
             }
         }
     }
@@ -88,8 +90,9 @@ public class SelectCriminal : MonoBehaviour
                 Debug.Log("Load Select Criminal " + _charL[i]);
                 CharImage.GetComponent<Image>().sprite = _charL[i].GetComponent<Image>().sprite;
                 CharImage.GetComponent<RectTransform>().sizeDelta = _charI[i].GetComponent<RectTransform>().sizeDelta;
-                CharImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(_charI[i].GetComponent<RectTransform>().anchoredPosition.x, 
+                CharImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(_charI[i].GetComponent<RectTransform>().anchoredPosition.x,
                     _charI[i].GetComponent<RectTransform>().anchoredPosition.y);
+                SelectEnvidence.GetComponent<RectTransform>().DOAnchorPos(_objCurrentPanel.GetComponent<RectTransform>().anchoredPosition, 1f).SetEase(_easyType);
             }
         }
     }

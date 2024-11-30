@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class scrSuggestEvidence : MonoBehaviour
 {
@@ -28,9 +29,19 @@ public class scrSuggestEvidence : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "LastChance")
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
