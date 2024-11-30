@@ -11,7 +11,7 @@ public class SelectCriminal : MonoBehaviour
     [SerializeField] private List<GameObject> _charL; // 캐릭터 패널
     [SerializeField] private List<GameObject> _charI; // 캐릭터 이미지 패널
 
-    public GameObject _objCurrentPanel;
+    [SerializeField] private GameObject _objCurrentPanel;
 
     public Transform _draggablesTransform;
     public Transform _lRestTransform;

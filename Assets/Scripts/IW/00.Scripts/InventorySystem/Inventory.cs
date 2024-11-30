@@ -429,6 +429,7 @@ public class Inventory : MonoBehaviour
             else
             {
                 Debug.Log("Item is already in the list");
+                // foreach (var item)
             }
         }
         catch (Exception e)
