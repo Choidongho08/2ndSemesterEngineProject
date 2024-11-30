@@ -24,7 +24,6 @@ public class scrSelectEvidence : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
