@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: HikingActText2
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uC774\uB7F0 \uC587\uC740\uC904\uC740 \uCC98\uC74C \uBCF4\uB294\uB514?"
+  - "\uAC00\uB054 \uC4F0\uB294 \uC0AC\uB78C\uC774 \uC788\uB2E4\uACE4 \uD558\uB294\uB514,
+    \uB098\uB294 \uBAB0\uB824"
+  - "\uCD5C\uADFC\uC5D0 \uB204\uAC00 \uBC84\uB9AC\uACE0 \uAC04 \uAC83 \uAC19\uAD6C\uBA3C."
   stopPoint: 0

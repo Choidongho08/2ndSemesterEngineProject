@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: MountainMActText3
+  m_Name: SusCorrectEvidenceText 1
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uC774 \uC601\uC218\uC99D\uC740..."
+  - "\uBB50\uC694, \uC774\uAC8C \uC81C\uAEBC\uB77C\uACE0 \uC0DD\uAC01\uD558\uC138\uC694?"
+  - "\uC124\uB839 \uC774\uAC78\uB85C \uD574\uB97C \uAC00\uD588\uB4E0 \uC81C\uAC00
+    \uC5B4\uB5BB\uAC8C \uD53C\uD574\uC790\uB97C \uC8FD\uC5EC\uC694!"
   stopPoint: 0

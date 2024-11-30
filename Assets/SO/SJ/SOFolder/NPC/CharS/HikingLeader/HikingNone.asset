@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
-  m_Name: AsBadFWrrongText
+  m_Name: HikingNone
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uC774 \uBB3C\uAC74\uC740 \uBB50\uC5EC?"
+  - "\uC73C\uC789... \uC774\uAC74 \uBD10\uB3C4 \uBAA8\uB974\uAC84\uB124..."
   stopPoint: 0

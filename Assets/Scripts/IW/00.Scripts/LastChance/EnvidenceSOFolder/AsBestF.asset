@@ -15,12 +15,10 @@ MonoBehaviour:
   ActEvidence:
   - {fileID: 11400000, guid: 677cdd4dde85fc8418927a495617023c, type: 2}
   - {fileID: 11400000, guid: 6ea1fa480fcc1514497a4b08bd0ba277, type: 2}
-  - {fileID: 11400000, guid: 5794114f44771884b877941bd8ad4401, type: 2}
   NoneActTxts: {fileID: 11400000, guid: 8fe944179b66ec4428b95c1e23887f97, type: 2}
   ActTxts:
   - {fileID: 11400000, guid: f83e5b98ccde99649bb336b3475a112a, type: 2}
   - {fileID: 11400000, guid: 13def8e80348f8442b84354a1627ddc2, type: 2}
-  - {fileID: 11400000, guid: ceaa67d7dbb56474bb0a668e8d12686e, type: 2}
   stopPoint: 0
   NPC: "\uCD5C\uD558\uC724"
   CorrectEvidence:

@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: MountainMan
   m_EditorClassIdentifier: 
   ActEvidence:
-  - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
+  - {fileID: 11400000, guid: c8f1521e50906b14faa5152f5c61d034, type: 2}
   - {fileID: 11400000, guid: 7a31fe3ebe5c2374aae3e7b1d897825d, type: 2}
-  - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
   NoneActTxts: {fileID: 11400000, guid: 3087a023a72d542429fd28d351110f58, type: 2}
   ActTxts:
   - {fileID: 11400000, guid: f57243117e6166b4fbfbd90aa23240c2, type: 2}
   - {fileID: 11400000, guid: a4d0550cc47c81d4c9acdffb82a155d0, type: 2}
-  - {fileID: 11400000, guid: 946f9aad04be311458ef663ba4480e71, type: 2}
   stopPoint: 0
   NPC: "XX\uC0B0 \uAD00\uB9AC\uC790"
   CorrectEvidence:

@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: SusWrrongText
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uC800\uAE30\uC694 \uC774\uB7F0\uAC8C \uC81C\uAC00 \uBC94\uC778\uC774\uB77C\uB294
+    \uC99D\uAC70\uB77C\uACE0\uC694?"
+  - "\uB2E4\uB978 \uC0AC\uB78C\uC774 \uBC94\uC778\uC774\uB77C\uBA74 \uC5B4\uCA4C\uB824\uACE0
+    \uADF8\uB798\uC694?"
+  - "\uBE68\uB9AC \uB2E4\uB978 \uC0AC\uB78C\uC744 \uCC3E\uC73C\uC2DC\uC8E0?"
   stopPoint: 0

@@ -22,9 +22,9 @@ MonoBehaviour:
   stopPoint: 0
   NPC: "\uC870\uC11C\uC548"
   CorrectEvidence:
-  - {fileID: 11400000, guid: 9015f70b0281ef143ba0a780f63ffebe, type: 2}
   - {fileID: 11400000, guid: d422c34461eb72e4c9e767b6c77e676a, type: 2}
   - {fileID: 11400000, guid: 7a31fe3ebe5c2374aae3e7b1d897825d, type: 2}
   WrrongEvidenceText: {fileID: 11400000, guid: e0e0e6e663c1aa446ac494bfcef6a1e0, type: 2}
   CorrectEvidencText:
+  - {fileID: 11400000, guid: 689a78d8342230d4e8a1eaa6bf135d8f, type: 2}
   - {fileID: 11400000, guid: 689a78d8342230d4e8a1eaa6bf135d8f, type: 2}

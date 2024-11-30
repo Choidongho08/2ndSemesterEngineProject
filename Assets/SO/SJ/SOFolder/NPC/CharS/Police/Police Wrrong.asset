@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: Police Wrrong
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uC774\uAC8C \uC81C\uAC00 \uBC94\uC778\uC774\uB77C\uB294 \uC99D\uAC70\uB77C\uACE0\uC694?"
+  - "\uC218\uC0AC\uD558\uC2DC\uBA74\uC11C \uD798\uB4DC\uC2DC\uBA74 \uC26C\uC154\uB3C4
+    \uC88B\uC2B5\uB2C8\uB2E4."
   stopPoint: 0

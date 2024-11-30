@@ -14,6 +14,7 @@ public class scrSelectEvidence : MonoBehaviour
     private InventoryItem _scrInventoryItem;
     private EvidenceTextSO _scrEvidenceTextSO;
     private SelectCriminal _scrSelectCriminal;
+    private bool _isThisRealSus;
 
     private Vector2 _trInven;
 
@@ -60,5 +61,10 @@ public class scrSelectEvidence : MonoBehaviour
     private void SelectEvidence(ItemSO itemSO)
     {
         Debug.Log("Select Evidence : " + itemSO.ItemName);
+    }
+
+    private void FindRealSus()
+    {
+
     }
 }

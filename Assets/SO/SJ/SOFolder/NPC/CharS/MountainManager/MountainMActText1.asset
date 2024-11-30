@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: MountainMActText1
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uB204\uAC00 \uB610 \uC774\uB7F0 \uC4F0\uB798\uAE30\uB97C..."
+  - "\uC544\uB9C8 \uB4F1\uC0B0\uD68C\uB098 \uADF8\uB7F0\uB370\uB294 \uC544\uB2D0\uAECD\uB2C8\uB2E4."
+  - "\uBCF4\uD1B5 \uC5EC\uAE30 \uC4F0\uB808\uAE30\uB97C \uBC84\uB9AC\uB294 \uC0AC\uB78C\uB4E4\uC740
+    \uD63C\uC790\uB354\uB77C\uACE0\uC694."
+  - "\uC7A1\uD788\uBA74 \uAC1C\uC778\uC801\uC73C\uB85C \uB9D0 \uD574\uB194\uC57C\uACA0\uC2B5\uB2C8\uB2E4."
   stopPoint: 0

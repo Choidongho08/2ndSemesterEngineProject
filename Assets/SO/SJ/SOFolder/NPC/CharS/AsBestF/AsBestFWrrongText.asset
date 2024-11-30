@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: AsBestFWrrongText
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uB124? \uC774\uAC8C \uC81C\uAC00 \uBC94\uC778\uC774\uB77C\uB294 \uC99D\uAC70\uB77C\uACE0\uC694?"
+  - "\uB108\uBB34 \uB2F9\uC2E0\uC744 \uBBFF\uC740\uAC70 \uAC19\uC544\uC694..."
   stopPoint: 0

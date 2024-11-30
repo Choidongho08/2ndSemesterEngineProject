@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9b1d7c37a5d14b93dc71b380a3d40, type: 3}
   m_Name: AsMActText2
   m_EditorClassIdentifier: 
-  ChaTxts: []
+  ChaTxts:
+  - "\uC774\uAC74 \uD754\uD55C \uC601\uC218\uC99D\uC774 \uC544\uB2CC\uB370...?"
+  - "\uC6B0\uB9AC \uB538\uC774 \uC790\uC8FC\uC0AC\uB358 \uC57D\uB3C4 \uC544\uB2C8\uC57C..."
+  - "\uB3C4\uB300\uCCB4 \uC5B4\uB51C \uAC14\uB358\uAC70\uB2C8..."
   stopPoint: 0
