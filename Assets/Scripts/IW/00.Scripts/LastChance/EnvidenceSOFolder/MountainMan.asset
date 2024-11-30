@@ -16,14 +16,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
   - {fileID: 11400000, guid: 7a31fe3ebe5c2374aae3e7b1d897825d, type: 2}
   - {fileID: 11400000, guid: c15741861759e674da99cc860dbeab47, type: 2}
-  NoneActTxts: {fileID: 11400000, guid: 13ec65906e9f6574f8e10bc7e555a5f7, type: 2}
+  NoneActTxts: {fileID: 11400000, guid: 3087a023a72d542429fd28d351110f58, type: 2}
   ActTxts:
-  - {fileID: 11400000, guid: 2242895c36f77f14fa19834ff685c46e, type: 2}
-  - {fileID: 11400000, guid: 8eb3808c89e387d42a027bbba84bffb2, type: 2}
-  - {fileID: 11400000, guid: 52934eea4075c3b438f1b8ff48ad6d93, type: 2}
+  - {fileID: 11400000, guid: f57243117e6166b4fbfbd90aa23240c2, type: 2}
+  - {fileID: 11400000, guid: a4d0550cc47c81d4c9acdffb82a155d0, type: 2}
+  - {fileID: 11400000, guid: 946f9aad04be311458ef663ba4480e71, type: 2}
   stopPoint: 0
   NPC: "XX\uC0B0 \uAD00\uB9AC\uC790"
   CorrectEvidence:
   - {fileID: 11400000, guid: 1d4adfe4644d2cd4aa560242ae80ebee, type: 2}
-  WrrongEvidenceText: {fileID: 0}
+  WrrongEvidenceText: {fileID: 11400000, guid: ac7d30a658eee794380982ab094d851d, type: 2}
   CorrectEvidencText: []
