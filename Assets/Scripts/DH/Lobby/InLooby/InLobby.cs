@@ -10,6 +10,8 @@ public class InLobby : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _lobbyCase;
     [SerializeField] private CaseBookListSO _caseBookListSo;
 
+    private string _caseNumber;
+
     private void Awake()
     {
         MainLobby.instance.OnLobbyCreate += (lobbyCode, lobbyName, lobbyCase) => Lobby(lobbyCode, lobbyName, lobbyCase);
@@ -17,6 +19,8 @@ public class InLobby : MonoBehaviour
     }
     private void Lobby(string lobbyCode, string lobbyName, string lobbyCase)
     {
+        _caseNumber = lobbyCase.Substring(4,1);
+        NowCase.instance.SetCaseNumber(_caseNumber);
         _lobbyCode.text = lobbyCode;
         _lobbyName.text = lobbyName;
         if(lobbyCase == "Case1")

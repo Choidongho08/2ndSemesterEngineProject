@@ -227,14 +227,14 @@ RectTransform:
   m_GameObject: {fileID: 887632545}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3125, y: 0.3125, z: 0.3125}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 8365747345516050801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1280, y: 770}
+  m_AnchoredPosition: {x: 0, y: -409.375}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!82 &887632547
@@ -953,7 +953,7 @@ MonoBehaviour:
   _volumDownButton: {fileID: 3401348041725460199}
   _volumUpButton: {fileID: 7997542602823602049}
   volume: 0.3
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 887632547}
 --- !u!222 &1875405029365205884
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1673,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5322486422996172020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2319,6 +2319,7 @@ RectTransform:
   m_Children:
   - {fileID: 4572991045482485657}
   - {fileID: 7711994047059474801}
+  - {fileID: 887632546}
   m_Father: {fileID: 4440695076508791301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -2592,5 +2593,4 @@ SceneRoots:
   - {fileID: 954293467}
   - {fileID: 1876774966927919672}
   - {fileID: 830925602}
-  - {fileID: 887632546}
   - {fileID: 927947341644773708}
