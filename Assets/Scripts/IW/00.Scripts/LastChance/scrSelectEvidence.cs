@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class scrSelectEvidence : MonoBehaviour
@@ -9,14 +10,20 @@ public class scrSelectEvidence : MonoBehaviour
 
     [SerializeField] private Ease _easyType;
     [SerializeField] private GameObject _inventory;
+    [SerializeField] private GameObject talkingPan;
+    [SerializeField] private TextMeshProUGUI npcName;
+    [SerializeField] private TextMeshProUGUI npcText;
 
     private Inventory _scrInventory;
     private InventoryItem _scrInventoryItem;
     private EvidenceTextSO _scrEvidenceTextSO;
     private SelectCriminal _scrSelectCriminal;
-    private bool _isThisRealSus;
+    public StoryTxtSO nowStory;
+    private bool isThisRealSus;
 
     private Vector2 _trInven;
+
+    private int _correctEvi;
 
     public static scrSelectEvidence Instance { get; private set; }
 
@@ -34,7 +41,10 @@ public class scrSelectEvidence : MonoBehaviour
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
     }
-
+    private void Update()
+    {
+        _scrEvidenceTextSO = _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar;
+    }
     public void EvidenceSelect()
     {
         Debug.Log("Select Evidence");
@@ -61,10 +71,65 @@ public class scrSelectEvidence : MonoBehaviour
     private void SelectEvidence(ItemSO itemSO)
     {
         Debug.Log("Select Evidence : " + itemSO.ItemName);
+
+        bool thisIsRightEvi = false;
+        bool thisIsTrueSus = false;
+        _correctEvi = 0;
+        int susCorrectnum = 0;
+
+        // 증거 제출 처리 로직 추가
+        Debug.Log("Processing Evidence : " + itemSO.ItemName);
+
+        if (_scrEvidenceTextSO.NPC == "조서안")
+        {
+            if (_scrEvidenceTextSO.CorrectEvidence[susCorrectnum].ItemName == itemSO.ItemName)
+            {
+                thisIsTrueSus = true;
+                susCorrectnum++;
+            }
+        }
+        else
+        {
+            foreach (var item in _scrEvidenceTextSO.CorrectEvidence) // correct change
+            {
+                _correctEvi++;
+                if (item.ItemName == itemSO.ItemName)
+                {
+                    thisIsRightEvi = true;
+                    Debug.Log(item.ItemName + _correctEvi);
+                    break;
+                }
+            }
+        }
+
+        // SO 판별해주는거만 구현하기
+        if (thisIsRightEvi)
+        {
+            Debug.Log("Correct Evidence : " + itemSO);
+            // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
+            nowStory = _scrEvidenceTextSO.CorrectEvidencText[_correctEvi - 1]; // correctTxts change
+            npcText.text = nowStory.ChaTxts[0];
+            SetCharSO(_scrEvidenceTextSO);
+        }
+        else if(thisIsTrueSus)
+        {
+            nowStory = _scrEvidenceTextSO.CorrectEvidencText[susCorrectnum - 1]; // correctTxts change
+            npcText.text = nowStory.ChaTxts[0];
+            SetCharSO(_scrEvidenceTextSO);
+        }
+        else
+        {
+            Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+
+            nowStory = _scrEvidenceTextSO.WrrongEvidenceText;
+            npcText.text = _scrEvidenceTextSO.WrrongEvidenceText.ChaTxts[0]; // WarrerEvidence change
+            SetCharSO(_scrEvidenceTextSO);
+        }
     }
 
-    private void FindRealSus()
+    private void SetCharSO(EvidenceTextSO charinfo)
     {
-
+        npcName.text = charinfo.NPC;
+        talkingPan.SetActive(true);
     }
 }
