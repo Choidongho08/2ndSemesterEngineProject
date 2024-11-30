@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +17,22 @@ public class NowCase : MonoSingleton<NowCase>
 
     public void SetCaseNumber(string txt)
     {
+        Debug.Log(txt);
         caseNumber = int.Parse(txt);
+        Debug.Log(caseNumber);
         _nowCaseTxt.gameObject.SetActive(true);
         _nowCaseTxt.text = $"사건 번호 : {txt}";
         _caseBook.caseType = $"Case{txt}";
+    }
+    [ServerRpc]
+    private void SetCaseNumberServerRpc(int number)
+    {
+        SetCaseNumberClientRpc(number);
+    }
+    [ClientRpc]
+    private void SetCaseNumberClientRpc(int number)
+    {
+        
     }
     public int CaseNumber()
     {
