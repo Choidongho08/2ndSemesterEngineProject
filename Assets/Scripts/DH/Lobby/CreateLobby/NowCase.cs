@@ -24,16 +24,6 @@ public class NowCase : MonoSingleton<NowCase>
         _nowCaseTxt.text = $"사건 번호 : {txt}";
         _caseBook.caseType = $"Case{txt}";
     }
-    [ServerRpc]
-    private void SetCaseNumberServerRpc(int number)
-    {
-        SetCaseNumberClientRpc(number);
-    }
-    [ClientRpc]
-    private void SetCaseNumberClientRpc(int number)
-    {
-        
-    }
     public int CaseNumber()
     {
         return caseNumber;

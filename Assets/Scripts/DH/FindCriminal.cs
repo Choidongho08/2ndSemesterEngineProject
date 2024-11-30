@@ -93,7 +93,7 @@ public class FindCriminal : MonoBehaviour
     [ClientRpc]
     private void VoteClientRpc() // 서버가 클라들한테
     {
-        FindCriminal.Singleton.Vote();
+        Vote();
     }
     
 }
