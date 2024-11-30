@@ -66,8 +66,21 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
             if (ItemSO != null)
             {
                 Debug.Log("Right Clicked : " + ItemSO.ItemName);
-                OnSubmitEvidence.Invoke(ItemSO);
-                OnSuggestEvidence.Invoke(ItemSO);
+
+                GameObject clickedButton = eventData.pointerCurrentRaycast.gameObject;
+
+                if (clickedButton.CompareTag("SuggestEButton"))
+                {
+                    OnSubmitEvidence.Invoke(ItemSO);
+                }
+                else if (clickedButton.CompareTag("SelectEButton"))
+                {
+                    OnSuggestEvidence.Invoke(ItemSO);
+                }
+                else
+                {
+                    Debug.Log("No specific button clicked for right-click action.");
+                }
             }
             else
             {
