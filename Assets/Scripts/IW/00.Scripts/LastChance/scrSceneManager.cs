@@ -3,32 +3,28 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class scrSceneManager : MonoBehaviour
 {
-    public GameObject suggestEvidencePrefab; // 프리팹을 코드에서 생성하려면 프리팹을 Inspector에서 연결
-
-    private void OnEnable()
+    // 프리팹 없이 동적으로 생성할 스크립트들
+    void LoadSuggestEvidence()
     {
-        // 씬 로드 시마다 처리하는 메서드
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        // 씬 로드 이벤트 해제
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "LastChance")
+        if (SceneManager.GetActiveScene().name == "LastChance")
         {
-            LoadSuggestEvidence();
+            // scrSuggestEvidence가 없으면 새로 생성
+            if (scrSuggestEvidence.Instance == null)
+            {
+                GameObject suggestEvidenceObject = new GameObject("scrSuggestEvidence");
+                suggestEvidenceObject.AddComponent<scrSuggestEvidence>(); // scrSuggestEvidence 스크립트 추가
+                RectTransform rectTransform = suggestEvidenceObject.AddComponent<RectTransform>(); // RectTransform 컴포넌트 추가
+                rectTransform.SetParent(GameObject.Find("Canvas").transform, false); // Canvas에 자식으로 추가
+                Debug.Log("scrSuggestEvidence dynamically created.");
+            }
         }
         else
         {
-            // 다른 씬에서는 scrSuggestEvidence를 제거
+            // 다른 씬에서는 scrSuggestEvidence 삭제
             if (scrSuggestEvidence.Instance != null)
             {
                 Destroy(scrSuggestEvidence.Instance.gameObject);
@@ -37,23 +33,47 @@ public class scrSceneManager : MonoBehaviour
         }
     }
 
-    void LoadSuggestEvidence()
+    void LoadSelectEvidence()
     {
-        if (scrSuggestEvidence.Instance == null)
+        if (SceneManager.GetActiveScene().name == "LastChance")
         {
-            // 1. scrSuggestEvidence 직접 생성
-            GameObject suggestEvidenceObject = new GameObject("scrSuggestEvidence");
-
-            suggestEvidenceObject.AddComponent<scrSuggestEvidence>(); // scrSuggestEvidence 스크립트 추가
-            RectTransform rectTransform = suggestEvidenceObject.AddComponent<RectTransform>(); // RectTransform 추가
-            rectTransform.SetParent(GameObject.Find("Canvas").transform, false); // Canvas 아래에 위치
-
-            if (suggestEvidencePrefab != null)
+            // scrSelectEvidence가 없으면 새로 생성
+            if (scrSelectEvidence.Instance == null)
             {
-                Instantiate(suggestEvidencePrefab, rectTransform); // 프리팹을 Canvas에 동적 생성
+                GameObject selectEvidenceObject = new GameObject("scrSelectEvidence");
+                selectEvidenceObject.AddComponent<scrSelectEvidence>(); // scrSelectEvidence 스크립트 추가
+                RectTransform rectTransform = selectEvidenceObject.AddComponent<RectTransform>(); // RectTransform 컴포넌트 추가
+                rectTransform.SetParent(GameObject.Find("Canvas").transform, false); // Canvas에 자식으로 추가
+                Debug.Log("scrSelectEvidence dynamically created.");
             }
-
-            Debug.Log("scrSuggestEvidence dynamically created.");
         }
+        else
+        {
+            // 다른 씬에서는 scrSelectEvidence 삭제
+            if (scrSelectEvidence.Instance != null)
+            {
+                Destroy(scrSelectEvidence.Instance.gameObject);
+                Debug.Log("Removed scrSelectEvidence in non-LastChance scene.");
+            }
+        }
+    }
+
+    // 씬이 로드될 때마다 필요한 스크립트들을 로드
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        LoadSuggestEvidence();
+        LoadSelectEvidence();
+    }
+
+    // 씬이 로드될 때 이벤트 등록
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // 씬 언로드 시 이벤트 제거
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

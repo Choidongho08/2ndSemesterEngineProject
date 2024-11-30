@@ -35,16 +35,6 @@ public class scrSelectEvidence : MonoBehaviour
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
     }
 
-    //private void Start()
-    //{
-    //    var inventoryItems = FindObjectsOfType<InventoryItem>();
-    //    foreach (var item in inventoryItems)
-    //    {
-    //        item.OnSuggestEvidence.RemoveAllListeners();
-    //        item.OnSuggestEvidence.AddListener(HandleEvidenceSubmission);
-    //    }
-    //}
-
     public void EvidenceSelect()
     {
         Debug.Log("Select Evidence");

@@ -6170,7 +6170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC99D\uAC70 \uC81C\uC2DC"
+  m_text: "\uC99D\uAC70 \uD655\uC778"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
   m_sharedMaterial: {fileID: 370270405986739486, guid: 8d68b80fa09e3b34587da3649faa9f5d, type: 2}
@@ -6276,7 +6276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822450071fdfd8145b29909c0e088134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suggestEvidencePrefab: {fileID: 0}
 --- !u!4 &1974818478
 Transform:
   m_ObjectHideFlags: 0
@@ -6548,6 +6547,7 @@ MonoBehaviour:
   - {fileID: 1838963886}
   - {fileID: 1346752791}
   - {fileID: 1118611760}
+  _easyType: 0
   _objCurrentPanel: {fileID: 0}
   _draggablesTransform: {fileID: 1295497235}
   _lRestTransform: {fileID: 73896986}

@@ -29,19 +29,10 @@ public class scrSuggestEvidence : MonoBehaviour
 
     private void Awake()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        if (currentScene == "LastChance")
+        if (Instance == null)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -52,17 +43,6 @@ public class scrSuggestEvidence : MonoBehaviour
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
         _scrEvidenceTextSO = _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar;
     }
-
-    //private void Start()
-    //{
-    //    var inventoryItems = FindObjectsOfType<InventoryItem>();
-    //    foreach (var item in inventoryItems)
-    //    {
-    //        item.OnSubmitEvidence.RemoveAllListeners();
-    //        item.OnSubmitEvidence.AddListener(HandleEvidenceSubmission);
-    //        Debug.Log("Added Listener");
-    //    }
-    //}
 
     public void EvidenceSuggest()
     {
