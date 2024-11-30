@@ -10,11 +10,12 @@ public class fdsgnh : NetworkBehaviour
 
     private GameObject _chatManagerInstance;
     private NetworkObject _chatManagerNetworkObj;
+   
 
     private string _playerId;
 
-    public override void OnNetworkDespawn()
-    {
+    public override void OnNetworkSpawn()
+    { 
         if (!IsServer)
             return;
 
@@ -22,5 +23,17 @@ public class fdsgnh : NetworkBehaviour
 
         _chatManagerNetworkObj = _chatManagerInstance.GetComponent<NetworkObject>();
         _chatManagerNetworkObj.Spawn();
+        if (IsClient)
+            LoadingServerRpc();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void LoadingServerRpc()
+    {
+        LoadingClientRpc();
+    }
+    [ClientRpc]
+    private void LoadingClientRpc()
+    {
+        Util.instance.LoadingHide();
     }
 }
