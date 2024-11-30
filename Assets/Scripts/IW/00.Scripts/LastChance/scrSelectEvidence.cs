@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class scrSelectEvidence : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class scrSelectEvidence : MonoBehaviour
     [SerializeField] private GameObject talkingPan;
     [SerializeField] private TextMeshProUGUI npcName;
     [SerializeField] private TextMeshProUGUI npcText;
+    [SerializeField] private GameObject nextBtn;
 
     private Inventory _scrInventory;
     private InventoryItem _scrInventoryItem;
@@ -114,6 +116,8 @@ public class scrSelectEvidence : MonoBehaviour
             nowStory = _scrEvidenceTextSO.CorrectEvidencText[susCorrectnum - 1]; // correctTxts change
             npcText.text = nowStory.ChaTxts[0];
             SetCharSO(_scrEvidenceTextSO);
+            if (susCorrectnum == 2)
+                nextBtn.SetActive(true);
         }
         else
         {
@@ -129,5 +133,11 @@ public class scrSelectEvidence : MonoBehaviour
     {
         npcName.text = charinfo.NPC;
         talkingPan.SetActive(true);
+    }
+
+    public void GoEndingScnee()
+    {
+        SceneManager.LoadScene("EndingScene");
+        nextBtn.SetActive(false);
     }
 }
