@@ -522,11 +522,11 @@ public class Inventory : MonoBehaviour
 
                 if (currentButtonState == "Submit")
                 {
-                    // OnSubmitEvidence.Invoke(itemSO); // Submit 이벤트 처리
+                    OnSubmitEvidence(itemSO); // Submit 이벤트 처리
                 }
                 else if (currentButtonState == "Suggest")
                 {
-                    // OnSuggestEvidence.Invoke(itemSO); // Suggest 이벤트 처리
+                    OnSuggestEvidence(itemSO); // Suggest 이벤트 처리
                 }
                 else
                 {
