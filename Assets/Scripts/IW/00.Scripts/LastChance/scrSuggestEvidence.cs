@@ -24,6 +24,7 @@ public class scrSuggestEvidence : MonoBehaviour
     private EvidenceTextSO _scrEvidenceTextSO;
     private SelectCriminal _scrSelectCriminal;
     public StoryTxtSO nowStory;
+    public Inventory Inventory;
 
     private Vector2 _trInven;
 
@@ -100,6 +101,7 @@ public class scrSuggestEvidence : MonoBehaviour
         Debug.Log("Select Evidence");
 
         _inventory.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 5), 1f).SetEase(_easyType);
+        Inventory.SetButtonState("Submit");
     }
 
     public void HandleEvidenceSubmission(ItemSO itemSO)
