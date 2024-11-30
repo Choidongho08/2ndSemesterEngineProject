@@ -35,12 +35,14 @@ public class ChoosingUI : MonoBehaviour
     {
         if (TorF)
         {
+            Debug.Log("있음");
             nowStory = charText.ActTxts[eviNum];
             npcText.text = nowStory.ChaTxts[0];
             SetCharSO(charText);
         }
         else
         {
+            Debug.Log("없음");
             nowStory = charText.NoneActTxts;
             npcText.text = charText.NoneActTxts.ChaTxts[0];
             SetCharSO(charText);

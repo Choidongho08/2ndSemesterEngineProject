@@ -86,7 +86,7 @@ public class scrSuggestEvidence : MonoBehaviour
         // 증거 제출 처리 로직 추가
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
-        foreach (var item in _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar.ActEvidence)
+        foreach (var item in _scrEvidenceTextSO.ActEvidence)
         {
             _correctEvi++;
             if (item.ItemName == itemSO.ItemName)
