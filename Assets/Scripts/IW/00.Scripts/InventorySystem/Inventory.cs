@@ -102,7 +102,7 @@ public class Inventory : MonoBehaviour
             if (_currentStartIndex > 0)
             {
                 _currentStartIndex--;
-                ScrollInventory(-1);
+                // ScrollInventory(-1);
                 UpdateInventorySlots();
                 Debug.Log("moved left : currentIndex = " + _currentStartIndex);
             }
@@ -113,7 +113,7 @@ public class Inventory : MonoBehaviour
             {
                 _currentStartIndex++;
                 UpdateInventorySlots();
-                ScrollInventory(1);
+                // ScrollInventory(1);
                 Debug.Log("moved right : currentIndex : " + _currentStartIndex);
             }
         }
@@ -385,15 +385,6 @@ public class Inventory : MonoBehaviour
                 newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
 
                 newItem.Initialize(item, _inventorySlots[i]);
-
-                if (scrSuggestEvidence.Instance == null)
-                {
-                    Debug.LogError("scrSuggestEvidence.Instance is null.");
-                }
-                if (scrSelectEvidence.Instance == null)
-                {
-                    Debug.LogError("scrSelectEvidence.Instance is null.");
-                }
 
                 if (scrSuggestEvidence.Instance != null)
                 {
