@@ -108,16 +108,6 @@ public class Inventory : MonoBehaviour
         else if (_collectedItem != null) _carriedItem.transform.position = Input.mousePosition;
     }
 
-    public void SetButtonState(string buttonState)
-    {
-        _currentButtonState = buttonState;
-    }
-
-    public string GetCurrentButtonState()
-    {
-        return _currentButtonState;
-    }
-
     public void GetKeyCodeA()
     {
         Debug.Log("A");
@@ -511,7 +501,6 @@ public class Inventory : MonoBehaviour
                 Debug.LogError("itemSO is Null");
                 return;
             }
-            string currentButtonState = Inventory.Instance.GetCurrentButtonState(); // 현재 버튼 상태 가져오기
 
             if (!_collectedItem.Exists(item => item.ItemName == itemSO.ItemName))
             {
@@ -520,18 +509,8 @@ public class Inventory : MonoBehaviour
                 SpawnInventoryItem(itemSO);
                 SaveCollectedItems();
 
-                if (currentButtonState == "Submit")
-                {
-                    OnSubmitEvidence(itemSO); // Submit 이벤트 처리
-                }
-                else if (currentButtonState == "Suggest")
-                {
-                    OnSuggestEvidence(itemSO); // Suggest 이벤트 처리
-                }
-                else
-                {
-                    Debug.Log("No action for the current button state.");
-                }
+                OnSubmitEvidence(itemSO); // Submit 이벤트 처리
+                OnSuggestEvidence(itemSO); // Suggest 이벤트 처리
             }
             else
             {

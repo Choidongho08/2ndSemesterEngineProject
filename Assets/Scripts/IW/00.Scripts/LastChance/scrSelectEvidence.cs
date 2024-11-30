@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class scrSelectEvidence : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class scrSelectEvidence : MonoBehaviour
     private int _correctEvi;
 
     public static scrSelectEvidence Instance { get; private set; }
+    public UnityEvent<string> OnSubmitButton = new UnityEvent<string>();
 
     private void Awake()
     {
@@ -45,12 +47,12 @@ public class scrSelectEvidence : MonoBehaviour
     {
         _scrEvidenceTextSO = _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar;
     }
+
     public void EvidenceSelect()
     {
         Debug.Log("Select Evidence");
 
         _inventory.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 5), 1f).SetEase(_easyType);
-        Inventory.SetButtonState("Suggest");
     }
 
     public void HandleEvidenceSubmission(ItemSO itemSO)

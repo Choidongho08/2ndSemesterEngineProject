@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 using TMPro;
 using UnityEngine.Events;
 
@@ -22,13 +21,13 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     public UnityEvent<ItemSO> OnSubmitEvidence = new UnityEvent<ItemSO>();
     public UnityEvent<ItemSO> OnSuggestEvidence = new UnityEvent<ItemSO>();
 
-
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _itemIcon = GetComponent<Image>();
     }
 
+    // 아이템 초기화
     public void Initialize(ItemSO items, InventorySlot parent)
     {
         _activeSlot = parent;
@@ -38,7 +37,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         parent.SetItem(this);
         Debug.Log("현재 들어온 아이템 : " + _currentItem.name);
 
-        if(_itemIcon != null && _currentItem.ItemIcon != null)
+        if (_itemIcon != null && _currentItem.ItemIcon != null)
         {
             _itemIcon.sprite = _currentItem.ItemIcon;
         }
@@ -48,7 +47,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         }
     }
 
-
+    // 마우스 클릭 이벤트 처리 (아이템 클릭)
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -67,20 +66,8 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
             {
                 Debug.Log("Right Clicked : " + ItemSO.ItemName);
 
-                GameObject clickedButton = eventData.pointerCurrentRaycast.gameObject;
-
-                if (clickedButton.CompareTag("SuggestEButton"))
-                {
-                    OnSubmitEvidence.Invoke(ItemSO);
-                }
-                else if (clickedButton.CompareTag("SelectEButton"))
-                {
-                    OnSuggestEvidence.Invoke(ItemSO);
-                }
-                else
-                {
-                    Debug.Log("No specific button clicked for right-click action.");
-                }
+                OnSubmitEvidence.Invoke(ItemSO); // Submit 이벤트 처리
+                OnSuggestEvidence.Invoke(ItemSO); // Suggest 이벤트 처리
             }
             else
             {
