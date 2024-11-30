@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class scrSelectEvidence : MonoBehaviour
@@ -9,14 +10,20 @@ public class scrSelectEvidence : MonoBehaviour
 
     [SerializeField] private Ease _easyType;
     [SerializeField] private GameObject _inventory;
+    [SerializeField] private GameObject talkingPan;
+    [SerializeField] private TextMeshProUGUI npcName;
+    [SerializeField] private TextMeshProUGUI npcText;
 
     private Inventory _scrInventory;
     private InventoryItem _scrInventoryItem;
     private EvidenceTextSO _scrEvidenceTextSO;
     private SelectCriminal _scrSelectCriminal;
-    private bool _isThisRealSus;
+    public StoryTxtSO nowStory;
 
     private Vector2 _trInven;
+
+    private bool _isEvidenceCorrect;
+    private int _correctEvi;
 
     public static scrSelectEvidence Instance { get; private set; }
 
@@ -61,6 +68,47 @@ public class scrSelectEvidence : MonoBehaviour
     private void SelectEvidence(ItemSO itemSO)
     {
         Debug.Log("Select Evidence : " + itemSO.ItemName);
+
+        bool thisIsRightEvi = false;
+        _correctEvi = 0;
+
+        // ���� ���� ó�� ���� �߰�
+        Debug.Log("Processing Evidence : " + itemSO.ItemName);
+
+        foreach (var item in _scrEvidenceTextSO.CorrectEvidence) // correct change
+        {
+            _correctEvi++;
+            if (item.ItemName == itemSO.ItemName)
+            {
+                thisIsRightEvi = true;
+                Debug.Log(item.ItemName + _correctEvi);
+                break;
+            }
+        }
+
+        // SO �Ǻ����ִ°Ÿ� �����ϱ�
+        if (thisIsRightEvi)
+        {
+            Debug.Log("Correct Evidence : " + itemSO);
+            // bool �� �־��༭ ������ SO �� ����� �Ǻ��ϱ�
+            nowStory = _scrEvidenceTextSO.CorrectEvidencText[_correctEvi - 1]; // correctTxts change
+            npcText.text = nowStory.ChaTxts[0];
+            SetCharSO(_scrEvidenceTextSO);
+        }
+        else
+        {
+            Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
+
+            nowStory = _scrEvidenceTextSO.WrrongEvidenceText;
+            npcText.text = _scrEvidenceTextSO.WrrongEvidenceText.ChaTxts[0]; // WarrerEvidence change
+            SetCharSO(_scrEvidenceTextSO);
+        }
+    }
+
+    private void SetCharSO(EvidenceTextSO charinfo)
+    {
+        npcName.text = charinfo.NPC;
+        talkingPan.SetActive(true);
     }
 
     private void FindRealSus()
