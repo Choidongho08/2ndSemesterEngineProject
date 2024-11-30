@@ -77,10 +77,10 @@ public class scrSelectEvidence : MonoBehaviour
         _correctEvi = 0;
         int susCorrectnum = 0;
 
-        // Áõ°Å Á¦Ãâ Ã³¸® ·ÎÁ÷ Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
-        if (_scrEvidenceTextSO.NPC == "Á¶¼­¾È")
+        if (_scrEvidenceTextSO.NPC == "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
         {
             if (_scrEvidenceTextSO.CorrectEvidence[susCorrectnum].ItemName == itemSO.ItemName)
             {
@@ -102,11 +102,11 @@ public class scrSelectEvidence : MonoBehaviour
             }
         }
 
-        // SO ÆÇº°ÇØÁÖ´Â°Å¸¸ ±¸ÇöÇÏ±â
+        // SO ï¿½Çºï¿½ï¿½ï¿½ï¿½Ö´Â°Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
         if (thisIsRightEvi)
         {
             Debug.Log("Correct Evidence : " + itemSO);
-            // bool °ª ³Ö¾îÁà¼­ ¾ÆÀÌÅÛ SO ´Ù Áá´ÂÁö ÆÇº°ÇÏ±â
+            // bool ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½à¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SO ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Çºï¿½ï¿½Ï±ï¿½
             nowStory = _scrEvidenceTextSO.CorrectEvidencText[_correctEvi - 1]; // correctTxts change
             npcText.text = nowStory.ChaTxts[0];
             SetCharSO(_scrEvidenceTextSO);
