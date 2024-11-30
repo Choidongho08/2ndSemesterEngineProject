@@ -1,7 +1,0 @@
-오류이름_영어, 오류코드
-QuickJoinLobbyFail,현재 들어갈 수 있는 로비가 없습니다.
-CodeJoinLobbyFail,로비 코드가 잘못되었습니다.
-CreateLobbyFail_Name,로비의 이름의 형식이 잘못되었습니다.
-CreateLobbyFail_Case,사건을 선택하지 않았습니다.
-ChangePlayerNameFail,이름에 특수문자가 들어가면 안됩니다.
-ManyLobbyRequests, 로비요청을 너무 많이 하였습니다.

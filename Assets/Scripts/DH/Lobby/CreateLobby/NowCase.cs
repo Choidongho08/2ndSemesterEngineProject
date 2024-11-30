@@ -8,16 +8,29 @@ using UnityEngine.UI;
 
 public class NowCase : MonoSingleton<NowCase>
 {
-    private TextMeshProUGUI _nowCaseTxt;
+    [SerializeField] private CaseBook _caseBook;
+    [SerializeField]private TextMeshProUGUI _nowCaseTxt;
 
-    private void Awake()
-    {
-        _nowCaseTxt = GetComponentInChildren<TextMeshProUGUI>();
-    }
+    private int caseNumber;
 
     public void SetCaseNumber(string txt)
     {
+        caseNumber = int.Parse(txt);
+        _nowCaseTxt.gameObject.SetActive(true);
         _nowCaseTxt.text = $"사건 번호 : {txt}";
+        _caseBook.caseType = $"Case{txt}";
+    }
+    public int CaseNumber()
+    {
+        return caseNumber;
+    }
+    public void HideText()
+    {
+        _nowCaseTxt.gameObject.SetActive(false);
+    }
+    public void ShowText()
+    {
+        _nowCaseTxt.gameObject.SetActive(true);
     }
     public int GetCase(CaseType caseType) => caseType switch 
     {

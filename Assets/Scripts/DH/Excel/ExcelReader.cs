@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ExcelReader : MonoSingleton<ExcelReader>
 {
-    public string csvFileName = "ErrorCodeExcel";
+    [SerializeField] private string csvFileName = "ErrorCodeExcel";
 
-    public Dictionary<string, ErrorCode> dictionaryErrorCode = new Dictionary<string, ErrorCode>(); // 상품명 : menu(상품 이름, 가격, 정보)
+    public Dictionary<string, ErrorCode> dictionaryErrorCode = new Dictionary<string, ErrorCode>(); 
 
     [System.Serializable]
     public class ErrorCode
@@ -14,45 +14,36 @@ public class ExcelReader : MonoSingleton<ExcelReader>
         public string name;
         public string errorCode;
     }
-
-    private void Start()
+    void Start()
     {
+        
         ReadCSV();
     }
 
     private void ReadCSV()
     {
-        string path = csvFileName + ".csv";
-
-        List<ErrorCode> errorCodeList = new List<ErrorCode>();
-
-        StreamReader reader = new StreamReader(Application.dataPath + "/" + path);
-
-        bool isFinish = false;
-
-
-        while (isFinish == false)
+        TextAsset csvFile = Resources.Load<TextAsset>(csvFileName);
+        if (csvFile != null)
         {
-            string data = reader.ReadLine(); 
-
-            if (data == null)
+            string[] lines = csvFile.text.Split('\n');
+            foreach (string line in lines)
             {
-                isFinish = true;
-                break;
+                string[] fields = line.Split(',');
+
+                if (fields[0] == string.Empty)
+                    break;
+
+                ErrorCode menu = new ErrorCode();
+
+                menu.name = fields[0];
+                menu.errorCode = fields[1];
+
+                dictionaryErrorCode.Add(menu.name, menu);
             }
-
-            var splitData = data.Split(','); 
-
-            ErrorCode menu = new ErrorCode();
-
-            menu.name = splitData[0];
-            menu.errorCode = splitData[1];
-
-            dictionaryErrorCode.Add(menu.name, menu);
-            Debug.Log(dictionaryErrorCode.Count);
-            Debug.Log(menu.name);
         }
-        Debug.Log(ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.ManyLobbyRequests));
-        Debug.Log(dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
+        else
+        {
+            Debug.LogError("CSV 파일을 찾을 수 없습니다.");
+        }
     }
 }

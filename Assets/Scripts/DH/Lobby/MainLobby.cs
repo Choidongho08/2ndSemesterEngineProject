@@ -18,12 +18,12 @@ public class MainLobby : MonoSingleton<MainLobby>
     private string _playerName;
     private string _playerReady = "False";
     private string _lobbyName;
+    private int _worldNumber;
 
     [SerializeField] private Button _createLobbyBtn;
     [SerializeField] private Button _quickJoinLobby;
     [SerializeField] private CaseBook _caseBook;
     [SerializeField] private CreateLobby _createLobby;
-
     public class LobbyEventArgs : EventArgs
     {
         public Lobby lobby;
@@ -40,10 +40,12 @@ public class MainLobby : MonoSingleton<MainLobby>
     public string KeyPlayerName = "PlayerName";
     public string KeyPlayerReady = "PlayerReady";
     public string KeyCaseBook = "CaseBook";
+    public const string KeyStartGame = "Start";
     public event Action OnAfterAuthenticate;
     public event Action<string, string, string> OnLobbyCreate;
     public event Action<string, string, string> OnLobbyJoined;
     public event Action OnGameStart;
+
     public string PlayerReady
     {
         get
@@ -121,7 +123,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             lobbyUpdateTimer -= Time.deltaTime;
             if (lobbyUpdateTimer < 0)
             {
-                float lobbyUpdateTimerMax = 1.1f;
+                float lobbyUpdateTimerMax = 1.5f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
@@ -136,6 +138,16 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                     OnKickedFromLobby?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
 
+                    joinedLobby = null;
+                }
+                if (joinedLobby.Data[KeyStartGame].Value != "0")
+                {
+                    Util.instance.LoadingShow();
+                    if (!IsLobbyHost())
+                    {
+                        await MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
+                        OnGameStart?.Invoke();
+                    }
                     joinedLobby = null;
                 }
             }
@@ -159,6 +171,7 @@ public class MainLobby : MonoSingleton<MainLobby>
                 Data = new Dictionary<string, DataObject>
                 {
                     {KeyCaseBook, new DataObject(DataObject.VisibilityOptions.Public, caseType, DataObject.IndexOptions.S1) },
+                    {KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, "0") }
                 },
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(_lobbyName, 2, createLobbyOptions);
@@ -169,7 +182,6 @@ public class MainLobby : MonoSingleton<MainLobby>
             Debug.Log($"Created Lobby! {lobby.Name} {lobby.LobbyCode}");
             OnLobbyCreate?.Invoke(lobby.LobbyCode, _lobbyName, caseType);
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
-            _createLobby.gameObject.SetActive(false);
         }
         catch (LobbyServiceException e)
         {
@@ -216,6 +228,7 @@ public class MainLobby : MonoSingleton<MainLobby>
         if (lobbyCode == string.Empty)
         {
             Debug.Log("no LobbyCode");
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Empty)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Empty)].errorCode);
             Util.instance.LoadingHide();
             Util.instance.MainMenuShow();
             return;
@@ -237,8 +250,9 @@ public class MainLobby : MonoSingleton<MainLobby>
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Code)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobbyFail_Code)].errorCode);
             Util.instance.LoadingHide();
-            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobby)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.CodeJoinLobby)].errorCode);
+
         }
     }
     public async void QuickJoinLobby()
@@ -267,7 +281,7 @@ public class MainLobby : MonoSingleton<MainLobby>
             Debug.Log(e);
             Util.instance.LoadingHide();
             Util.instance.MainMenuShow();
-            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobby)].errorCode);
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobbyFail)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.QuickJoinLobbyFail)].errorCode);
         }
     }
     private Player GetPlayer()
@@ -324,6 +338,7 @@ public class MainLobby : MonoSingleton<MainLobby>
                 Data = new Dictionary<string, DataObject>
                 {
                     {KeyCaseBook, new DataObject(DataObject.VisibilityOptions.Public, caseBook.ToString(), DataObject.IndexOptions.S1) },
+                    {KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member)}
                 }
             });
 
@@ -433,14 +448,17 @@ public class MainLobby : MonoSingleton<MainLobby>
         {
             try
             {
-                hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+                if (joinedLobby.Players.Count == 2)
                 {
-                    HostId = joinedLobby.Players[1].Id
-                });
-
-                joinedLobby = hostLobby;
-                PrintPlayers(hostLobby);
-                InLobbyUI.instance.HostPanel();
+                    hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions
+                    {
+                        HostId = joinedLobby.Players[1].Id
+                    });
+                    joinedLobby = hostLobby;
+                    PrintPlayers(hostLobby);
+                }
+                else
+                    return;
             }
             catch (LobbyServiceException e)
             {
@@ -448,21 +466,47 @@ public class MainLobby : MonoSingleton<MainLobby>
             }
         }
     }
-    public void GameStart()
+    public async void GameStart()
     {
-        int readyCount = 0;
-        foreach (Player player in joinedLobby.Players)
+        if (IsLobbyHost() && GameStartPlayers())
         {
-            if (player.Data[KeyPlayerReady].Value == "True")
-                readyCount++;
+            try
+            {
+                Util.instance.LoadingShow();
+                string relayCode = await MainRelay.instance.CreateRelay();
+
+                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                {
+                    Data = new Dictionary<string, DataObject>
+                    {
+                        { KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                    },
+                });
+
+                joinedLobby = lobby;
+                OnGameStart?.Invoke();
+            }
+            catch (LobbyServiceException e)
+            {
+                Util.instance.LoadingHide();
+                Debug.Log(e);
+            }
         }
-        if (readyCount == 2)
+        else
         {
-            Debug.Log("GameStart");
-            OnGameStart?.Invoke();
-            SceneManager.LoadScene(0);
+            Message.instance.SetTitleAndMessageText(ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].name, ExcelReader.instance.dictionaryErrorCode[ErrorEnum.instance.GetErrorCode(ErrorCodeEnum.LobbyPlayerReady)].errorCode);
         }
-        readyCount = 0;
+    }
+
+    private bool GameStartPlayers()
+    {
+        int count = 0;
+        for (int i = 0; i < joinedLobby.Players.Count; i++)
+        {
+            if (joinedLobby.Players[i].Data[KeyPlayerReady].Value == "True")
+                count++;
+        }
+        return count == 2;
     }
     public bool IsLobbyHost()
     {

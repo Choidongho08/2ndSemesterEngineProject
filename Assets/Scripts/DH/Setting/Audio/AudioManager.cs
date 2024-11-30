@@ -17,7 +17,6 @@ public class AudioManager : MonoSingleton<AudioManager>
     private void Awake()
     {
         _path = Application.persistentDataPath + "/";
-        Debug.Log(_path);
         _volumDownButton.onClick.AddListener(AudioVolDown);
         _volumUpButton.onClick.AddListener(AudioVolUp);
         _volumeString = volume.ToString();
@@ -38,7 +37,6 @@ public class AudioManager : MonoSingleton<AudioManager>
         _audioVolumeFillImage.fillAmount = volume;
         _volumeString = volume.ToString();
         WriteVolume(_path, _fileName);
-        Debug.Log(volume);
     }
     public void AudioVolDown()
     {
@@ -50,7 +48,6 @@ public class AudioManager : MonoSingleton<AudioManager>
         _audioVolumeFillImage.fillAmount = volume;
         _volumeString = volume.ToString();
         WriteVolume(_path, _fileName);
-        Debug.Log(volume);
     }
     private void ReadVolume(string path, string fileName)
     {

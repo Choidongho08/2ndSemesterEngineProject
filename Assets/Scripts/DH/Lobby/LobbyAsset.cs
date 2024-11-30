@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class LobbyAsset : MonoSingleton<LobbyAsset>
 {
-    [SerializeField] private Sprite yes;
-    [SerializeField] private Sprite no;
+    //[SerializeField] private Sprite yes;
+    //[SerializeField] private Sprite no;
 
-    public Sprite GetSprite(MainLobby.PlayerReadyEnum playerReady)
+    public string GetSprite(MainLobby.PlayerReadyEnum playerReady)
     {
-        switch (playerReady)
+        switch (playerReady.ToString())
         {
-            default:
-            case MainLobby.PlayerReadyEnum.True: return yes;
-            case MainLobby.PlayerReadyEnum.False: return no;
+            case "True": 
+                return "True";
+            case "False": 
+                return "False";
+            default: 
+                return null;
         }
     }
 }

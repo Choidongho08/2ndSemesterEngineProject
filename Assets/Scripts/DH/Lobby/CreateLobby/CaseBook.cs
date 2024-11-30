@@ -57,7 +57,8 @@ public class CaseBook : MonoBehaviour
                         throw new Exception("No case");
                 };
             });
-
+            if (item.isBlock)
+                Instantiate(item.lockImage, caseTemplate);
             caseTemplate.gameObject.SetActive(true);
         }
 
