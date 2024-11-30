@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Vote : NetworkBehaviour
+public class ReturnVote : NetworkBehaviour
 {
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _voteButton;
@@ -95,7 +95,7 @@ public class Vote : NetworkBehaviour
         _voteButton.GetComponent<Image>().fillAmount += _currentFillAmount;
         if(_currentFillAmount >= 1f)
         {
-            NetworkManager.SceneManager.LoadScene("LastChance", LoadSceneMode.Single);
+            NetworkManager.SceneManager.LoadScene("Case1", LoadSceneMode.Single);
             OnVoted?.Invoke();
         }
     }

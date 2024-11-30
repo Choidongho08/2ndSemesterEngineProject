@@ -67,3 +67,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCanvas: {fileID: 1450035866287773482, guid: 38badbd16ad5bf241813a97eb0976ae8, type: 3}
+  _lastChanceCanvas: {fileID: 7984131572620036693, guid: b389d64cd07f1aa4382348f24797f93c, type: 3}

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DH/Main.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/IW/LastChance.unity
+    guid: 2550934eed5f73c4c80a345961f2f007
   m_configObjects: {}
