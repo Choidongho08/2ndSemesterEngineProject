@@ -32,7 +32,6 @@ public class scrSuggestEvidence : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -42,6 +41,49 @@ public class scrSuggestEvidence : MonoBehaviour
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
         _scrEvidenceTextSO = _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar;
+    }
+
+    void LoadSuggestEvidence()
+    {
+        if (SceneManager.GetActiveScene().name == "LastChance")
+        {
+            // scrSuggestEvidence 동적 생성
+            if (scrSuggestEvidence.Instance == null)
+            {
+                GameObject suggestEvidenceObject = new GameObject("scrSuggestEvidence");
+                suggestEvidenceObject.AddComponent<scrSuggestEvidence>();
+
+                RectTransform rectTransform = suggestEvidenceObject.AddComponent<RectTransform>();
+                rectTransform.SetParent(GameObject.Find("Canvas").transform, false);
+                Debug.Log("scrSuggestEvidence dynamically created in LastChance scene.");
+            }
+
+            // scrSelectEvidence 동적 생성
+            if (scrSelectEvidence.Instance == null)
+            {
+                GameObject selectEvidenceObject = new GameObject("scrSelectEvidence");
+                selectEvidenceObject.AddComponent<scrSelectEvidence>();
+
+                RectTransform rectTransform = selectEvidenceObject.AddComponent<RectTransform>();
+                rectTransform.SetParent(GameObject.Find("Canvas").transform, false);
+                Debug.Log("scrSelectEvidence dynamically created in LastChance scene.");
+            }
+        }
+        else
+        {
+            // LastChance 씬이 아니면 삭제
+            if (scrSuggestEvidence.Instance != null)
+            {
+                Destroy(scrSuggestEvidence.Instance.gameObject);
+                Debug.Log("Removed scrSuggestEvidence in non-LastChance scene.");
+            }
+
+            if (scrSelectEvidence.Instance != null)
+            {
+                Destroy(scrSelectEvidence.Instance.gameObject);
+                Debug.Log("Removed scrSelectEvidence in non-LastChance scene.");
+            }
+        }
     }
 
     public void EvidenceSuggest()
