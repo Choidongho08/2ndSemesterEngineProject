@@ -19,7 +19,6 @@ public class scrSelectEvidence : MonoBehaviour
     private EvidenceTextSO _scrEvidenceTextSO;
     private SelectCriminal _scrSelectCriminal;
     public StoryTxtSO nowStory;
-    private bool isThisRealSus;
 
     private Vector2 _trInven;
 
@@ -77,7 +76,6 @@ public class scrSelectEvidence : MonoBehaviour
         _correctEvi = 0;
         int susCorrectnum = 0;
 
-        // ���� ���� ó�� ���� �߰�
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
         if (_scrEvidenceTextSO.NPC == "������")
@@ -102,11 +100,9 @@ public class scrSelectEvidence : MonoBehaviour
             }
         }
 
-        // SO �Ǻ����ִ°Ÿ� �����ϱ�
         if (thisIsRightEvi)
         {
             Debug.Log("Correct Evidence : " + itemSO);
-            // bool �� �־��༭ ������ SO �� ����� �Ǻ��ϱ�
             nowStory = _scrEvidenceTextSO.CorrectEvidencText[_correctEvi - 1]; // correctTxts change
             npcText.text = nowStory.ChaTxts[0];
             SetCharSO(_scrEvidenceTextSO);
