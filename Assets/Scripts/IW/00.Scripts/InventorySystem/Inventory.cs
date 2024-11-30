@@ -311,9 +311,18 @@ public class Inventory : MonoBehaviour
 
                         // 핸들러 연결
                         var suggestEvidence = FindObjectOfType<scrSuggestEvidence>();
+                        var selectEvidence = FindObjectOfType<scrSelectEvidence>();
                         if (suggestEvidence != null)
                         {
                             newItem.OnSubmitEvidence.AddListener(suggestEvidence.HandleEvidenceSubmission);
+                        }
+                        else
+                        {
+                            Debug.Log("scrSuggestEvidence scr not found in the scene");
+                        }
+                        if(selectEvidence != null)
+                        {
+                            newItem.OnSubmitEvidence.AddListener(selectEvidence.HandleEvidenceSubmission);
                         }
                         else
                         {
@@ -350,8 +359,26 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        if (_inventorySlots == null || _inventorySlots.Length == 0)
+        {
+            Debug.LogError("_inventorySlots is not initialized or has no slots.");
+            return;
+        }
+
+        if (_itemPrefabs == null)
+        {
+            Debug.LogError("_itemPrefabs is not assigned in the Inspector.");
+            return;
+        }
+
         for (int i = 0; i < _inventorySlots.Length;  i++)
         {
+            if (_inventorySlots[i] == null)
+            {
+                Debug.LogError("Inventory slot at index " + i + " is null.");
+                return;
+            }
+
             // 슬롯이 비어있는지 체크
             if (_inventorySlots[i]._myItem == null)
             {
@@ -360,10 +387,39 @@ public class Inventory : MonoBehaviour
 
                 newItem.Initialize(item, _inventorySlots[i]);
 
-                newItem.OnSubmitEvidence.RemoveAllListeners();
-                newItem.OnSubmitEvidence.AddListener(scrSuggestEvidence.Instance.HandleEvidenceSubmission);
-                newItem.OnSuggestEvidence.RemoveAllListeners();
-                newItem.OnSuggestEvidence.AddListener(scrSelectEvidence.Instance.HandleEvidenceSubmission);
+                if (scrSuggestEvidence.Instance == null)
+                {
+                    Debug.LogError("scrSuggestEvidence.Instance is null.");
+                }
+                if (scrSelectEvidence.Instance == null)
+                {
+                    Debug.LogError("scrSelectEvidence.Instance is null.");
+                }
+
+                if (scrSuggestEvidence.Instance != null)
+                {
+                    newItem.OnSubmitEvidence.RemoveAllListeners();
+                    newItem.OnSubmitEvidence.AddListener(scrSuggestEvidence.Instance.HandleEvidenceSubmission);
+                }
+                else
+                {
+                    Debug.LogWarning("scrSuggestEvidence.Instance is null.");
+                }
+
+                if (scrSelectEvidence.Instance != null)
+                {
+                    newItem.OnSuggestEvidence.RemoveAllListeners();
+                    newItem.OnSuggestEvidence.AddListener(scrSelectEvidence.Instance.HandleEvidenceSubmission);
+                }
+                else
+                {
+                    Debug.LogWarning("scrSelectEvidence.Instance is null.");
+                }
+
+                //newItem.OnSubmitEvidence.RemoveAllListeners();
+                //newItem.OnSubmitEvidence.AddListener(scrSuggestEvidence.Instance.HandleEvidenceSubmission);
+                //newItem.OnSuggestEvidence.RemoveAllListeners();
+                //newItem.OnSuggestEvidence.AddListener(scrSelectEvidence.Instance.HandleEvidenceSubmission);
 
                 SaveInventory();
                 return;
@@ -429,7 +485,11 @@ public class Inventory : MonoBehaviour
             else
             {
                 Debug.Log("Item is already in the list");
-                // foreach (var item)
+                foreach (var item in _collectedItem)
+                {
+                    Debug.Log("Existing Item : " + item.ItemName);
+                }
+                Debug.Log("Attempted to Add : " + itemSO.ItemName);
             }
         }
         catch (Exception e)
