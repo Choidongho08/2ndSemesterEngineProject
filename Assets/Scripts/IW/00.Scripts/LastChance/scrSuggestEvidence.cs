@@ -128,7 +128,7 @@ public class scrSuggestEvidence : MonoBehaviour
         // 증거 제출 처리 로직 추가
         Debug.Log("Processing Evidence : " + itemSO.ItemName);
 
-        foreach (var item in _scrEvidenceTextSO.ActEvidence)
+        foreach (var item in _scrEvidenceTextSO.ActEvidence) // correct change
         {
             _correctEvi++;
             if (item.ItemName == itemSO.ItemName)
@@ -144,7 +144,7 @@ public class scrSuggestEvidence : MonoBehaviour
         {
             Debug.Log("Correct Evidence : " + itemSO);
             // bool 값 넣어줘서 아이템 SO 다 줬는지 판별하기
-            nowStory = _scrEvidenceTextSO.ActTxts[_correctEvi - 1];
+            nowStory = _scrEvidenceTextSO.ActTxts[_correctEvi - 1]; // correctTxts change
             npcText.text = nowStory.ChaTxts[0];
             SetCharSO(_scrEvidenceTextSO);
         }
@@ -153,7 +153,7 @@ public class scrSuggestEvidence : MonoBehaviour
             Debug.Log("Not Correct Evidence : " + itemSO + ". Please ReSelect Again");
 
             nowStory = _scrEvidenceTextSO.NoneActTxts;
-            npcText.text = _scrEvidenceTextSO.NoneActTxts.ChaTxts[0];
+            npcText.text = _scrEvidenceTextSO.NoneActTxts.ChaTxts[0]; // WarrerEvidence change
             SetCharSO(_scrEvidenceTextSO);
         }
     }

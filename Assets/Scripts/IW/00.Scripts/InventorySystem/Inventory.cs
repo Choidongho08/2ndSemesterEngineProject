@@ -102,8 +102,8 @@ public class Inventory : MonoBehaviour
             if (_currentStartIndex > 0)
             {
                 _currentStartIndex--;
-                ScrollInventory(-1);
-                UpdateInventorySlots();
+                // ScrollInventory(-1);
+                UpdateVisibleItems();
                 Debug.Log("moved left : currentIndex = " + _currentStartIndex);
             }
         }
@@ -112,9 +112,44 @@ public class Inventory : MonoBehaviour
             if (_currentStartIndex < _collectedItem.Count - _maxVisibleSlots)
             {
                 _currentStartIndex++;
-                UpdateInventorySlots();
-                ScrollInventory(1);
+                UpdateVisibleItems();
+                // ScrollInventory(1);
                 Debug.Log("moved right : currentIndex : " + _currentStartIndex);
+            }
+        }
+    }
+
+    private void UpdateVisibleItems()
+    {
+        // 현재 페이지에 맞는 아이템만 갱신
+        for (int i = 0; i < _maxVisibleSlots; i++)
+        {
+            int itemIndex = _currentStartIndex + i;
+
+            if (itemIndex >= 0 && itemIndex < _collectedItem.Count)
+            {
+                ItemSO itemSO = _collectedItem[itemIndex];
+                // 이미 생생되어있으면 초기화, 없으면 새로 생성
+                InventoryItem inventoryItem = _inventorySlots[i].GetComponent<InventoryItem>();
+
+                if (inventoryItem == null)
+                {
+                    inventoryItem = Instantiate(_itemPrefabs, _inventorySlots[i].transform);
+                    inventoryItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
+                    inventoryItem.Initialize(itemSO, _inventorySlots[i]);
+                }
+                else
+                {
+                    // 이미 있는 인벤 아이템 업데이트
+                    inventoryItem.Initialize(itemSO, _inventorySlots[i]);
+                }
+
+                _inventorySlots[i].SetItem(inventoryItem);
+            }
+            else
+            {
+                // 슬롯을 비워주는 코드 추가
+                _inventorySlots[i].ClearSlot();
             }
         }
     }
@@ -135,22 +170,6 @@ public class Inventory : MonoBehaviour
                 SpawnInventoryItem(_collectedItem[itemIndex]);
             }
         }
-    }
-
-    private void ScrollInventory(int dir)
-    {
-        int newIndex = _currentStartIndex + dir;
-
-        // 리스트 경계 처리
-        if (newIndex < 0 || newIndex + _maxVisibleSlots > _collectedItem.Count)
-        {
-            Debug.Log("Reached inventory bounds");
-            return;
-        }
-
-        _currentStartIndex = newIndex;
-
-        UpdateInventorySlots();
     }
 
     // Save Inventory To Json
@@ -385,15 +404,6 @@ public class Inventory : MonoBehaviour
                 newItem.GetComponent<RectTransform>().sizeDelta = new Vector2(165, 180);
 
                 newItem.Initialize(item, _inventorySlots[i]);
-
-                if (scrSuggestEvidence.Instance == null)
-                {
-                    Debug.LogError("scrSuggestEvidence.Instance is null.");
-                }
-                if (scrSelectEvidence.Instance == null)
-                {
-                    Debug.LogError("scrSelectEvidence.Instance is null.");
-                }
 
                 if (scrSuggestEvidence.Instance != null)
                 {
