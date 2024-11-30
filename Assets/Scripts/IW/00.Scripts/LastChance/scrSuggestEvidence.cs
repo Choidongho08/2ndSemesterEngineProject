@@ -46,8 +46,7 @@ public class scrSuggestEvidence : MonoBehaviour
         _trInven = _inventory.GetComponent<RectTransform>().anchoredPosition;
         _scrSelectCriminal = FindObjectOfType<SelectCriminal>();
     }
-
-    private void Start()
+    private void Update()
     {
         _scrEvidenceTextSO = _scrSelectCriminal._objCurrentPanel.GetComponent<scrPutCharSO>()._soChar;
     }
