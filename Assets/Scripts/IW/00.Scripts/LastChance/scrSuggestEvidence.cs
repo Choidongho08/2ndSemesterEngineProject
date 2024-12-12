@@ -32,7 +32,7 @@ public class scrSuggestEvidence : MonoBehaviour
     private int _correctEvi;
 
     public static scrSuggestEvidence Instance { get; private set; }
-    public UnityEvent<string> OnSyggestButton = new UnityEvent<string>();
+    public UnityEvent OnSuggestButton;
 
     private void Awake()
     {
@@ -102,7 +102,7 @@ public class scrSuggestEvidence : MonoBehaviour
         Debug.Log("Select Evidence");
 
         _inventory.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 5), 1f).SetEase(_easyType);
-        OnSyggestButton?.Invoke("Suggest");
+        OnSuggestButton?.Invoke();
     }
 
     public void HandleEvidenceSubmission(ItemSO itemSO)

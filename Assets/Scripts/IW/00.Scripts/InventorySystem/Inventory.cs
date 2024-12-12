@@ -378,8 +378,6 @@ public class Inventory : MonoBehaviour
         if (itemSO == null)
         {
             Debug.LogError("SpawnInventoryItem called with null ItemSO");
-            //int random = UnityEngine.Random.Range(0, _items.Length);
-            //itemSO = _items[random];
             return;
         }
 
@@ -441,11 +439,6 @@ public class Inventory : MonoBehaviour
                 {
                     Debug.LogWarning("scrSelectEvidence.Instance is null.");
                 }
-
-                //newItem.OnSubmitEvidence.RemoveAllListeners();
-                //newItem.OnSubmitEvidence.AddListener(scrSuggestEvidence.Instance.HandleEvidenceSubmission);
-                //newItem.OnSuggestEvidence.RemoveAllListeners();
-                //newItem.OnSuggestEvidence.AddListener(scrSelectEvidence.Instance.HandleEvidenceSubmission);
 
                 SaveInventory();
                 return;
