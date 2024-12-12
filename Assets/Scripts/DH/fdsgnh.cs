@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using Unity.Multiplayer.Samples.Utilities;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class fdsgnh : NetworkBehaviour
 {
@@ -35,31 +32,31 @@ public class fdsgnh : NetworkBehaviour
         Vote.OnVoted += (() =>
         {
             StartCoroutine(Wait1sec());
-
-
         });
         ReturnVote.OnVoted += (() =>
         {
-
             StartCoroutine(Wait1secs());
-            Debug.Log(_chatManagerNetworkObj);
         });
     }
     private IEnumerator Wait1sec()
     {
+        Util.instance.LoadingShow();
         yield return new WaitForSeconds(1f);
-        _chatManagerNetworkObj.Despawn();
+            _chatManagerNetworkObj.Despawn();
         _lastChanceInstance = Instantiate(_lastChanceCanvas);
         _lastChanceNetworkObj = _lastChanceInstance.GetComponent<NetworkObject>();
         _lastChanceNetworkObj.Spawn();
-        Debug.Log(_chatManagerNetworkObj);
+        Util.instance.LoadingHide();
     }
     private IEnumerator Wait1secs()
     {
-        yield return new WaitForSeconds(1f); 
+        Util.instance.LoadingShow();
+        yield return new WaitForSeconds(1f);
         _lastChanceNetworkObj.Despawn();
         _chatManagerInstance = Instantiate(_uiCanvas);
         _chatManagerNetworkObj = _chatManagerInstance.GetComponent<NetworkObject>();
         _chatManagerNetworkObj.Spawn();
+        Util.instance.LoadingHide();
+
     }
 }
