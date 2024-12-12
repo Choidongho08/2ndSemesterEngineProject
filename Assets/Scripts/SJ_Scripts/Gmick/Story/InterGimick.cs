@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 public class InterGimick : MonoBehaviour, IStoryEnd
 {
@@ -76,7 +77,17 @@ public class InterGimick : MonoBehaviour, IStoryEnd
 
     public void StatueInteractionGimick(GameObject password)
     {
-        if(!_gimickSO.player2Watering)
+        StatueInteractionGimickServerRpc(password);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void StatueInteractionGimickServerRpc(GameObject password)
+    {
+        StatueInteractionGimickClientRpc(password);
+    }
+    [ClientRpc]
+    private void StatueInteractionGimickClientRpc(GameObject password)
+    {
+        if (!_gimickSO.player2Watering)
         {
             _storyListNum = 0;
             _storyPan.SetActive(true);

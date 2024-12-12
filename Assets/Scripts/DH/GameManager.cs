@@ -18,7 +18,6 @@ public class GameManager : NetworkBehaviour
     }
     private void GameStart()
     {
-        
         NetworkManager.SceneManager.LoadScene($"Case{NowCase.instance.CaseNumber()}", LoadSceneMode.Single);
         if (NetworkManager.Singleton.IsConnectedClient)
         {
@@ -26,7 +25,7 @@ public class GameManager : NetworkBehaviour
         }
         else
         {
-            Debug.LogError("Client failed to connect to the server.");
+            Debug.Log("Client failed to connect to the server.");
         }
     }
     private void Gamestart(Scene scene, LoadSceneMode mode)
