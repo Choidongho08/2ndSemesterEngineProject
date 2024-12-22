@@ -30,7 +30,7 @@ public class GameManager : NetworkBehaviour
     }
     private void Gamestart(Scene scene, LoadSceneMode mode)
     {
-        if (GameObject.Find("World1Canvas").GetComponent<Canvas>() == null) return;
+        if (!GameObject.Find("World1Canvas").TryGetComponent(out Canvas canvas)) return;
         else
         {
             GameStartServerRpc();

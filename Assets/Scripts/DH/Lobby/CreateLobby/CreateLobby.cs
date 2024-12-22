@@ -44,6 +44,7 @@ public class CreateLobby : MonoBehaviour
                 OnLobbyNameChange?.Invoke(_lobbyName);
                 _setLobbyOptionUI.gameObject.SetActive(false);
                 OnCreateLobby?.Invoke(_caseType);
+                NowCase.instance.HideText();
             }
         });
         cancelCreateButton.onClick.AddListener(() =>
