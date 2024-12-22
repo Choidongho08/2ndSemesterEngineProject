@@ -141,16 +141,16 @@ public class MainLobby : MonoSingleton<MainLobby>
 
                     joinedLobby = null;
                 }
-                if (joinedLobby.Data[KeyStartGame].Value != "0")
-                {
-                    Util.instance.LoadingShow();
-                    if (!IsLobbyHost())
-                    {
-                        await MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
-                        OnGameStart?.Invoke();
-                    }
-                    joinedLobby = null;
-                }
+                //if (joinedLobby.Data[KeyStartGame].Value != "0")
+                //{
+                //    Util.instance.LoadingShow();
+                //    if (!IsLobbyHost())
+                //    {
+                //        await MainRelay.instance.JoinCodeRelay(joinedLobby.Data[KeyStartGame].Value);
+                //        OnGameStart?.Invoke();
+                //    }
+                //    joinedLobby = null;
+                //}
             }
 
         }
@@ -467,27 +467,35 @@ public class MainLobby : MonoSingleton<MainLobby>
             }
         }
     }
-    public async void GameStart()
+    public async void RelayCode(string relayCode)
+    {
+        Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+        {
+            Data = new Dictionary<string, DataObject>
+                    {
+                        { KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                    },
+        });
+    }
+    public void GameStart()
     {
         if (IsLobbyHost() && GameStartPlayers())
         {
             try
             {
-                Util.instance.LoadingShow();
-                string relayCode = await MainRelay.instance.CreateRelay();
+                //string relayCode = await MainRelay.instance.CreateRelay();
 
-                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
-                {
-                    Data = new Dictionary<string, DataObject>
-                    {
-                        { KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
-                    },
-                });
+                //Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                //{
+                //    Data = new Dictionary<string, DataObject>
+                //    {
+                //        { KeyStartGame, new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                //    },
+                //});
 
-                joinedLobby = lobby;
+                //joinedLobby = lobby;
 
                 OnGameStart?.Invoke();
-
             }
             catch (LobbyServiceException e)
             {
